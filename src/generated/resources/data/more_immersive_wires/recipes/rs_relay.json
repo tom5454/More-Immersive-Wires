@@ -1,9 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " c ",
-    "bcb"
-  ],
   "key": {
     "b": {
       "tag": "forge:stone"
@@ -12,8 +8,12 @@
       "item": "refinedstorage:quartz_enriched_iron"
     }
   },
+  "pattern": [
+    " c ",
+    "bcb"
+  ],
   "result": {
-    "item": "more_immersive_wires:rs_relay",
-    "count": 8
+    "count": 8,
+    "item": "more_immersive_wires:rs_relay"
   }
 }

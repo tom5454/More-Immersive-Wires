@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " c ",
-    "bcb",
-    "bwb"
-  ],
   "key": {
     "b": {
       "tag": "forge:stone"
@@ -16,8 +11,13 @@
       "item": "computercraft:cable"
     }
   },
+  "pattern": [
+    " c ",
+    "bcb",
+    "bwb"
+  ],
   "result": {
-    "item": "more_immersive_wires:cc_connector",
-    "count": 4
+    "count": 4,
+    "item": "more_immersive_wires:cc_connector"
   }
 }

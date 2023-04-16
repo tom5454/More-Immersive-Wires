@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "more_immersive_wires:ae_connector"
-    ]
-  },
   "criteria": {
     "ae_connector_unlock": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -22,13 +16,14 @@
             "tag": "ae2:glass_cable"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "more_immersive_wires:ae_connector"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -36,5 +31,10 @@
       "ae_connector_unlock",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:ae_connector"
+    ]
+  }
 }

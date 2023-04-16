@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import com.refinedmods.refinedstorage.api.network.INetworkNodeVisitor.Operator;
 import com.refinedmods.refinedstorage.blockentity.NetworkNodeBlockEntity;
+import com.refinedmods.refinedstorage.blockentity.data.BlockEntitySynchronizationSpec;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.tile.IOnCableConnector;
@@ -21,10 +22,11 @@ import blusunrize.immersiveengineering.api.wires.LocalWireNetwork;
 import blusunrize.immersiveengineering.api.wires.WireType;
 
 public class RSConnectorBlockEntity extends NetworkNodeBlockEntity<ConnectorNetworkNode> implements IOnCableConnector {
+	public static BlockEntitySynchronizationSpec SPEC = BlockEntitySynchronizationSpec.builder().build();
 	protected GlobalWireNetwork globalNet;
 
 	protected RSConnectorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state);
+		super(type, pos, state, SPEC);
 	}
 
 	@Override

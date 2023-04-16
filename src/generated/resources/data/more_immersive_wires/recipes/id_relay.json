@@ -1,9 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " c ",
-    "bcb"
-  ],
   "key": {
     "b": {
       "item": "integrateddynamics:menril_wood"
@@ -12,8 +8,12 @@
       "item": "integrateddynamics:crystalized_menril_chunk"
     }
   },
+  "pattern": [
+    " c ",
+    "bcb"
+  ],
   "result": {
-    "item": "more_immersive_wires:id_relay",
-    "count": 8
+    "count": 8,
+    "item": "more_immersive_wires:id_relay"
   }
 }

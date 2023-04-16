@@ -2,12 +2,13 @@ package com.tom.morewires.data;
 
 import static blusunrize.immersiveengineering.ImmersiveEngineering.rl;
 
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.ItemLike;
 
-import net.minecraftforge.client.model.generators.loaders.OBJLoaderBuilder;
+import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import com.google.common.base.Preconditions;
@@ -46,7 +47,7 @@ public class ItemModels2 extends TRSRItemModelProvider {
 	public TRSRModelBuilder obj(ItemLike item, ResourceLocation model) {
 		Preconditions.checkArgument(existingFileHelper.exists(model, PackType.CLIENT_RESOURCES, "", "models"));
 		return getBuilder(item)
-				.customLoader(OBJLoaderBuilder::begin)
+				.customLoader(ObjModelBuilder::begin)
 				.flipV(true)
 				.modelLocation(new ResourceLocation(model.getNamespace(), "models/"+model.getPath()))
 				.end();
@@ -57,6 +58,6 @@ public class ItemModels2 extends TRSRItemModelProvider {
 	}
 
 	private String name(ItemLike item) {
-		return item.asItem().getRegistryName().getPath();
+		return Registry.ITEM.getKey(item.asItem()).getPath();
 	}
 }

@@ -1,8 +1,8 @@
 {
   "parent": "more_immersive_wires:block/modem_connector",
   "textures": {
-    "texture": "more_immersive_wires:block/relay_cc",
     "back": "computercraft:block/modem_back",
-    "front": "computercraft:block/wired_modem_face"
+    "front": "computercraft:block/wired_modem_face",
+    "texture": "more_immersive_wires:block/relay_cc"
   }
 }

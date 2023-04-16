@@ -1,10 +1,10 @@
 package com.tom.morewires.compat.cc;
 
-import java.util.Random;
 import java.util.function.BiPredicate;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -62,7 +62,7 @@ public class CCConnectorBlock extends OnCableConnectorBlock<CCConnectorBlockEnti
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random rand) {
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource rand) {
 		BlockEntity te = world.getBlockEntity(pos);
 		if (te instanceof CCBlockEntity generic) generic.blockTick();
 	}

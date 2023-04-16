@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "wcw",
-    "csc",
-    "wcw"
-  ],
   "key": {
-    "s": {
-      "tag": "forge:rods/wooden"
-    },
     "c": {
       "item": "refinedstorage:cable"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
     },
     "w": {
       "tag": "forge:wires/aluminum"
     }
   },
+  "pattern": [
+    "wcw",
+    "csc",
+    "wcw"
+  ],
   "result": {
-    "item": "more_immersive_wires:rs_coil",
-    "count": 4
+    "count": 4,
+    "item": "more_immersive_wires:rs_coil"
   }
 }

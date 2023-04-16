@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " c ",
-    "bcb",
-    "bwb"
-  ],
   "key": {
     "b": {
       "item": "minecraft:deepslate"
@@ -16,8 +11,13 @@
       "tag": "ae2:glass_cable"
     }
   },
+  "pattern": [
+    " c ",
+    "bcb",
+    "bwb"
+  ],
   "result": {
-    "item": "more_immersive_wires:ae_connector",
-    "count": 4
+    "count": 4,
+    "item": "more_immersive_wires:ae_connector"
   }
 }

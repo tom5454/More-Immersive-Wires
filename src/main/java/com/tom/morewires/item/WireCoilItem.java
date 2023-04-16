@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -42,7 +41,7 @@ public class WireCoilItem extends IEBaseItem implements IWireCoil {
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
 		if(hasWireLink(stack)) {
 			WireLink link = WireLink.readFromItem(stack);
-			list.add(new TranslatableComponent(Lib.DESC_INFO+"attachedToDim", link.cp.getX(),
+			list.add(Component.translatable(Lib.DESC_INFO+"attachedToDim", link.cp.getX(),
 					link.cp.getY(), link.cp.getZ(), link.dimension));
 		}
 	}

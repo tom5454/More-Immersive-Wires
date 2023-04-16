@@ -1,9 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " c ",
-    "bcb"
-  ],
   "key": {
     "b": {
       "item": "ae2:sky_stone_block"
@@ -12,8 +8,12 @@
       "item": "ae2:fluix_block"
     }
   },
+  "pattern": [
+    " c ",
+    "bcb"
+  ],
   "result": {
-    "item": "more_immersive_wires:ae_dense_relay",
-    "count": 8
+    "count": 8,
+    "item": "more_immersive_wires:ae_dense_relay"
   }
 }

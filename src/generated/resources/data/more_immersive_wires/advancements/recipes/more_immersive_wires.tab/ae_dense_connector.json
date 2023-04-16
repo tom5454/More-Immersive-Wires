@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "more_immersive_wires:ae_dense_connector"
-    ]
-  },
   "criteria": {
     "ae_dense_connector_unlock": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -24,13 +18,14 @@
             "tag": "ae2:covered_dense_cable"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "more_immersive_wires:ae_dense_connector"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -38,5 +33,10 @@
       "ae_dense_connector_unlock",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:ae_dense_connector"
+    ]
+  }
 }
