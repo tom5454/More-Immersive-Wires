@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " c ",
+    "bcb"
+  ],
+  "key": {
+    "b": {
+      "tag": "forge:stone"
+    },
+    "c": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "more_immersive_wires:cc_relay",
+    "count": 8
+  }
+}

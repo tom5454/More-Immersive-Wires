@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:ae_connector"
+    ]
+  },
+  "criteria": {
+    "ae_connector_unlock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:deepslate"
+            ]
+          },
+          {
+            "tag": "forge:gems/fluix"
+          },
+          {
+            "tag": "ae2:glass_cable"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "more_immersive_wires:ae_connector"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ae_connector_unlock",
+      "has_the_recipe"
+    ]
+  ]
+}

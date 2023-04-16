@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:id_relay"
+    ]
+  },
+  "criteria": {
+    "id_relay_unlock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "integrateddynamics:menril_wood"
+            ]
+          },
+          {
+            "items": [
+              "integrateddynamics:crystalized_menril_chunk"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "more_immersive_wires:id_relay"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "id_relay_unlock",
+      "has_the_recipe"
+    ]
+  ]
+}

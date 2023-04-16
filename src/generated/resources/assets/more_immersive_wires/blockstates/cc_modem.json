@@ -1,0 +1,108 @@
+{
+  "variants": {
+    "facing=down,modem=false,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector"
+    },
+    "facing=up,modem=false,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector",
+      "x": 180
+    },
+    "facing=north,modem=false,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,modem=false,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector",
+      "x": 90
+    },
+    "facing=west,modem=false,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,modem=false,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,modem=true,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on"
+    },
+    "facing=up,modem=true,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on",
+      "x": 180
+    },
+    "facing=north,modem=true,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,modem=true,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on",
+      "x": 90
+    },
+    "facing=west,modem=true,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,modem=true,peripheral=false": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,modem=false,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_p"
+    },
+    "facing=up,modem=false,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_p",
+      "x": 180
+    },
+    "facing=north,modem=false,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_p",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,modem=false,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_p",
+      "x": 90
+    },
+    "facing=west,modem=false,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_p",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,modem=false,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_p",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,modem=true,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on_p"
+    },
+    "facing=up,modem=true,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on_p",
+      "x": 180
+    },
+    "facing=north,modem=true,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on_p",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,modem=true,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on_p",
+      "x": 90
+    },
+    "facing=west,modem=true,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on_p",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,modem=true,peripheral=true": {
+      "model": "more_immersive_wires:block/cc_modem_connector_on_p",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " c ",
+    "bcb",
+    "bwb"
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:deepslate"
+    },
+    "c": {
+      "tag": "forge:gems/fluix"
+    },
+    "w": {
+      "tag": "ae2:glass_cable"
+    }
+  },
+  "result": {
+    "item": "more_immersive_wires:ae_connector",
+    "count": 4
+  }
+}

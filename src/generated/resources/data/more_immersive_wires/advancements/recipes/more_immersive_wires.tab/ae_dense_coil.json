@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:ae_dense_coil"
+    ]
+  },
+  "criteria": {
+    "ae_dense_unlock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "ae2:covered_dense_cable"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "more_immersive_wires:ae_dense_coil"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ae_dense_unlock",
+      "has_the_recipe"
+    ]
+  ]
+}

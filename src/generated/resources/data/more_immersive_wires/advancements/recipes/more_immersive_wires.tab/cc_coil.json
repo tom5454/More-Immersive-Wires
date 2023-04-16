@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:cc_coil"
+    ]
+  },
+  "criteria": {
+    "cc_unlock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "computercraft:cable"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "more_immersive_wires:cc_coil"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cc_unlock",
+      "has_the_recipe"
+    ]
+  ]
+}

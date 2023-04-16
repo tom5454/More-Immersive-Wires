@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " c ",
+    "bcb",
+    "bwb"
+  ],
+  "key": {
+    "b": {
+      "tag": "forge:stone"
+    },
+    "c": {
+      "item": "refinedstorage:quartz_enriched_iron"
+    },
+    "w": {
+      "item": "refinedstorage:cable"
+    }
+  },
+  "result": {
+    "item": "more_immersive_wires:rs_connector",
+    "count": 4
+  }
+}

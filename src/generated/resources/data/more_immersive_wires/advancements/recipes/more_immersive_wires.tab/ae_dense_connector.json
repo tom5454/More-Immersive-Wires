@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:ae_dense_connector"
+    ]
+  },
+  "criteria": {
+    "ae_dense_connector_unlock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ae2:sky_stone_block"
+            ]
+          },
+          {
+            "items": [
+              "ae2:fluix_block"
+            ]
+          },
+          {
+            "tag": "ae2:covered_dense_cable"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "more_immersive_wires:ae_dense_connector"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "ae_dense_connector_unlock",
+      "has_the_recipe"
+    ]
+  ]
+}

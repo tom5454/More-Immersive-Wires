@@ -1,0 +1,6 @@
+{
+  "parent": "more_immersive_wires:block/modem_connector",
+  "textures": {
+    "front": "computercraft:block/wired_modem_face_peripheral"
+  }
+}

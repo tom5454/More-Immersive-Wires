@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " c ",
+    "bcb",
+    "bwb"
+  ],
+  "key": {
+    "b": {
+      "item": "integrateddynamics:menril_wood"
+    },
+    "c": {
+      "item": "integrateddynamics:crystalized_menril_chunk"
+    },
+    "w": {
+      "item": "integrateddynamics:cable"
+    }
+  },
+  "result": {
+    "item": "more_immersive_wires:id_connector",
+    "count": 4
+  }
+}
