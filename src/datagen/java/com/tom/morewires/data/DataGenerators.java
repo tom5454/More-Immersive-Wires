@@ -17,9 +17,9 @@ public class DataGenerators {
 		if (event.includeServer()) {
 			generator.addProvider(new Recipes(generator));
 			generator.addProvider(new LootTables(generator));
-			//COEBlockTags blockTags = new COEBlockTags(generator, event.getExistingFileHelper());
-			//generator.addProvider(blockTags);
-			//generator.addProvider(new COEItemTags(generator, blockTags, event.getExistingFileHelper()));
+			MiwBlockTags blockTags = new MiwBlockTags(generator, event.getExistingFileHelper());
+			generator.addProvider(blockTags);
+			generator.addProvider(new MiwItemTags(generator, blockTags, event.getExistingFileHelper()));
 		}
 		if (event.includeClient()) {
 			generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "more_immersive_wires:ae_connector",
+    "more_immersive_wires:ae_relay",
+    "more_immersive_wires:ae_dense_connector",
+    "more_immersive_wires:ae_dense_relay",
+    "more_immersive_wires:rs_connector",
+    "more_immersive_wires:rs_relay",
+    "more_immersive_wires:id_connector",
+    "more_immersive_wires:id_relay",
+    "more_immersive_wires:cc_connector",
+    "more_immersive_wires:cc_relay",
+    "more_immersive_wires:cc_modem"
+  ]
+}
