@@ -1,23 +1,36 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "wcw",
-    "csc",
-    "wcw"
-  ],
-  "key": {
-    "s": {
-      "tag": "forge:rods/wooden"
-    },
-    "c": {
-      "item": "integrateddynamics:cable"
-    },
-    "w": {
-      "tag": "forge:wires/aluminum"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "integrateddynamics",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "wcw",
+          "csc",
+          "wcw"
+        ],
+        "key": {
+          "s": {
+            "tag": "forge:rods/wooden"
+          },
+          "c": {
+            "item": "integrateddynamics:cable"
+          },
+          "w": {
+            "tag": "forge:wires/aluminum"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:id_coil",
+          "count": 4
+        }
+      }
     }
-  },
-  "result": {
-    "item": "more_immersive_wires:id_coil",
-    "count": 4
-  }
+  ]
 }

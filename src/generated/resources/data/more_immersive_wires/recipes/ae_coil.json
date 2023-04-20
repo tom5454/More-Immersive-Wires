@@ -1,23 +1,36 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "wcw",
-    "csc",
-    "wcw"
-  ],
-  "key": {
-    "s": {
-      "tag": "forge:rods/wooden"
-    },
-    "c": {
-      "tag": "ae2:glass_cable"
-    },
-    "w": {
-      "tag": "forge:wires/aluminum"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "ae2",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "wcw",
+          "csc",
+          "wcw"
+        ],
+        "key": {
+          "s": {
+            "tag": "forge:rods/wooden"
+          },
+          "c": {
+            "tag": "ae2:glass_cable"
+          },
+          "w": {
+            "tag": "forge:wires/aluminum"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:ae_coil",
+          "count": 4
+        }
+      }
     }
-  },
-  "result": {
-    "item": "more_immersive_wires:ae_coil",
-    "count": 4
-  }
+  ]
 }

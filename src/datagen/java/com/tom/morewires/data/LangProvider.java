@@ -5,6 +5,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
 import com.tom.morewires.MoreImmersiveWires;
+import com.tom.morewires.compat.cc.CCWireDefinition;
 
 public class LangProvider extends LanguageProvider {
 
@@ -24,7 +25,7 @@ public class LangProvider extends LanguageProvider {
 			add("config.moreimmersivewires." + w.name + ".maxlen", w.localized + " Cable Max Length");
 			add("config.moreimmersivewires." + w.name + ".settings", w.localized + " Cable Settings");
 		});
-		add(MoreImmersiveWires.CC_MODEM_CONNECTOR.get(), "CC Modem with Connector");
+		add(CCWireDefinition.CC_MODEM_CONNECTOR.get(), "CC Modem with Connector");
 	}
 
 }

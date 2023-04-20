@@ -6,11 +6,14 @@ import java.util.List;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Item;
 
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import com.tom.morewires.MoreImmersiveWires;
+import com.tom.morewires.compat.cc.CCWireDefinition;
 
 import blusunrize.immersiveengineering.api.IETags;
 
@@ -28,9 +31,10 @@ public class MiwItemTags extends ItemTagsProvider {
 			wiring.add(w.RELAY.get().asItem());
 			wiring.add(w.COIL.get());
 		});
-		wiring.add(MoreImmersiveWires.CC_MODEM_CONNECTOR.get().asItem());
+		wiring.add(CCWireDefinition.CC_MODEM_CONNECTOR.get().asItem());
 
-		tag(IETags.toolboxWiring).add(wiring.toArray(Item[]::new));
+		TagsProvider.TagAppender<Item> w = tag(IETags.toolboxWiring);
+		wiring.stream().map(ForgeRegistries.ITEMS::getKey).forEach(w::addOptional);
 	}
 
 	@Override

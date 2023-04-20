@@ -1,19 +1,32 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " c ",
-    "bcb"
-  ],
-  "key": {
-    "b": {
-      "item": "minecraft:deepslate"
-    },
-    "c": {
-      "tag": "forge:gems/fluix"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "ae2",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "bcb"
+        ],
+        "key": {
+          "b": {
+            "item": "minecraft:deepslate"
+          },
+          "c": {
+            "tag": "forge:gems/fluix"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:ae_relay",
+          "count": 8
+        }
+      }
     }
-  },
-  "result": {
-    "item": "more_immersive_wires:ae_relay",
-    "count": 8
-  }
+  ]
 }

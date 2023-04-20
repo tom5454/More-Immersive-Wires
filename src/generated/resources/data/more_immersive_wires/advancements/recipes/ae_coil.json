@@ -1,0 +1,44 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ae2",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ae_coil"
+          ]
+        },
+        "criteria": {
+          "ae_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "tag": "ae2:glass_cable"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ae_coil"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ae_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

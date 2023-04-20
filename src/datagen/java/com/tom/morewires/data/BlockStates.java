@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableMap;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.block.OnCableConnectorBlock;
+import com.tom.morewires.compat.cc.CCWireDefinition;
 
 import dan200.computercraft.shared.peripheral.modem.wired.BlockWiredModemFull;
 
@@ -57,7 +58,7 @@ public class BlockStates extends ExtendedBlockstateProvider {
 			}
 		});
 
-		createAllRotatedBlock(MoreImmersiveWires.CC_MODEM_CONNECTOR, d -> {
+		createAllRotatedBlock(CCWireDefinition.CC_MODEM_CONNECTOR, d -> {
 			boolean p = d.getSetStates().get(BlockWiredModemFull.PERIPHERAL_ON) == Boolean.TRUE;
 			boolean m = d.getSetStates().get(BlockWiredModemFull.MODEM_ON) == Boolean.TRUE;
 			return models().withExistingParent("cc_modem_connector" + (m ? "_on" : "") + (p ? "_p" : ""), modLoc("block/modem_connector"))

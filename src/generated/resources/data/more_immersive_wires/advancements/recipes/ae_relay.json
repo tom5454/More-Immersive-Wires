@@ -1,0 +1,49 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ae2",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ae_relay"
+          ]
+        },
+        "criteria": {
+          "ae_relay_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:deepslate"
+                  ]
+                },
+                {
+                  "tag": "forge:gems/fluix"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ae_relay"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ae_relay_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,21 +1,69 @@
 {
   "replace": false,
   "values": [
-    "more_immersive_wires:ae_connector",
-    "more_immersive_wires:ae_relay",
-    "more_immersive_wires:ae_coil",
-    "more_immersive_wires:ae_dense_connector",
-    "more_immersive_wires:ae_dense_relay",
-    "more_immersive_wires:ae_dense_coil",
-    "more_immersive_wires:rs_connector",
-    "more_immersive_wires:rs_relay",
-    "more_immersive_wires:rs_coil",
-    "more_immersive_wires:id_connector",
-    "more_immersive_wires:id_relay",
-    "more_immersive_wires:id_coil",
-    "more_immersive_wires:cc_connector",
-    "more_immersive_wires:cc_relay",
-    "more_immersive_wires:cc_coil",
-    "more_immersive_wires:cc_modem"
+    {
+      "id": "more_immersive_wires:ae_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ae_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ae_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ae_dense_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ae_dense_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ae_dense_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:rs_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:rs_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:rs_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:id_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:id_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:id_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:cc_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:cc_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:cc_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:cc_modem",
+      "required": false
+    }
   ]
 }

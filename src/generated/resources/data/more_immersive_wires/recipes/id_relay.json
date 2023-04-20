@@ -1,19 +1,32 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " c ",
-    "bcb"
-  ],
-  "key": {
-    "b": {
-      "item": "integrateddynamics:menril_wood"
-    },
-    "c": {
-      "item": "integrateddynamics:crystalized_menril_chunk"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "integrateddynamics",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "bcb"
+        ],
+        "key": {
+          "b": {
+            "item": "integrateddynamics:menril_wood"
+          },
+          "c": {
+            "item": "integrateddynamics:crystalized_menril_chunk"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:id_relay",
+          "count": 8
+        }
+      }
     }
-  },
-  "result": {
-    "item": "more_immersive_wires:id_relay",
-    "count": 8
-  }
+  ]
 }

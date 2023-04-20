@@ -1,23 +1,36 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " c ",
-    "bcb",
-    "bwb"
-  ],
-  "key": {
-    "b": {
-      "tag": "forge:stone"
-    },
-    "c": {
-      "item": "minecraft:redstone"
-    },
-    "w": {
-      "item": "computercraft:cable"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "computercraft",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "bcb",
+          "bwb"
+        ],
+        "key": {
+          "b": {
+            "tag": "forge:stone"
+          },
+          "c": {
+            "item": "minecraft:redstone"
+          },
+          "w": {
+            "item": "computercraft:cable"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:cc_connector",
+          "count": 4
+        }
+      }
     }
-  },
-  "result": {
-    "item": "more_immersive_wires:cc_connector",
-    "count": 4
-  }
+  ]
 }

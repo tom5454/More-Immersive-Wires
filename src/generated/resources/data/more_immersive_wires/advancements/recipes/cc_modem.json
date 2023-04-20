@@ -1,0 +1,51 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "computercraft",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:cc_modem"
+          ]
+        },
+        "criteria": {
+          "cc_modem_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "more_immersive_wires:cc_connector"
+                  ]
+                },
+                {
+                  "items": [
+                    "computercraft:wired_modem"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:cc_modem"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "cc_modem_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

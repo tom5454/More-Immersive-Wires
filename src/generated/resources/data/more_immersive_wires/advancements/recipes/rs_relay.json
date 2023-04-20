@@ -1,0 +1,49 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "refinedstorage",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:rs_relay"
+          ]
+        },
+        "criteria": {
+          "rs_relay_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "tag": "forge:stone"
+                },
+                {
+                  "items": [
+                    "refinedstorage:quartz_enriched_iron"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:rs_relay"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "rs_relay_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

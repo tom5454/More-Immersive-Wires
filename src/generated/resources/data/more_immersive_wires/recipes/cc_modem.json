@@ -1,14 +1,27 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "more_immersive_wires:cc_connector"
-    },
-    {
-      "item": "computercraft:wired_modem"
+      "conditions": [
+        {
+          "modid": "computercraft",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "more_immersive_wires:cc_connector"
+          },
+          {
+            "item": "computercraft:wired_modem"
+          }
+        ],
+        "result": {
+          "item": "more_immersive_wires:cc_modem"
+        }
+      }
     }
-  ],
-  "result": {
-    "item": "more_immersive_wires:cc_modem"
-  }
+  ]
 }

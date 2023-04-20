@@ -7,6 +7,7 @@ import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import com.tom.morewires.MoreImmersiveWires;
+import com.tom.morewires.compat.cc.CCWireDefinition;
 
 public class ItemModels extends ItemModelProvider {
 
@@ -23,7 +24,7 @@ public class ItemModels extends ItemModelProvider {
 		});
 
 		withExistingParent(MoreImmersiveWires.AE_DENSE_WIRE.CONNECTOR.get().getRegistryName().getPath(), modLoc("block/ae_dense_connector"));
-		withExistingParent(MoreImmersiveWires.CC_MODEM_CONNECTOR.get().getRegistryName().getPath(), modLoc("block/modem_connector"))
+		withExistingParent(CCWireDefinition.CC_MODEM_CONNECTOR.get().getRegistryName().getPath(), modLoc("block/modem_connector"))
 		.texture("texture", modLoc("block/relay_cc"))
 		.texture("back", new ResourceLocation("computercraft:block/modem_back"))
 		.texture("front", new ResourceLocation("computercraft:block/wired_modem_face"));

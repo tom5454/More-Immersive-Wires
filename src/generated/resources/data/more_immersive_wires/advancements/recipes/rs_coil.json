@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "refinedstorage",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:rs_coil"
+          ]
+        },
+        "criteria": {
+          "rs_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "refinedstorage:cable"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:rs_coil"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "rs_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}
