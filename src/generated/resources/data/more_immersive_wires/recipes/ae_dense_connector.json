@@ -1,23 +1,36 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "key": {
-    "b": {
-      "item": "ae2:sky_stone_block"
-    },
-    "c": {
-      "item": "ae2:fluix_block"
-    },
-    "w": {
-      "tag": "ae2:covered_dense_cable"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ae2"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "b": {
+            "item": "ae2:sky_stone_block"
+          },
+          "c": {
+            "item": "ae2:fluix_block"
+          },
+          "w": {
+            "tag": "ae2:covered_dense_cable"
+          }
+        },
+        "pattern": [
+          " c ",
+          "bcb",
+          "bwb"
+        ],
+        "result": {
+          "count": 4,
+          "item": "more_immersive_wires:ae_dense_connector"
+        }
+      }
     }
-  },
-  "pattern": [
-    " c ",
-    "bcb",
-    "bwb"
-  ],
-  "result": {
-    "count": 4,
-    "item": "more_immersive_wires:ae_dense_connector"
-  }
+  ]
 }

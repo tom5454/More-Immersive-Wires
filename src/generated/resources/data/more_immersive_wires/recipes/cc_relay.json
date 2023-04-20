@@ -1,19 +1,32 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "key": {
-    "b": {
-      "tag": "forge:stone"
-    },
-    "c": {
-      "item": "minecraft:redstone"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "computercraft"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "b": {
+            "tag": "forge:stone"
+          },
+          "c": {
+            "item": "minecraft:redstone"
+          }
+        },
+        "pattern": [
+          " c ",
+          "bcb"
+        ],
+        "result": {
+          "count": 8,
+          "item": "more_immersive_wires:cc_relay"
+        }
+      }
     }
-  },
-  "pattern": [
-    " c ",
-    "bcb"
-  ],
-  "result": {
-    "count": 8,
-    "item": "more_immersive_wires:cc_relay"
-  }
+  ]
 }

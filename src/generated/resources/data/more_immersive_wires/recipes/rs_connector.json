@@ -1,23 +1,36 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "key": {
-    "b": {
-      "tag": "forge:stone"
-    },
-    "c": {
-      "item": "refinedstorage:quartz_enriched_iron"
-    },
-    "w": {
-      "item": "refinedstorage:cable"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "refinedstorage"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "b": {
+            "tag": "forge:stone"
+          },
+          "c": {
+            "item": "refinedstorage:quartz_enriched_iron"
+          },
+          "w": {
+            "item": "refinedstorage:cable"
+          }
+        },
+        "pattern": [
+          " c ",
+          "bcb",
+          "bwb"
+        ],
+        "result": {
+          "count": 4,
+          "item": "more_immersive_wires:rs_connector"
+        }
+      }
     }
-  },
-  "pattern": [
-    " c ",
-    "bcb",
-    "bwb"
-  ],
-  "result": {
-    "count": 4,
-    "item": "more_immersive_wires:rs_connector"
-  }
+  ]
 }

@@ -1,0 +1,51 @@
+{
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "more_immersive_wires:id_relay"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
+          "id_relay_unlock": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "integrateddynamics:menril_wood"
+                  ]
+                },
+                {
+                  "items": [
+                    "integrateddynamics:crystalized_menril_chunk"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "id_relay_unlock",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:id_relay"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "integrateddynamics"
+        }
+      ]
+    }
+  ]
+}

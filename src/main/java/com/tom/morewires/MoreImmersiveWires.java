@@ -44,8 +44,6 @@ import net.minecraftforge.registries.RegistryObject;
 import com.tom.morewires.block.RelayBlock;
 import com.tom.morewires.compat.ae.AEDenseWireDefinition;
 import com.tom.morewires.compat.ae.AEWireDefinition;
-import com.tom.morewires.compat.cc.CCModemConnectorBlock;
-import com.tom.morewires.compat.cc.CCModemConnectorBlockEntity;
 import com.tom.morewires.compat.cc.CCWireDefinition;
 import com.tom.morewires.compat.id.IntegratedDynamicsWireDefinition;
 import com.tom.morewires.compat.rs.RSWireDefinition;
@@ -78,9 +76,6 @@ public class MoreImmersiveWires {
 	public static final Wire RS_WIRE = new Wire("rs", RS, 0x222222, "RS Cable", false, () -> RSWireDefinition::new);
 	public static final Wire ID_WIRE = new Wire("id", ID, 0x335566, "Logic Cable", false, () -> IntegratedDynamicsWireDefinition::new);
 	public static final Wire CC_WIRE = new Wire("cc", CC, 0x888888, "Networking Cable", false, () -> CCWireDefinition::new);
-
-	public static RegistryObject<Block> CC_MODEM_CONNECTOR;
-	public static RegistryObject<BlockEntityType<BlockEntity>> CC_MODEM_CONNECTOR_ENTITY;
 
 	public static class Wire {
 		public final String name, localized, modid;
@@ -193,11 +188,6 @@ public class MoreImmersiveWires {
 
 		ALL_WIRES.forEach(Wire::init);
 
-		if(ModList.get().isLoaded(CC)) {
-			CC_MODEM_CONNECTOR = blockWithItem("cc_modem", () -> new CCModemConnectorBlock(CC_MODEM_CONNECTOR_ENTITY), b -> new BlockItemIE(b, new Item.Properties().tab(MOD_TAB)));
-			CC_MODEM_CONNECTOR_ENTITY = blockEntity("cc_modem.tile", (p, s) -> new CCModemConnectorBlockEntity(CC_MODEM_CONNECTOR_ENTITY.get(), p, s), CC_MODEM_CONNECTOR);
-		}
-
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		BLOCKS.register(bus);
 		ITEMS.register(bus);
@@ -225,20 +215,20 @@ public class MoreImmersiveWires {
 		}
 	};
 
-	private static <B extends Block> RegistryObject<B> blockWithItem(String name, Supplier<B> create) {
+	public static <B extends Block> RegistryObject<B> blockWithItem(String name, Supplier<B> create) {
 		RegistryObject<B> re = BLOCKS.register(name, create);
 		ITEMS.register(name, () -> new BlockItem(re.get(), new Item.Properties().tab(MOD_TAB)));
 		return re;
 	}
 
-	private static <B extends Block, I extends Item> RegistryObject<B> blockWithItem(String name, Supplier<B> create, Function<Block, I> createItem) {
+	public static <B extends Block, I extends Item> RegistryObject<B> blockWithItem(String name, Supplier<B> create, Function<Block, I> createItem) {
 		RegistryObject<B> re = BLOCKS.register(name, create);
 		ITEMS.register(name, () -> createItem.apply(re.get()));
 		return re;
 	}
 
 	@SafeVarargs
-	private static <BE extends BlockEntity> RegistryObject<BlockEntityType<BE>> blockEntity(String name, BlockEntitySupplier<? extends BE> create, RegistryObject<? extends Block>... blocks) {
+	public static <BE extends BlockEntity> RegistryObject<BlockEntityType<BE>> blockEntity(String name, BlockEntitySupplier<? extends BE> create, RegistryObject<? extends Block>... blocks) {
 		return BLOCK_ENTITIES.register(name, () -> {
 			return BlockEntityType.Builder.<BE>of(create, Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)).build(null);
 		});

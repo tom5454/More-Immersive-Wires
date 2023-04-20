@@ -20,6 +20,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import com.refinedmods.refinedstorage.RSBlocks;
@@ -27,6 +28,7 @@ import com.refinedmods.refinedstorage.RSItems;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.MoreImmersiveWires.Wire;
+import com.tom.morewires.compat.cc.CCWireDefinition;
 
 import dan200.computercraft.shared.Registry;
 
@@ -68,40 +70,44 @@ public class Recipes extends RecipeProvider {
 	@Override
 	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
 		for (WireRecipe wr : WireRecipe.values()) {
-			ShapedRecipeBuilder.shaped(wr.wire.COIL.get(), 4)
-			.pattern("wcw")
-			.pattern("csc")
-			.pattern("wcw")
-			.define('s', Tags.Items.RODS_WOODEN)
-			.define('c', wr.cableItem.ingredient())
-			.define('w', wr.wireItem.ingredient())
-			.unlockedBy(wr.wire.name + "_unlock", InventoryChangeTrigger.TriggerInstance.hasItems(wr.cableItem.predicate()))
-			.save(consumer);
+			ConditionalRecipeUtil.builder().addCondition(new ModLoadedCondition(wr.wire.modid)).addRecipe(cc -> {
+				ShapedRecipeBuilder.shaped(wr.wire.COIL.get(), 4)
+				.pattern("wcw")
+				.pattern("csc")
+				.pattern("wcw")
+				.define('s', Tags.Items.RODS_WOODEN)
+				.define('c', wr.cableItem.ingredient())
+				.define('w', wr.wireItem.ingredient())
+				.unlockedBy(wr.wire.name + "_unlock", InventoryChangeTrigger.TriggerInstance.hasItems(wr.cableItem.predicate()))
+				.save(cc);
 
-			ShapedRecipeBuilder.shaped(wr.wire.RELAY.get(), 8)
-			.pattern(" c ")
-			.pattern("bcb")
-			.define('b', wr.baseItem.ingredient())
-			.define('c', wr.coreItem.ingredient())
-			.unlockedBy(wr.wire.name + "_relay_unlock", InventoryChangeTrigger.TriggerInstance.hasItems(wr.baseItem.predicate(), wr.coreItem.predicate()))
-			.save(consumer);
+				ShapedRecipeBuilder.shaped(wr.wire.RELAY.get(), 8)
+				.pattern(" c ")
+				.pattern("bcb")
+				.define('b', wr.baseItem.ingredient())
+				.define('c', wr.coreItem.ingredient())
+				.unlockedBy(wr.wire.name + "_relay_unlock", InventoryChangeTrigger.TriggerInstance.hasItems(wr.baseItem.predicate(), wr.coreItem.predicate()))
+				.save(cc);
 
-			ShapedRecipeBuilder.shaped(wr.wire.CONNECTOR.get(), 4)
-			.pattern(" c ")
-			.pattern("bcb")
-			.pattern("bwb")
-			.define('b', wr.baseItem.ingredient())
-			.define('c', wr.coreItem.ingredient())
-			.define('w', wr.cableItem.ingredient())
-			.unlockedBy(wr.wire.name + "_connector_unlock", InventoryChangeTrigger.TriggerInstance.hasItems(wr.baseItem.predicate(), wr.coreItem.predicate(), wr.cableItem.predicate()))
-			.save(consumer);
+				ShapedRecipeBuilder.shaped(wr.wire.CONNECTOR.get(), 4)
+				.pattern(" c ")
+				.pattern("bcb")
+				.pattern("bwb")
+				.define('b', wr.baseItem.ingredient())
+				.define('c', wr.coreItem.ingredient())
+				.define('w', wr.cableItem.ingredient())
+				.unlockedBy(wr.wire.name + "_connector_unlock", InventoryChangeTrigger.TriggerInstance.hasItems(wr.baseItem.predicate(), wr.coreItem.predicate(), wr.cableItem.predicate()))
+				.save(cc);
+			}).build(consumer);
 		}
 
-		ShapelessRecipeBuilder.shapeless(MoreImmersiveWires.CC_MODEM_CONNECTOR.get())
-		.requires(MoreImmersiveWires.CC_WIRE.CONNECTOR.get())
-		.requires(Registry.ModItems.WIRED_MODEM.get())
-		.unlockedBy("cc_modem_unlock", InventoryChangeTrigger.TriggerInstance.hasItems(MoreImmersiveWires.CC_WIRE.CONNECTOR.get(), Registry.ModItems.WIRED_MODEM.get()))
-		.save(consumer);
+		ConditionalRecipeUtil.builder().addCondition(new ModLoadedCondition(MoreImmersiveWires.CC)).addRecipe(cc -> {
+			ShapelessRecipeBuilder.shapeless(CCWireDefinition.CC_MODEM_CONNECTOR.get())
+			.requires(MoreImmersiveWires.CC_WIRE.CONNECTOR.get())
+			.requires(Registry.ModItems.WIRED_MODEM.get())
+			.unlockedBy("cc_modem_unlock", InventoryChangeTrigger.TriggerInstance.hasItems(MoreImmersiveWires.CC_WIRE.CONNECTOR.get(), Registry.ModItems.WIRED_MODEM.get()))
+			.save(cc);
+		}).build(consumer);
 	}
 
 	public static interface CraftingIngredient {
