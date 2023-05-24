@@ -12,7 +12,7 @@ public class AEDenseNetworkHandler extends AENetworkHandler {
 
 	@Override
 	protected IManagedGridNode createMainNode() {
-		return GridHelper.createManagedNode(this, this).setFlags(GridFlags.DENSE_CAPACITY).setVisualRepresentation(MoreImmersiveWires.AE_DENSE_WIRE.COIL.get());
+		return GridHelper.createManagedNode(this, this).setFlags(GridFlags.DENSE_CAPACITY).setVisualRepresentation(MoreImmersiveWires.AE_DENSE_WIRE.simple().COIL.get());
 	}
 
 	protected AEDenseNetworkHandler(LocalWireNetwork net, GlobalWireNetwork global) {

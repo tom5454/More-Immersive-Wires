@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "wcw",
+          "csc",
+          "wcw"
+        ],
+        "key": {
+          "s": {
+            "tag": "forge:rods/wooden"
+          },
+          "c": {
+            "item": "ftbic:iv_cable"
+          },
+          "w": {
+            "item": "ftbic:iv_cable"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:ftbic_iv_coil",
+          "count": 4
+        }
+      }
+    }
+  ]
+}

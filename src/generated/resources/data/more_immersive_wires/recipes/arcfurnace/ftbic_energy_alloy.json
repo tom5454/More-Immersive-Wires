@@ -1,0 +1,28 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "results": [
+    {
+      "item": "more_immersive_wires:ftbic_energy_alloy",
+      "count": 4
+    }
+  ],
+  "additives": [
+    {
+      "count": 3,
+      "base_ingredient": {
+        "tag": "forge:ingots/electrum"
+      }
+    }
+  ],
+  "input": {
+    "item": "ftbic:energy_crystal"
+  },
+  "conditions": [
+    {
+      "modid": "ftbic",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "energy": 256000,
+  "time": 400
+}

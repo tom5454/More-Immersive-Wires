@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "bcb",
+          "bcb"
+        ],
+        "key": {
+          "b": {
+            "item": "ftbic:rubber_sheet"
+          },
+          "c": {
+            "tag": "forge:ingots/enderium"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:ftbic_ev_relay",
+          "count": 8
+        }
+      }
+    }
+  ]
+}

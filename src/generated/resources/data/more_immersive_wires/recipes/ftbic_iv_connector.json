@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "bcb",
+          "bwb"
+        ],
+        "key": {
+          "b": {
+            "tag": "forge:glass"
+          },
+          "c": {
+            "item": "more_immersive_wires:ftbic_energy_alloy"
+          },
+          "w": {
+            "item": "ftbic:iv_cable"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:ftbic_iv_connector",
+          "count": 4
+        }
+      }
+    }
+  ]
+}

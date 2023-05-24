@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ftbic_iv_coil"
+          ]
+        },
+        "criteria": {
+          "ftbic_iv_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ftbic:iv_cable"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ftbic_iv_coil"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ftbic_iv_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

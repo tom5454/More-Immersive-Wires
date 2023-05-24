@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "bcb"
+        ],
+        "key": {
+          "b": {
+            "item": "ftbic:rubber"
+          },
+          "c": {
+            "tag": "forge:ingots/aluminum"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:ftbic_mv_relay",
+          "count": 8
+        }
+      }
+    }
+  ]
+}

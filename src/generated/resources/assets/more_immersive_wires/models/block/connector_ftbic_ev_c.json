@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "more_immersive_wires:block/connector_ftbic_ev",
+    "texture": "more_immersive_wires:block/connector_ftbic_ev"
+  },
+  "loader": "forge:obj",
+  "model": "more_immersive_wires:models/block/connector_hv.obj",
+  "detectCullableFaces": false,
+  "flip-v": true
+}

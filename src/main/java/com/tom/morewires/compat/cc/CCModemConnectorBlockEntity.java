@@ -2,6 +2,7 @@ package com.tom.morewires.compat.cc;
 
 import static dan200.computercraft.shared.Capabilities.CAPABILITY_PERIPHERAL;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -28,6 +30,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableList;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.tile.IConnector;
@@ -79,7 +82,7 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 		if (local != null && !local.getConnections(this.worldPosition).isEmpty()) {
 			return false;
 		}
-		return MoreImmersiveWires.CC_WIRE.wireType == cableType;
+		return MoreImmersiveWires.CC_WIRE.simple().wireType == cableType;
 	}
 
 	@Override
@@ -442,5 +445,10 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 	@Override
 	public IWiredElement getElement() {
 		return cable;
+	}
+
+	@Override
+	public Collection<ResourceLocation> getRequestedHandlers() {
+		return ImmutableList.of(MoreImmersiveWires.CC_WIRE.simple().NET_ID);
 	}
 }

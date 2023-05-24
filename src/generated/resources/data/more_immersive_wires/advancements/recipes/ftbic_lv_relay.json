@@ -1,0 +1,49 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ftbic_lv_relay"
+          ]
+        },
+        "criteria": {
+          "ftbic_lv_relay_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ftbic:rubber"
+                  ]
+                },
+                {
+                  "tag": "forge:ingots/copper"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ftbic_lv_relay"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ftbic_lv_relay_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

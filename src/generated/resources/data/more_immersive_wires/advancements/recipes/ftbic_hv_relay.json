@@ -1,0 +1,49 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ftbic_hv_relay"
+          ]
+        },
+        "criteria": {
+          "ftbic_hv_relay_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ftbic:rubber_sheet"
+                  ]
+                },
+                {
+                  "tag": "forge:ingots/gold"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ftbic_hv_relay"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ftbic_hv_relay_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

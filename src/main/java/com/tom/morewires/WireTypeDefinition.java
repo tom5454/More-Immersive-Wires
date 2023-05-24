@@ -1,37 +1,61 @@
 package com.tom.morewires;
 
-import net.minecraft.core.BlockPos;
+import java.util.List;
+
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
 
+import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.registries.RegistryObject;
 
-import com.tom.morewires.block.OnCableConnectorBlock;
+import com.tom.morewires.MoreImmersiveWires.Wire;
 
 import blusunrize.immersiveengineering.api.wires.IImmersiveConnectable;
-import blusunrize.immersiveengineering.api.wires.localhandlers.ILocalHandlerProvider;
-import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
+import blusunrize.immersiveengineering.api.wires.WireType;
 
-public interface WireTypeDefinition<T extends BlockEntity & IImmersiveConnectable> extends ILocalHandlerProvider {
-	T createBE(BlockPos pos, BlockState state);
-	boolean isCable(BlockGetter level, BlockPos pos);
+public interface WireTypeDefinition<T extends BlockEntity & IImmersiveConnectable> {
+	void init();
+	boolean isMatchingWireType(WireType wt);
+	void config(Builder builder);
+	void setup(Wire wire);
+	List<? extends WireInfo> getWireCoils();
+	List<? extends ConnectorInfo> getConnectors();
+	List<? extends RelayInfo> getRelays();
+	void appendHoverTextCoil(WireType type, ItemStack stack, Level world, List<Component> list, TooltipFlag flag);
+	void appendHoverTextConnector(Object id, ItemStack stack, Level world, List<Component> tooltip, TooltipFlag advanced);
+	void configReload();
+	void clientSetup();
+	String getName();
+	String getLocalized();
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	default Block makeBlock(RegistryObject<BlockEntityType<?>> type) {
-		return makeBlock0((RegistryObject) type);
+	public static interface WireInfo {
+		boolean isThickWire();
+		int getColor();
+		String getLocalized();
+		RegistryObject<Item> getCoilItem();
+		String getName();
 	}
 
-	default Block makeBlock0(RegistryObject<BlockEntityType<T>> type) {
-		return new OnCableConnectorBlock<>(type, this::isCable);
+	public static interface ConnectorInfo {
+		boolean isTallConnector();
+		String getLocalized();
+		RegistryObject<Block> getConnectorBlock();
+		String getName();
+
+		default boolean datagenConnectorBlock() { return true; }
 	}
 
-	default Item makeItemBlock(Block block) {
-		return new BlockItemIE(block, new Item.Properties().tab(MoreImmersiveWires.MOD_TAB));
+	public static interface RelayInfo {
+		boolean isExTallRelay();
+		boolean isTallRelay();
+		String getLocalized();
+		RegistryObject<Block> getRelayBlock();
+		String getName();
+		boolean isMatchingWireType(WireType cableType);
 	}
-
-	default void init() {}
 }

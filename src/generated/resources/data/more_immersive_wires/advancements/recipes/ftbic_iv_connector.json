@@ -1,0 +1,54 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ftbic_iv_connector"
+          ]
+        },
+        "criteria": {
+          "ftbic_iv_connector_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "tag": "forge:glass"
+                },
+                {
+                  "items": [
+                    "more_immersive_wires:ftbic_energy_alloy"
+                  ]
+                },
+                {
+                  "items": [
+                    "ftbic:iv_cable"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ftbic_iv_connector"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ftbic_iv_connector_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

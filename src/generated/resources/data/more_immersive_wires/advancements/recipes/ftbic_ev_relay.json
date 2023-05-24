@@ -1,0 +1,49 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ftbic_ev_relay"
+          ]
+        },
+        "criteria": {
+          "ftbic_ev_relay_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ftbic:rubber_sheet"
+                  ]
+                },
+                {
+                  "tag": "forge:ingots/enderium"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ftbic_ev_relay"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ftbic_ev_relay_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

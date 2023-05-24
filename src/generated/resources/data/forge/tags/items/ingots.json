@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "more_immersive_wires:ftbic_energy_alloy",
+      "required": false
+    }
+  ]
+}

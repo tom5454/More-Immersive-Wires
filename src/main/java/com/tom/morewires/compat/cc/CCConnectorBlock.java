@@ -41,7 +41,7 @@ public class CCConnectorBlock extends OnCableConnectorBlock<CCConnectorBlockEnti
 	@Override
 	public final InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
 			BlockHitResult hit) {
-		if(player.getItemInHand(hand).is(MoreImmersiveWires.CC_WIRE.COIL.get()))return InteractionResult.PASS;
+		if(player.getItemInHand(hand).is(MoreImmersiveWires.CC_WIRE.simple().COIL.get()))return InteractionResult.PASS;
 		BlockEntity tile = world.getBlockEntity(pos);
 		return tile instanceof CCBlockEntity generic ? generic.onActivate(player, hand, hit) : InteractionResult.PASS;
 	}

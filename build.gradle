@@ -147,7 +147,6 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
-    maven { url "https://dvs1.progwml6.com/files/maven" }
     maven {
         url = "https://maven.theillusivec4.top/"
     }
@@ -157,12 +156,19 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.architectury.dev/" }
     maven {
     	url = "http://localhost:8000"
 		allowInsecureProtocol true
 		content {
             includeGroup "local"
         }
+	}
+	maven {
+    	// location of the maven that hosts JEI files since January 2023
+    	name = "Jared's maven"
+    	url = "https://maven.blamejared.com/"
 	}
 }
 
@@ -185,9 +191,10 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
     
     // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.7.1.255:api")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.2-forge-api:10.2.1.1004")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.2-common-api:10.2.1.1004")
   	// at runtime, use the full JEI jar
-  	runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.7.1.255")
+  	runtimeOnly fg.deobf("mezz.jei:jei-1.18.2-forge:10.2.1.1004")
   	
     compileOnly fg.deobf('local:ImmersiveEngineering:1.18.2-8.4.0-161')
     compileOnly fg.deobf('curse.maven:applied-energistics-2-223794:4136407')
@@ -197,6 +204,13 @@ dependencies {
     compileOnly fg.deobf('local:IntegratedDynamics:1.18.2-1.13.3')
     compileOnly fg.deobf('curse.maven:cyclops-core-232758:4422919')
     compileOnly fg.deobf('curse.maven:common-capabilities-247007:4391353')
+    
+    compileOnly fg.deobf('curse.maven:ftb-industrial-contraptions-forge-539097:4033023')
+    compileOnly fg.deobf("dev.architectury:architectury-forge:4.11.90")
+    compileOnly fg.deobf('curse.maven:ftb-library-forge-404465:4396792')
+    
+    compileOnly fg.deobf('curse.maven:electrodynamics-316867:3928753')
+    compileOnly fg.deobf('curse.maven:nuclear-science-318646:3928751')
     
     implementation fg.deobf("curse.maven:the-one-probe-245211:3965688")
 }

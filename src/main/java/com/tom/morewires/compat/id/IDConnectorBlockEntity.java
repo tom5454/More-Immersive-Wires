@@ -1,5 +1,6 @@
 package com.tom.morewires.compat.id;
 
+import java.util.Collection;
 import java.util.Set;
 
 import org.cyclops.cyclopscore.blockentity.BlockEntityTickerDelayed;
@@ -22,6 +23,7 @@ import org.cyclops.integrateddynamics.core.helper.NetworkHelpers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -29,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.minecraftforge.common.util.LazyOptional;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 
 import com.tom.morewires.MoreImmersiveWires;
@@ -83,7 +86,7 @@ public class IDConnectorBlockEntity extends CyclopsBlockEntity implements IOnCab
 
 			@Override
 			public ItemStack getItemStack() {
-				return new ItemStack(MoreImmersiveWires.ID_WIRE.CONNECTOR.get());
+				return new ItemStack(MoreImmersiveWires.ID_WIRE.simple().CONNECTOR.get());
 			}
 		};
 		addCapabilityInternal(CableConfig.CAPABILITY, LazyOptional.of(() -> cable));
@@ -121,7 +124,7 @@ public class IDConnectorBlockEntity extends CyclopsBlockEntity implements IOnCab
 		if (local != null && !local.getConnections(this.worldPosition).isEmpty()) {
 			return false;
 		}
-		return cableType == MoreImmersiveWires.ID_WIRE.wireType;
+		return cableType == MoreImmersiveWires.ID_WIRE.simple().wireType;
 	}
 
 	@Override
@@ -199,5 +202,10 @@ public class IDConnectorBlockEntity extends CyclopsBlockEntity implements IOnCab
 		super.setRemoved();
 		if(!isUnloaded)
 			setRemovedIE();
+	}
+
+	@Override
+	public Collection<ResourceLocation> getRequestedHandlers() {
+		return ImmutableList.of(MoreImmersiveWires.ID_WIRE.simple().NET_ID);
 	}
 }

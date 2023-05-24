@@ -24,7 +24,7 @@ public class AENetworkHandler extends NodeNetworkHandler<ConnectionWrapper, IGri
 			.setIdlePowerUsage(0.0D);
 
 	protected IManagedGridNode createMainNode() {
-		return GridHelper.createManagedNode(this, this).setFlags(new GridFlags[0]).setVisualRepresentation(MoreImmersiveWires.AE_WIRE.COIL.get());
+		return GridHelper.createManagedNode(this, this).setFlags(new GridFlags[0]).setVisualRepresentation(MoreImmersiveWires.AE_WIRE.simple().COIL.get());
 	}
 
 	protected AENetworkHandler(LocalWireNetwork net, GlobalWireNetwork global) {

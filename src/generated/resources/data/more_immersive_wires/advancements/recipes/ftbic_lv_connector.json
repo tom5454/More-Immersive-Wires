@@ -1,0 +1,54 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ftbic_lv_connector"
+          ]
+        },
+        "criteria": {
+          "ftbic_lv_connector_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ftbic:rubber"
+                  ]
+                },
+                {
+                  "tag": "forge:ingots/copper"
+                },
+                {
+                  "items": [
+                    "ftbic:lv_cable"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ftbic_lv_connector"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ftbic_lv_connector_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

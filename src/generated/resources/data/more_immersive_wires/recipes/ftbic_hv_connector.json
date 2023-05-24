@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " c ",
+          "bcb",
+          "bwb"
+        ],
+        "key": {
+          "b": {
+            "item": "ftbic:rubber_sheet"
+          },
+          "c": {
+            "tag": "forge:ingots/gold"
+          },
+          "w": {
+            "item": "ftbic:hv_cable"
+          }
+        },
+        "result": {
+          "item": "more_immersive_wires:ftbic_hv_connector",
+          "count": 4
+        }
+      }
+    }
+  ]
+}

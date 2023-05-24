@@ -1,5 +1,6 @@
 package com.tom.morewires.compat.ae;
 
+import java.util.Collection;
 import java.util.EnumSet;
 
 import javax.annotation.Nullable;
@@ -7,12 +8,15 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import com.google.common.collect.ImmutableList;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.tile.IConnector;
@@ -34,7 +38,7 @@ public class AEDenseConnectorBlockEntity extends AENetworkBlockEntity implements
 	protected GlobalWireNetwork globalNet;
 
 	static {
-		registerBlockEntityItem(MoreImmersiveWires.AE_DENSE_WIRE.CONNECTOR_ENTITY.get(), MoreImmersiveWires.AE_DENSE_WIRE.CONNECTOR.get().asItem());
+		registerBlockEntityItem(MoreImmersiveWires.AE_DENSE_WIRE.simple().CONNECTOR_ENTITY.get(), MoreImmersiveWires.AE_DENSE_WIRE.simple().CONNECTOR.get().asItem());
 	}
 
 	public AEDenseConnectorBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
@@ -89,7 +93,7 @@ public class AEDenseConnectorBlockEntity extends AENetworkBlockEntity implements
 		if (local != null && !local.getConnections(this.worldPosition).isEmpty()) {
 			return false;
 		}
-		return cableType == MoreImmersiveWires.AE_DENSE_WIRE.wireType;
+		return cableType == MoreImmersiveWires.AE_DENSE_WIRE.simple().wireType;
 	}
 
 	@Override
@@ -147,5 +151,10 @@ public class AEDenseConnectorBlockEntity extends AENetworkBlockEntity implements
 	@Override
 	public VoxelShape getBlockBounds(@Nullable CollisionContext ctx) {
 		return EnergyConnectorBlockEntity.getConnectorBounds(getFacing(), 1F);
+	}
+
+	@Override
+	public Collection<ResourceLocation> getRequestedHandlers() {
+		return ImmutableList.of(MoreImmersiveWires.AE_DENSE_WIRE.simple().NET_ID);
 	}
 }

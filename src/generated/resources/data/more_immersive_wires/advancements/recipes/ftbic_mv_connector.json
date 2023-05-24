@@ -1,0 +1,54 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "modid": "ftbic",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ftbic_mv_connector"
+          ]
+        },
+        "criteria": {
+          "ftbic_mv_connector_unlock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ftbic:rubber"
+                  ]
+                },
+                {
+                  "tag": "forge:ingots/aluminum"
+                },
+                {
+                  "items": [
+                    "ftbic:mv_cable"
+                  ]
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "more_immersive_wires:ftbic_mv_connector"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "ftbic_mv_connector_unlock",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

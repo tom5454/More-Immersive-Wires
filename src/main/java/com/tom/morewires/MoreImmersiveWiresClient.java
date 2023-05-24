@@ -18,6 +18,7 @@ public class MoreImmersiveWiresClient {
 
 	public static void clientSetup() {
 		MinecraftForge.EVENT_BUS.register(MoreImmersiveWiresClient.class);
+		MoreImmersiveWires.ALL_WIRES.forEach(c -> c.wireTypeDef.clientSetup());
 	}
 
 	public static void tooltip(String key, List<Component> tooltip, Object... args) {

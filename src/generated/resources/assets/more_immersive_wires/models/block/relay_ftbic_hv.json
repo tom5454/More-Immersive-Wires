@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "more_immersive_wires:block/relay_ftbic_hv",
+    "texture": "more_immersive_wires:block/relay_ftbic_hv"
+  },
+  "loader": "forge:obj",
+  "model": "more_immersive_wires:models/block/relay_hv.obj",
+  "detectCullableFaces": false,
+  "flip-v": true
+}
