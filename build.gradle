@@ -153,17 +153,30 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
-    maven { url "https://dvs1.progwml6.com/files/maven" }
     maven {
     	// location of the maven that hosts JEI files since January 2023
     	name = "Jared's maven"
     	url = "https://maven.blamejared.com/"
   	}
+  	maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://maven.architectury.dev/" }
     maven {
         url 'https://www.cursemaven.com'
         content {
             includeGroup "curse.maven"
         }
+    }
+    maven {
+    	url = "http://localhost:8000"
+		allowInsecureProtocol true
+		content {
+            includeGroup "local"
+        }
+	}
+	maven {
+        // Location of the maven for mixed mappings, Registrate, and Flywheel
+        name 'tterrag maven'
+        url 'https://maven.tterrag.com'
     }
 }
 
@@ -171,7 +184,7 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.19.2-43.2.0'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.2.8'
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
@@ -191,7 +204,7 @@ dependencies {
   	// at runtime, use the full JEI jar
   	runtimeOnly fg.deobf("mezz.jei:jei-1.19.2-forge:11.6.0.1013")
   	
-  	compileOnly fg.deobf('curse.maven:immersive-engineering-231951:4478894')
+  	compileOnly fg.deobf('curse.maven:immersive-engineering-231951:4535935')
     compileOnly fg.deobf('curse.maven:applied-energistics-2-223794:4293558')
     compileOnly fg.deobf('curse.maven:refined-storage-243076:4465872')
     compileOnly fg.deobf('curse.maven:cc-tweaked-282001:4395619')
@@ -202,7 +215,18 @@ dependencies {
     compileOnly fg.deobf('curse.maven:cyclops-core-232758:4438232')
     compileOnly fg.deobf('curse.maven:common-capabilities-247007:4391413')
     
+    compileOnly fg.deobf('curse.maven:ftb-industrial-contraptions-forge-539097:4392862')
+    compileOnly fg.deobf("dev.architectury:architectury-forge:6.4.62")
+    compileOnly fg.deobf('curse.maven:ftb-library-forge-404465:4478919')
+    
+    compileOnly fg.deobf('curse.maven:electrodynamics-316867:4490532')
+    compileOnly fg.deobf('curse.maven:nuclear-science-318646:4490543')
+    
     implementation fg.deobf("curse.maven:the-one-probe-245211:3965693")
+    
+    implementation fg.deobf("local:create:1.19.2-0.5.1.a")
+  	implementation fg.deobf("local:flywheel-forge:1.19.2-0.6.8.a-14")
+  	implementation fg.deobf("com.tterrag.registrate:Registrate:MC1.19-1.1.5")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

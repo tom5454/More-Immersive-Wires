@@ -1,0 +1,18 @@
+{
+	"input": {
+		"type": "ic2:item",
+		"item": "more_immersive_wires:ic2_uncompressed_insulation",
+		"size": 1
+	},
+	"output": {
+		"type": "ic2:simple",
+		"xp": 0,
+		"outputs": [
+			{
+				"item": "more_immersive_wires:ic2_compressed_insulation",
+				"count": 1
+			}
+		]
+		
+	}
+}

@@ -1,9 +1,6 @@
 package com.tom.morewires.compat.rs;
 
-import java.util.Collection;
-
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -13,19 +10,20 @@ import net.minecraftforge.registries.RegistryObject;
 
 import com.refinedmods.refinedstorage.block.CableBlock;
 
-import com.google.common.collect.ImmutableList;
-
 import com.tom.morewires.MoreImmersiveWires;
-import com.tom.morewires.WireTypeDefinition;
+import com.tom.morewires.SimpleWireTypeDefinition;
 
-import blusunrize.immersiveengineering.api.wires.localhandlers.LocalNetworkHandler;
+import blusunrize.immersiveengineering.api.wires.localhandlers.ILocalHandlerConstructor;
 
-public class RSWireDefinition implements WireTypeDefinition<RSConnectorBlockEntity> {
-	public static final ResourceLocation NET_ID = new ResourceLocation(MoreImmersiveWires.modid, "rs_network");
+public class RSWireDefinition extends SimpleWireTypeDefinition<RSConnectorBlockEntity> {
+
+	public RSWireDefinition() {
+		super("rs", "RS Cable", 0x222222);
+	}
 
 	@Override
 	public RSConnectorBlockEntity createBE(BlockPos pos, BlockState state) {
-		return new RSConnectorBlockEntity(MoreImmersiveWires.RS_WIRE.CONNECTOR_ENTITY.get(), pos, state);
+		return new RSConnectorBlockEntity(MoreImmersiveWires.RS_WIRE.simple().CONNECTOR_ENTITY.get(), pos, state);
 	}
 
 	@Override
@@ -34,17 +32,12 @@ public class RSWireDefinition implements WireTypeDefinition<RSConnectorBlockEnti
 	}
 
 	@Override
-	public void init() {
-		LocalNetworkHandler.register(NET_ID, RSNetworkHandler::new);
-	}
-
-	@Override
-	public Collection<ResourceLocation> getRequestedHandlers() {
-		return ImmutableList.of(NET_ID);
-	}
-
-	@Override
-	public Block makeBlock0(RegistryObject<BlockEntityType<RSConnectorBlockEntity>> type) {
+	public Block makeBlock(RegistryObject<BlockEntityType<RSConnectorBlockEntity>> type) {
 		return new RSConnectorBlock(type, this::isCable);
+	}
+
+	@Override
+	protected ILocalHandlerConstructor createLocalHandler() {
+		return RSNetworkHandler::new;
 	}
 }

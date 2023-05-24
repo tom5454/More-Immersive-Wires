@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "c": {
+            "item": "ic2:glassfiber_cable_item"
+          },
+          "s": {
+            "tag": "forge:rods/wooden"
+          },
+          "w": {
+            "item": "ic2:glassfiber_cable_item"
+          }
+        },
+        "pattern": [
+          "wcw",
+          "csc",
+          "wcw"
+        ],
+        "result": {
+          "count": 4,
+          "item": "more_immersive_wires:ic2_glass_fibre_coil"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "b": {
+            "item": "more_immersive_wires:ic2_compressed_insulation"
+          },
+          "c": {
+            "tag": "forge:ingots/aluminium"
+          },
+          "w": {
+            "item": "ic2:aluminium_quadruple_insulated_cable_item"
+          }
+        },
+        "pattern": [
+          " c ",
+          "bcb",
+          "bwb"
+        ],
+        "result": {
+          "count": 4,
+          "item": "more_immersive_wires:ic2_iv_connector"
+        }
+      }
+    }
+  ]
+}

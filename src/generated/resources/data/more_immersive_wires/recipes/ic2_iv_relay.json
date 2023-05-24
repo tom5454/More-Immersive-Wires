@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "b": {
+            "item": "more_immersive_wires:ic2_compressed_insulation"
+          },
+          "c": {
+            "tag": "forge:ingots/aluminium"
+          }
+        },
+        "pattern": [
+          " c ",
+          "bcb",
+          "bcb"
+        ],
+        "result": {
+          "count": 8,
+          "item": "more_immersive_wires:ic2_iv_relay"
+        }
+      }
+    }
+  ]
+}

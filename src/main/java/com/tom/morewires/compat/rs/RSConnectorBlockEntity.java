@@ -1,7 +1,10 @@
 package com.tom.morewires.compat.rs;
 
+import java.util.Collection;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -10,8 +13,10 @@ import com.refinedmods.refinedstorage.api.network.INetworkNodeVisitor.Operator;
 import com.refinedmods.refinedstorage.blockentity.NetworkNodeBlockEntity;
 import com.refinedmods.refinedstorage.blockentity.data.BlockEntitySynchronizationSpec;
 
+import com.google.common.collect.ImmutableList;
+
 import com.tom.morewires.MoreImmersiveWires;
-import com.tom.morewires.tile.IOnCableConnector;
+import com.tom.morewires.tile.IOnCable.IOnCableConnector;
 
 import blusunrize.immersiveengineering.api.wires.Connection;
 import blusunrize.immersiveengineering.api.wires.ConnectionPoint;
@@ -50,7 +55,7 @@ public class RSConnectorBlockEntity extends NetworkNodeBlockEntity<ConnectorNetw
 		if (local != null && !local.getConnections(this.worldPosition).isEmpty()) {
 			return false;
 		}
-		return cableType == MoreImmersiveWires.RS_WIRE.wireType;
+		return cableType == MoreImmersiveWires.RS_WIRE.simple().wireType;
 	}
 
 	@Override
@@ -113,5 +118,10 @@ public class RSConnectorBlockEntity extends NetworkNodeBlockEntity<ConnectorNetw
 
 	public void visit(Operator operator) {
 		operator.apply(level, worldPosition, null);
+	}
+
+	@Override
+	public Collection<ResourceLocation> getRequestedHandlers() {
+		return ImmutableList.of(MoreImmersiveWires.RS_WIRE.simple().NET_ID);
 	}
 }

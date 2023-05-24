@@ -15,6 +15,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
 import com.tom.morewires.MoreImmersiveWires;
+import com.tom.morewires.WireTypeDefinition;
 
 import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.api.wires.IWireCoil;
@@ -26,10 +27,12 @@ import blusunrize.immersiveengineering.common.items.IEBaseItem;
 public class WireCoilItem extends IEBaseItem implements IWireCoil {
 	@Nonnull
 	private final WireType type;
+	private final WireTypeDefinition<?> def;
 
-	public WireCoilItem(@Nonnull WireType type) {
+	public WireCoilItem(@Nonnull WireType type, WireTypeDefinition<?> def) {
 		super(new Properties(), MoreImmersiveWires.MOD_TAB);
 		this.type = type;
+		this.def = def;
 	}
 
 	@Override
@@ -44,6 +47,7 @@ public class WireCoilItem extends IEBaseItem implements IWireCoil {
 			list.add(Component.translatable(Lib.DESC_INFO+"attachedToDim", link.cp.getX(),
 					link.cp.getY(), link.cp.getZ(), link.dimension));
 		}
+		def.appendHoverTextCoil(type, stack, world, list, flag);
 	}
 
 	@Override

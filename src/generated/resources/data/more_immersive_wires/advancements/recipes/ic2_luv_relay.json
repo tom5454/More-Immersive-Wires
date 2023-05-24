@@ -1,0 +1,49 @@
+{
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "more_immersive_wires:ic2_luv_relay"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
+          "ic2_luv_relay_unlock": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ic2:carbon_plate"
+                  ]
+                },
+                {
+                  "tag": "forge:ingots/refined_iron"
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "ic2_luv_relay_unlock",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ic2_luv_relay"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ]
+    }
+  ]
+}

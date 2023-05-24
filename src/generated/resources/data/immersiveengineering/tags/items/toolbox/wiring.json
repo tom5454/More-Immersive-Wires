@@ -61,6 +61,482 @@
       "required": false
     },
     {
+      "id": "more_immersive_wires:ftbic_lv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_lv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_lv_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_mv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_mv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_mv_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_hv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_hv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_hv_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_ev_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_ev_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_ev_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_iv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_iv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ftbic_iv_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ulv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ulv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_tin_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_copper_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins_copper_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_glass_fibre_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins4_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_super_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_plasma_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_lv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_lv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_copper_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins_copper_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_glass_fibre_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins4_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_super_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_plasma_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_mv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_mv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_gold_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_bronze_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_glass_fibre_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins4_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_super_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_plasma_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_hv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_hv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_glass_fibre_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins4_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_super_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_plasma_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ev_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ev_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_iron_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins4_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_super_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_plasma_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_iv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_iv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins1_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins2_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins3_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_ins4_al_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_super_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_plasma_coil",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_luv_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_luv_relay",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:ic2_plasma_coil",
+      "required": false
+    },
+    {
       "id": "more_immersive_wires:cc_modem",
       "required": false
     }

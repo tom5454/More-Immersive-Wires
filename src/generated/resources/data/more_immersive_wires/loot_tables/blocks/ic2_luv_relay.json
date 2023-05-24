@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "more_immersive_wires:ic2_luv_relay"
+        }
+      ],
+      "name": "ic2_luv_relay",
+      "rolls": 1.0
+    }
+  ]
+}

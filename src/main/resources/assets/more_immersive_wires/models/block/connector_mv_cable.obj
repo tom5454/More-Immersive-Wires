@@ -1,7 +1,7 @@
 # Model created by Damien A.W. Hazard
-mtllib connector_mv_cable.mtl
+mtllib connector.mtl
 
-o connectorMV
+o connector
 v 0.40625 0.25 0.59375
 v 0.40625 0.1875 0.59375
 v 0.59375 0.1875 0.59375
@@ -59,7 +59,7 @@ vt 1.000000 0.375000
 vt 0.250000 0.375000
 vt 0.250000 0.125000
 vt 0.625000 0.125000
-usemtl connectorMV
+usemtl connector
 f 1/1 2/2 3/3 4/4
 f 5/5 6/6 7/7 8/8
 f 8/9 1/1 4/4 5/10

@@ -1,0 +1,36 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "b": {
+            "tag": "forge:glass"
+          },
+          "c": {
+            "item": "more_immersive_wires:ic2_energy_alloy"
+          },
+          "w": {
+            "item": "ic2:glassfiber_cable_item"
+          }
+        },
+        "pattern": [
+          " c ",
+          "bcb",
+          "bwb"
+        ],
+        "result": {
+          "count": 4,
+          "item": "more_immersive_wires:ic2_hv_connector"
+        }
+      }
+    }
+  ]
+}

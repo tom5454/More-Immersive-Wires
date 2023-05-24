@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "c": {
+            "item": "ic2:carbon_fiber"
+          },
+          "r": {
+            "tag": "ic2:rubber"
+          }
+        },
+        "pattern": [
+          " r ",
+          "rcr",
+          " r "
+        ],
+        "result": {
+          "count": 2,
+          "item": "more_immersive_wires:ic2_uncompressed_insulation"
+        }
+      }
+    }
+  ]
+}

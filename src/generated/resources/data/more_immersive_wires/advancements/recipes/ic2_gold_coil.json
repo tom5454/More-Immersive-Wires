@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "more_immersive_wires:ic2_gold_coil"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
+          "ic2_ulv_gold_unlock": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ic2:gold_cable_item"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "ic2_ulv_gold_unlock",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ic2_gold_coil"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ]
+    }
+  ]
+}

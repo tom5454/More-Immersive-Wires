@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "more_immersive_wires:ftbic_iv_relay"
+        }
+      ],
+      "name": "ftbic_iv_relay",
+      "rolls": 1.0
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "more_immersive_wires:ic2_mv_connector2"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
+          "ic2_mv_connector_unlock": {
+            "conditions": {
+              "items": [
+                {
+                  "tag": "ic2:rubber"
+                },
+                {
+                  "tag": "forge:ingots/bronze"
+                },
+                {
+                  "items": [
+                    "ic2:bronze_double_insulated_cable_item"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "ic2_mv_connector_unlock",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ic2_mv_connector2"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ]
+    }
+  ]
+}

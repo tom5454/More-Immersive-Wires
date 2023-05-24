@@ -1,0 +1,6 @@
+# Made in Blockbench 4.7.2
+newmtl connector
+map_Kd #texture
+
+newmtl io
+map_Kd #io

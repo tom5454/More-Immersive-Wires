@@ -1,16 +1,20 @@
 package com.tom.morewires.compat.ae;
 
+import java.util.Collection;
 import java.util.EnumSet;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import com.google.common.collect.ImmutableList;
+
 import com.tom.morewires.MoreImmersiveWires;
-import com.tom.morewires.tile.IOnCableConnector;
+import com.tom.morewires.tile.IOnCable.IOnCableConnector;
 
 import appeng.api.networking.GridFlags;
 import appeng.api.util.AECableType;
@@ -27,7 +31,7 @@ public class AEConnectorBlockEntity extends AENetworkBlockEntity implements IOnC
 	protected GlobalWireNetwork globalNet;
 
 	static {
-		registerBlockEntityItem(MoreImmersiveWires.AE_WIRE.CONNECTOR_ENTITY.get(), MoreImmersiveWires.AE_WIRE.CONNECTOR.get().asItem());
+		registerBlockEntityItem(MoreImmersiveWires.AE_WIRE.simple().CONNECTOR_ENTITY.get(), MoreImmersiveWires.AE_WIRE.simple().CONNECTOR.get().asItem());
 	}
 
 	public AEConnectorBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState blockState) {
@@ -82,7 +86,7 @@ public class AEConnectorBlockEntity extends AENetworkBlockEntity implements IOnC
 		if (local != null && !local.getConnections(this.worldPosition).isEmpty()) {
 			return false;
 		}
-		return cableType == MoreImmersiveWires.AE_WIRE.wireType;
+		return cableType == MoreImmersiveWires.AE_WIRE.simple().wireType;
 	}
 
 	@Override
@@ -125,5 +129,10 @@ public class AEConnectorBlockEntity extends AENetworkBlockEntity implements IOnC
 		super.setRemoved();
 		if(!isUnloaded)
 			setRemovedIE();
+	}
+
+	@Override
+	public Collection<ResourceLocation> getRequestedHandlers() {
+		return ImmutableList.of(MoreImmersiveWires.AE_WIRE.simple().NET_ID);
 	}
 }

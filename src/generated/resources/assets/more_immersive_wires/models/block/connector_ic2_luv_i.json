@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "flip_v": true,
+  "loader": "forge:obj",
+  "model": "more_immersive_wires:models/block/connector_hv_io.obj",
+  "textures": {
+    "io": "more_immersive_wires:block/input",
+    "particle": "more_immersive_wires:block/connector_ic2_luv",
+    "texture": "more_immersive_wires:block/connector_ic2_luv"
+  }
+}

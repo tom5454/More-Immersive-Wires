@@ -1,0 +1,46 @@
+{
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "more_immersive_wires:ic2_uncompressed_insulation"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+          },
+          "ic2_uins_connector_unlock": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "ic2:carbon_fiber"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          }
+        },
+        "requirements": [
+          [
+            "ic2_uins_connector_unlock",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "more_immersive_wires:ic2_uncompressed_insulation"
+          ]
+        }
+      },
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ic2"
+        }
+      ]
+    }
+  ]
+}

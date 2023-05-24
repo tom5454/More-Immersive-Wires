@@ -105,6 +105,6 @@ public class IDConnectorBlock extends OnCableConnectorBlock<IDConnectorBlockEnti
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-		return level.isClientSide ? null : (blockEntityType == MoreImmersiveWires.ID_WIRE.CONNECTOR_ENTITY.get() ? (BlockEntityTicker<T>) new IDConnectorBlockEntity.Ticker() : null);
+		return level.isClientSide ? null : (blockEntityType == MoreImmersiveWires.ID_WIRE.simple().CONNECTOR_ENTITY.get() ? (BlockEntityTicker<T>) new IDConnectorBlockEntity.Ticker() : null);
 	}
 }

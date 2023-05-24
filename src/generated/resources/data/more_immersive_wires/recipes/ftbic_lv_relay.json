@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "ftbic"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "b": {
+            "item": "ftbic:rubber"
+          },
+          "c": {
+            "tag": "forge:ingots/copper"
+          }
+        },
+        "pattern": [
+          " c ",
+          "bcb"
+        ],
+        "result": {
+          "count": 8,
+          "item": "more_immersive_wires:ftbic_lv_relay"
+        }
+      }
+    }
+  ]
+}
