@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 
 import blusunrize.immersiveengineering.api.wires.Connection;
@@ -15,8 +16,9 @@ import blusunrize.immersiveengineering.api.wires.localhandlers.IWorldTickable;
 import blusunrize.immersiveengineering.api.wires.localhandlers.LocalNetworkHandler;
 
 public abstract class NodeNetworkHandler<C, N> extends LocalNetworkHandler implements IWorldTickable {
-	private boolean gridInitialized, needRefresh;
+	protected boolean gridInitialized, needRefresh;
 	private Set<C> connections = new HashSet<>();
+	private Set<ChunkPos> proxyChunks = new HashSet<>();
 
 	protected NodeNetworkHandler(LocalWireNetwork net, GlobalWireNetwork global) {
 		super(net, global);
@@ -72,8 +74,15 @@ public abstract class NodeNetworkHandler<C, N> extends LocalNetworkHandler imple
 			N main = getNode();
 			if(main != null) {
 				boolean first = true;
+				proxyChunks.clear();
+				connections.forEach(this::clearConnection);
+				connections.clear();
 				for(ConnectionPoint cp : localNet.getConnectionPoints()) {
 					IImmersiveConnectable iic = localNet.getConnector(cp);
+					if(iic.isProxy()) {
+						proxyChunks.add(new ChunkPos(iic.getPosition()));
+						continue;
+					}
 					if(first) {
 						first = false;
 						connectFirst(iic, main);
@@ -81,6 +90,13 @@ public abstract class NodeNetworkHandler<C, N> extends LocalNetworkHandler imple
 					C c = connect(iic, main);
 					if(c != null)
 						connections.add(c);
+				}
+			}
+		} else if(w.getGameTime() % 10 == 0) {
+			for (ChunkPos p : proxyChunks) {
+				if(w.getChunkSource().hasChunk(p.x, p.z)) {
+					reset();
+					break;
 				}
 			}
 		}
