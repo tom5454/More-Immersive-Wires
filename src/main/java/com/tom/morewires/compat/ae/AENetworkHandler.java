@@ -65,8 +65,8 @@ public class AENetworkHandler extends NodeNetworkHandler<ConnectionWrapper, IGri
 				} catch (FailedConnectionException e) {
 				}
 			}
+			needRefresh = true;
 		}
-
 		return null;
 	}
 

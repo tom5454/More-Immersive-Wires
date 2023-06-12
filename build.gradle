@@ -209,7 +209,7 @@ dependencies {
     compileOnly fg.deobf('curse.maven:refined-storage-243076:4465872')
     compileOnly fg.deobf('curse.maven:cc-tweaked-282001:4395619')
     
-    compileOnly fg.deobf('curse.maven:ic2-classic-242942:4441313')
+    compileOnly fg.deobf('curse.maven:ic2-classic-242942:4558911')
     
     compileOnly fg.deobf('curse.maven:integrated-dynamics-236307:4445207')
     compileOnly fg.deobf('curse.maven:cyclops-core-232758:4438232')
