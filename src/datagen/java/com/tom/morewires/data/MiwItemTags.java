@@ -9,11 +9,13 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Item;
 
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.compat.cc.CCWireDefinition;
+import com.tom.morewires.compat.ftbic.FTBICWireDefinition;
 
 import blusunrize.immersiveengineering.api.IETags;
 
@@ -26,15 +28,17 @@ public class MiwItemTags extends ItemTagsProvider {
 	@Override
 	protected void addTags() {
 		List<Item> wiring = new ArrayList<>();
-		MoreImmersiveWires.ALL_WIRES.forEach(w -> {
-			wiring.add(w.CONNECTOR.get().asItem());
-			wiring.add(w.RELAY.get().asItem());
-			wiring.add(w.COIL.get());
+		MoreImmersiveWires.ALL_WIRES.forEach(wt -> {
+			wt.wireTypeDef.getConnectors().forEach(e -> wiring.add(e.getConnectorBlock().get().asItem()));
+			wt.wireTypeDef.getRelays().forEach(e -> wiring.add(e.getRelayBlock().get().asItem()));
+			wt.wireTypeDef.getWireCoils().forEach(e -> wiring.add(e.getCoilItem().get()));
 		});
 		wiring.add(CCWireDefinition.CC_MODEM_CONNECTOR.get().asItem());
 
 		TagsProvider.TagAppender<Item> w = tag(IETags.toolboxWiring);
 		wiring.stream().map(ForgeRegistries.ITEMS::getKey).forEach(w::addOptional);
+
+		tag(Tags.Items.INGOTS).addOptional(FTBICWireDefinition.ENERGY_ALLOY.getId());
 	}
 
 	@Override

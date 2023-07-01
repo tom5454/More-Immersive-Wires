@@ -14,6 +14,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import com.google.common.base.Preconditions;
 
 import com.tom.morewires.MoreImmersiveWires;
+import com.tom.morewires.MoreImmersiveWires.Wire;
 
 import blusunrize.immersiveengineering.data.models.TRSRItemModelProvider;
 import blusunrize.immersiveengineering.data.models.TRSRModelBuilder;
@@ -31,20 +32,31 @@ public class ItemModels2 extends TRSRItemModelProvider {
 
 	@Override
 	protected void registerModels() {
-		MoreImmersiveWires.ALL_WIRES.forEach(w -> {
-			obj(w.RELAY.get(), w.tall ? modLoc("block/connector_hv.obj") : rl("block/connector/connector_mv.obj"))
-			.texture("texture", modLoc("block/relay_" + w.name))
-			.transforms(rl("item/connector"));
-
-			if(w !=  MoreImmersiveWires.AE_DENSE_WIRE) {
-				obj(w.CONNECTOR.get(), w.tall ? modLoc("block/connector_hv.obj") : rl("block/connector/connector_mv.obj"))
-				.texture("texture", modLoc("block/connector_" + w.name))
-				.transforms(rl("item/connector"));
-			}
+		MoreImmersiveWires.ALL_WIRES.forEach(wt -> {
+			wt.wireTypeDef.getRelays().forEach(r -> {
+				obj(r.getRelayBlock().get(), r.isExTallRelay() ? modLoc("block/relay_hv.obj") : r.isTallRelay() ? modLoc("block/connector_hv.obj") : rl("block/connector/connector_mv.obj"))
+				.texture("texture", modLoc("block/relay_" + r.getName()))
+				.transforms(modLoc("item/connector"));
+			});
+			wt.wireTypeDef.getConnectors().forEach(c -> {
+				if(c.datagenConnectorBlock()) {
+					obj(c.getConnectorBlock().get(), c.isTallConnector() ? modLoc("block/connector_hv.obj") : rl("block/connector/connector_mv.obj"))
+					.texture("texture", modLoc("block/connector_" + c.getName()))
+					.transforms(modLoc("item/connector"));
+				}
+			});
 		});
+		for (Wire w : MoreImmersiveWires.IC2_WIRES) {
+			w.wireTypeDef.getConnectors().forEach(c -> {
+				obj(c.getConnectorBlock().get(), c.isTallConnector() ? modLoc("block/connector_hv_io.obj") : modLoc("block/connector_mv_io.obj"))
+				.texture("texture", modLoc("block/connector_" + c.getName()))
+				.texture("io", modLoc("block/input"))
+				.transforms(modLoc("item/connector"));
+			});
+		}
 	}
 
-	public TRSRModelBuilder obj(ItemLike item, ResourceLocation model) {
+	private TRSRModelBuilder obj(ItemLike item, ResourceLocation model) {
 		Preconditions.checkArgument(existingFileHelper.exists(model, PackType.CLIENT_RESOURCES, "", "models"));
 		return getBuilder(item)
 				.customLoader(ObjModelBuilder::begin)

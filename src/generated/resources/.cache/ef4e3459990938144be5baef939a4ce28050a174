@@ -1,9 +1,10 @@
-// 1.19.2	2023-05-18T03:04:34.5569192	MoreImmersiveWires LootTables
+// 1.19.2	2023-07-01T18:54:41.9480076	MoreImmersiveWires LootTables
 cae1cd2c37f7509d5e52cc15cd755173ce21b4cd data/more_immersive_wires/loot_tables/blocks/ae_connector.json
 874c270619c542f66ed7b3ca2464c7b4bb4e22fc data/more_immersive_wires/loot_tables/blocks/ae_dense_connector.json
 114e38ea654319c46d840e05ccfa5ce7f3678117 data/more_immersive_wires/loot_tables/blocks/ae_dense_relay.json
 969fa850d0e9cc28d5bfc7967716f1a08a1077d0 data/more_immersive_wires/loot_tables/blocks/ae_relay.json
 4323b8f7fbc656fd4913f5cefa42c56d68303526 data/more_immersive_wires/loot_tables/blocks/cc_connector.json
+ec5151cbffb382a9e8985dceec761bc89b482ef0 data/more_immersive_wires/loot_tables/blocks/cc_modem.json
 d53a13003e995e619d3873d273583418f17653f4 data/more_immersive_wires/loot_tables/blocks/cc_relay.json
 cc8be24dbd23edd98af2b0043b0c4f8f33a72376 data/more_immersive_wires/loot_tables/blocks/ftbic_ev_connector.json
 a385298b64e1a1eab8aa56ef9727800ceab65239 data/more_immersive_wires/loot_tables/blocks/ftbic_ev_relay.json
