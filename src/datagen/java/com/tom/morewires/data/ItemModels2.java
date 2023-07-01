@@ -30,16 +30,19 @@ public class ItemModels2 extends TRSRItemModelProvider {
 
 	@Override
 	protected void registerModels() {
-		MoreImmersiveWires.ALL_WIRES.forEach(w -> {
-			obj(w.RELAY.get(), w.tall ? modLoc("block/connector_hv.obj") : rl("block/connector/connector_mv.obj"))
-			.texture("texture", modLoc("block/relay_" + w.name))
-			.transforms(rl("item/connector"));
-
-			if(w !=  MoreImmersiveWires.AE_DENSE_WIRE) {
-				obj(w.CONNECTOR.get(), w.tall ? modLoc("block/connector_hv.obj") : rl("block/connector/connector_mv.obj"))
-				.texture("texture", modLoc("block/connector_" + w.name))
+		MoreImmersiveWires.ALL_WIRES.forEach(wt -> {
+			wt.wireTypeDef.getRelays().forEach(r -> {
+				obj(r.getRelayBlock().get(), r.isExTallRelay() ? modLoc("block/relay_hv.obj") : r.isTallRelay() ? modLoc("block/connector_hv.obj") : rl("block/connector/connector_mv.obj"))
+				.texture("texture", modLoc("block/relay_" + r.getName()))
 				.transforms(rl("item/connector"));
-			}
+			});
+			wt.wireTypeDef.getConnectors().forEach(c -> {
+				if(c.datagenConnectorBlock()) {
+					obj(c.getConnectorBlock().get(), c.isTallConnector() ? modLoc("block/connector_hv.obj") : rl("block/connector/connector_mv.obj"))
+					.texture("texture", modLoc("block/connector_" + c.getName()))
+					.transforms(rl("item/connector"));
+				}
+			});
 		});
 	}
 

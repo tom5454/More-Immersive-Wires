@@ -26,9 +26,9 @@ public class MiwBlockTags extends BlockTagsProvider {
 	@Override
 	protected void addTags() {
 		List<Block> mineable = new ArrayList<>();
-		MoreImmersiveWires.ALL_WIRES.forEach(w -> {
-			mineable.add(w.CONNECTOR.get());
-			mineable.add(w.RELAY.get());
+		MoreImmersiveWires.ALL_WIRES.forEach(wt -> {
+			wt.wireTypeDef.getConnectors().forEach(e -> mineable.add(e.getConnectorBlock().get()));
+			wt.wireTypeDef.getRelays().forEach(e -> mineable.add(e.getRelayBlock().get()));
 		});
 		mineable.add(CCWireDefinition.CC_MODEM_CONNECTOR.get());
 

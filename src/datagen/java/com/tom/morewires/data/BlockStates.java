@@ -26,37 +26,40 @@ public class BlockStates extends ExtendedBlockstateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		MoreImmersiveWires.ALL_WIRES.forEach(w -> {
-			createAllRotatedBlock(w.RELAY, obj(
-					"block/relay_" + w.name, w.tall ? modLoc("block/connector_hv.obj") : ieLoc("block/connector/connector_mv.obj"),
-							ImmutableMap.of("texture", modLoc("block/relay_" + w.name)),
-							models()
-					));
-
-			if(w == MoreImmersiveWires.AE_DENSE_WIRE) {
-				createAllRotatedBlock(w.CONNECTOR, models().getExistingFile(modLoc("block/ae_dense_connector")));
-			} else {
-				ModelFile def = obj(
-						"block/connector_" + w.name, w.tall ? modLoc("block/connector_hv.obj") : ieLoc("block/connector/connector_mv.obj"),
-								ImmutableMap.of("texture", modLoc("block/connector_" + w.name)),
+		MoreImmersiveWires.ALL_WIRES.forEach(wt -> {
+			wt.wireTypeDef.getRelays().forEach(r -> {
+				createAllRotatedBlock(r.getRelayBlock(), obj(
+						"block/relay_" + r.getName(), r.isExTallRelay() ? modLoc("block/relay_hv.obj") : r.isTallRelay() ? modLoc("block/connector_hv.obj") : ieLoc("block/connector/connector_mv.obj"),
+								ImmutableMap.of("texture", modLoc("block/relay_" + r.getName())),
 								models()
-						);
-
-				if(w.CONNECTOR.get() instanceof OnCableConnectorBlock) {
-					ModelFile onCable = obj(
-							"block/connector_" + w.name + "_c", w.tall ? modLoc("block/connector_hv.obj") : modLoc("block/connector_mv_cable.obj"),
-									ImmutableMap.of("texture", modLoc("block/connector_" + w.name)),
+						));
+			});
+			wt.wireTypeDef.getConnectors().forEach(c -> {
+				if(c.datagenConnectorBlock()) {
+					ModelFile def = obj(
+							"block/connector_" + c.getName(), c.isTallConnector() ? modLoc("block/connector_hv.obj") : ieLoc("block/connector/connector_mv.obj"),
+									ImmutableMap.of("texture", modLoc("block/connector_" + c.getName())),
 									models()
 							);
-					createAllRotatedBlock(w.CONNECTOR, d -> {
-						if(d.getSetStates().get(OnCableConnectorBlock.ON_CABLE) == Boolean.TRUE)return onCable;
-						else return def;
-					}, List.of(OnCableConnectorBlock.ON_CABLE));
-				} else {
-					createAllRotatedBlock(w.CONNECTOR, def);
+
+					if(c.getConnectorBlock().get() instanceof OnCableConnectorBlock) {
+						ModelFile onCable = obj(
+								"block/connector_" + c.getName() + "_c", c.isTallConnector() ? modLoc("block/connector_hv.obj") : modLoc("block/connector_mv_cable.obj"),
+										ImmutableMap.of("texture", modLoc("block/connector_" + c.getName())),
+										models()
+								);
+						createAllRotatedBlock(c.getConnectorBlock(), d -> {
+							if(d.getSetStates().get(OnCableConnectorBlock.ON_CABLE) == Boolean.TRUE)return onCable;
+							else return def;
+						}, List.of(OnCableConnectorBlock.ON_CABLE));
+					} else {
+						createAllRotatedBlock(c.getConnectorBlock(), def);
+					}
 				}
-			}
+			});
 		});
+
+		createAllRotatedBlock(MoreImmersiveWires.AE_DENSE_WIRE.simple().CONNECTOR, models().getExistingFile(modLoc("block/ae_dense_connector")));
 
 		createAllRotatedBlock(CCWireDefinition.CC_MODEM_CONNECTOR, d -> {
 			boolean p = d.getSetStates().get(BlockWiredModemFull.PERIPHERAL_ON) == Boolean.TRUE;
@@ -65,5 +68,4 @@ public class BlockStates extends ExtendedBlockstateProvider {
 					.texture("front", new ResourceLocation("computercraft:block/wired_modem_face" + (p ? "_peripheral" : "") + (m ? "_on" : "")));
 		}, List.of(BlockWiredModemFull.MODEM_ON, BlockWiredModemFull.PERIPHERAL_ON));
 	}
-
 }
