@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "key": {
           "b": {
             "item": "ae2:sky_stone_block"
@@ -25,7 +26,8 @@
         "result": {
           "count": 8,
           "item": "more_immersive_wires:ae_dense_relay"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

@@ -1,20 +1,33 @@
 package com.tom.morewires.compat.cc;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
-import dan200.computercraft.shared.common.TileGeneric;
+public class CCBlockEntity extends BlockEntity {
 
-public class CCBlockEntity extends TileGeneric {
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public CCBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super((BlockEntityType) type, pos, state);
+		super(type, pos, state);
 	}
 
-	@Override
 	public void blockTick() {
-		super.blockTick();
+	}
+
+	public void destroy() {
+	}
+
+	public InteractionResult onActivate(Player player, InteractionHand hand, BlockHitResult hit) {
+		return InteractionResult.PASS;
+	}
+
+	public void onNeighbourTileEntityChange(BlockPos neighbour) {
+	}
+
+	public void onNeighbourChange(BlockPos neighbourPos) {
 	}
 }

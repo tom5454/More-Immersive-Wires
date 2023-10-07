@@ -6,18 +6,18 @@ import net.minecraft.world.phys.Vec3;
 import com.tom.morewires.network.NodeNetworkHandler;
 
 import dan200.computercraft.api.ComputerCraftAPI;
-import dan200.computercraft.api.network.wired.IWiredElement;
-import dan200.computercraft.api.network.wired.IWiredNode;
+import dan200.computercraft.api.network.wired.WiredElement;
+import dan200.computercraft.api.network.wired.WiredNode;
 
 import blusunrize.immersiveengineering.api.wires.GlobalWireNetwork;
 import blusunrize.immersiveengineering.api.wires.IImmersiveConnectable;
 import blusunrize.immersiveengineering.api.wires.LocalWireNetwork;
 import blusunrize.immersiveengineering.api.wires.localhandlers.IWorldTickable;
 
-public class CCNetworkHandler extends NodeNetworkHandler<IWiredNode, IWiredNode> implements IWorldTickable {
+public class CCNetworkHandler extends NodeNetworkHandler<WiredNode, WiredNode> implements IWorldTickable {
 	private Level level;
-	private final IWiredElement cable = new CableElement();
-	private final IWiredNode node = cable.getNode();
+	private final WiredElement cable = new CableElement();
+	private final WiredNode node = cable.getNode();
 
 	protected CCNetworkHandler(LocalWireNetwork net, GlobalWireNetwork global) {
 		super(net, global);
@@ -29,8 +29,8 @@ public class CCNetworkHandler extends NodeNetworkHandler<IWiredNode, IWiredNode>
 		super.update(w);
 	}
 
-	private class CableElement implements IWiredElement {
-		private final IWiredNode node = ComputerCraftAPI.createWiredNodeForElement(this);
+	private class CableElement implements WiredElement {
+		private final WiredNode node = ComputerCraftAPI.createWiredNodeForElement(this);
 
 		@Override
 		public Level getLevel() {
@@ -43,7 +43,7 @@ public class CCNetworkHandler extends NodeNetworkHandler<IWiredNode, IWiredNode>
 		}
 
 		@Override
-		public IWiredNode getNode() {
+		public WiredNode getNode() {
 			return node;
 		}
 
@@ -54,19 +54,19 @@ public class CCNetworkHandler extends NodeNetworkHandler<IWiredNode, IWiredNode>
 	}
 
 	@Override
-	protected void clearConnection(IWiredNode c) {
+	protected void clearConnection(WiredNode c) {
 		node.disconnectFrom(c);
 	}
 
 	@Override
-	protected IWiredNode getNode() {
+	protected WiredNode getNode() {
 		return node;
 	}
 
 	@Override
-	protected IWiredNode connect(IImmersiveConnectable iic, IWiredNode nodeIn) {
+	protected WiredNode connect(IImmersiveConnectable iic, WiredNode nodeIn) {
 		if(iic instanceof ICCTile te) {
-			IWiredNode node = te.getElement().getNode();
+			WiredNode node = te.getElement().getNode();
 			nodeIn.connectTo(node);
 			return node;
 		}
@@ -74,5 +74,5 @@ public class CCNetworkHandler extends NodeNetworkHandler<IWiredNode, IWiredNode>
 	}
 
 	@Override
-	protected void connectFirst(IImmersiveConnectable iic, IWiredNode main) {}
+	protected void connectFirst(IImmersiveConnectable iic, WiredNode main) {}
 }

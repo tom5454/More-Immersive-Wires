@@ -5,7 +5,6 @@ import net.minecraft.world.level.Level;
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.network.NodeNetworkHandler;
 
-import appeng.api.exceptions.FailedConnectionException;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.GridHelper;
 import appeng.api.networking.IGridNode;
@@ -37,10 +36,6 @@ public class AENetworkHandler extends NodeNetworkHandler<ConnectionWrapper, IGri
 	}
 
 	@Override
-	public void onSecurityBreak(AENetworkHandler var1, IGridNode var2) {
-	}
-
-	@Override
 	protected void clearConnection(ConnectionWrapper c) {
 		if(c.getConnection() != null)c.getConnection().destroy();
 	}
@@ -60,10 +55,7 @@ public class AENetworkHandler extends NodeNetworkHandler<ConnectionWrapper, IGri
 		if(iic instanceof AENetworkBlockEntity te) {
 			IGridNode node = te.getActionableNode();
 			if(node != null) {
-				try {
-					return new ConnectionWrapper(GridHelper.createGridConnection(nodeIn, node));
-				} catch (FailedConnectionException e) {
-				}
+				return new ConnectionWrapper(GridHelper.createConnection(nodeIn, node));
 			}
 			needRefresh = true;
 		}

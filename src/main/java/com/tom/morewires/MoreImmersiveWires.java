@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -24,12 +26,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplier;
 
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeConfigSpec.Builder;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -47,11 +47,8 @@ import com.tom.morewires.WireTypeDefinition.RelayInfo;
 import com.tom.morewires.compat.ae.AEDenseWireDefinition;
 import com.tom.morewires.compat.ae.AEWireDefinition;
 import com.tom.morewires.compat.cc.CCWireDefinition;
-import com.tom.morewires.compat.ftbic.FTBICWireDefinition;
-import com.tom.morewires.compat.ic2.IC2WireDefinition;
 import com.tom.morewires.compat.id.IntegratedDynamicsWireDefinition;
 import com.tom.morewires.compat.rs.RSWireDefinition;
-import com.tom.morewires.compat.top.TheOneProbeHandler;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MoreImmersiveWires.modid)
@@ -61,6 +58,8 @@ public class MoreImmersiveWires {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, modid);
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, modid);
+	public static final DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modid);
+
 	public static final Map<BlockEntityType<?>, RelayInfo> WIRE_TYPES = new HashMap<>();
 	public static final List<Wire> ALL_WIRES = new ArrayList<>();
 
@@ -76,27 +75,6 @@ public class MoreImmersiveWires {
 	public static final Wire RS_WIRE = new Wire(RS, () -> RSWireDefinition::new);
 	public static final Wire ID_WIRE = new Wire(ID, () -> IntegratedDynamicsWireDefinition::new);
 	public static final Wire CC_WIRE = new Wire(CC, () -> CCWireDefinition::new);
-	public static final Wire FTBIC_WIRE_LV = new Wire(FTBIC, () -> FTBICWireDefinition::lv);
-	public static final Wire FTBIC_WIRE_MV = new Wire(FTBIC, () -> FTBICWireDefinition::mv);
-	public static final Wire FTBIC_WIRE_HV = new Wire(FTBIC, () -> FTBICWireDefinition::hv);
-	public static final Wire FTBIC_WIRE_EV = new Wire(FTBIC, () -> FTBICWireDefinition::ev);
-	public static final Wire FTBIC_WIRE_IV = new Wire(FTBIC, () -> FTBICWireDefinition::iv);
-	public static final Wire IC2_WIRE_ULV = new Wire(IC2, () -> IC2WireDefinition::ulv);
-	public static final Wire IC2_WIRE_LV = new Wire(IC2, () -> IC2WireDefinition::lv);
-	public static final Wire IC2_WIRE_MV = new Wire(IC2, () -> IC2WireDefinition::mv);
-	public static final Wire IC2_WIRE_HV = new Wire(IC2, () -> IC2WireDefinition::hv);
-	public static final Wire IC2_WIRE_EV = new Wire(IC2, () -> IC2WireDefinition::ev);
-	public static final Wire IC2_WIRE_IV = new Wire(IC2, () -> IC2WireDefinition::iv);
-	public static final Wire IC2_WIRE_LUV = new Wire(IC2, () -> IC2WireDefinition::luv);
-	public static final Wire[] IC2_WIRES = new Wire[] {
-			IC2_WIRE_ULV,
-			IC2_WIRE_LV,
-			IC2_WIRE_MV,
-			IC2_WIRE_HV,
-			IC2_WIRE_EV,
-			IC2_WIRE_IV,
-			IC2_WIRE_LUV,
-	};
 
 	public static class Wire {
 		public final String modid;
@@ -153,6 +131,7 @@ public class MoreImmersiveWires {
 		BLOCKS.register(bus);
 		ITEMS.register(bus);
 		BLOCK_ENTITIES.register(bus);
+		TAB.register(bus);
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
@@ -169,33 +148,40 @@ public class MoreImmersiveWires {
 	}
 
 	public void enqueueIMC(InterModEnqueueEvent e) {
-		if(ModList.get().isLoaded("theoneprobe"))
-			InterModComms.sendTo("theoneprobe", "getTheOneProbe", () -> TheOneProbeHandler.create());
 	}
 
-	public static final CreativeModeTab MOD_TAB = new CreativeModeTab("more_immersive_wires.tab") {
+	private static List<Item> tabItems = new ArrayList<>();
+	public static final RegistryObject<CreativeModeTab> STORAGE_MOD_TAB = TAB.register("tab", () ->
+	CreativeModeTab.builder()
+	.title(Component.translatable("itemGroup.more_immersive_wires.tab"))
+	.icon(() -> {
+		return ALL_WIRES.stream().flatMap(w -> w.wireTypeDef.getWireCoils().stream()).map(w -> new ItemStack(w.getCoilItem().get())).findFirst().orElse(new ItemStack(Items.REDSTONE));
+	})
+	.displayItems((p, out) -> {
+		tabItems.forEach(out::accept);
+	})
+	.build()
+			);
 
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public ItemStack makeIcon() {
-			return ALL_WIRES.stream().flatMap(w -> w.wireTypeDef.getWireCoils().stream()).map(w -> new ItemStack(w.getCoilItem().get())).findFirst().orElse(new ItemStack(Items.REDSTONE));
-		}
-	};
+	public static <I extends Item> I addItemToTab(I item) {
+		tabItems.add(item);
+		return item;
+	}
 
 	public static <B extends Block> RegistryObject<B> blockWithItem(String name, Supplier<B> create) {
 		RegistryObject<B> re = BLOCKS.register(name, create);
-		ITEMS.register(name, () -> new BlockItem(re.get(), new Item.Properties().tab(MOD_TAB)));
+		ITEMS.register(name, () -> addItemToTab(new BlockItem(re.get(), new Item.Properties())));
 		return re;
 	}
 
 	public static <B extends Block, I extends Item> RegistryObject<B> blockWithItem(String name, Supplier<B> create, Function<Block, I> createItem) {
 		RegistryObject<B> re = BLOCKS.register(name, create);
-		ITEMS.register(name, () -> createItem.apply(re.get()));
+		ITEMS.register(name, () -> addItemToTab(createItem.apply(re.get())));
 		return re;
 	}
 
 	public static RegistryObject<Item> materialItem(String name) {
-		return ITEMS.register(name, () -> new Item(new Item.Properties().tab(MOD_TAB)));
+		return ITEMS.register(name, () -> addItemToTab(new Item(new Item.Properties())));
 	}
 
 	@SafeVarargs
@@ -203,5 +189,9 @@ public class MoreImmersiveWires {
 		return BLOCK_ENTITIES.register(name, () -> {
 			return BlockEntityType.Builder.<BE>of(create, Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)).build(null);
 		});
+	}
+
+	public static <I extends Item> RegistryObject<Item> registerItem(String name, Supplier<I> object) {
+		return ITEMS.register(name, () -> addItemToTab(object.get()));
 	}
 }

@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.SimpleWireTypeDefinition;
 
 import appeng.block.IOwnerAwareBlockEntity;
@@ -24,7 +23,7 @@ public class AEItemBlock extends BlockItem {
 	private final SimpleWireTypeDefinition<?> def;
 
 	public AEItemBlock(Block id, SimpleWireTypeDefinition<?> def) {
-		super(id, new Item.Properties().tab(MoreImmersiveWires.MOD_TAB));
+		super(id, new Item.Properties());
 		this.def = def;
 	}
 

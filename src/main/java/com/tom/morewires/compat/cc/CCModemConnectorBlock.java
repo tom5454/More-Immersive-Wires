@@ -20,7 +20,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import com.tom.morewires.MoreImmersiveWires;
 
-import dan200.computercraft.shared.peripheral.modem.wired.BlockWiredModemFull;
+import dan200.computercraft.shared.peripheral.modem.wired.WiredModemFullBlock;
 
 import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.common.blocks.generic.ConnectorBlock;
@@ -34,7 +34,7 @@ public class CCModemConnectorBlock extends ConnectorBlock<CCModemConnectorBlockE
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
-		builder.add(IEProperties.FACING_ALL, BlockStateProperties.WATERLOGGED, BlockWiredModemFull.MODEM_ON, BlockWiredModemFull.PERIPHERAL_ON);
+		builder.add(IEProperties.FACING_ALL, BlockStateProperties.WATERLOGGED, WiredModemFullBlock.MODEM_ON, WiredModemFullBlock.PERIPHERAL_ON);
 	}
 
 	@Override

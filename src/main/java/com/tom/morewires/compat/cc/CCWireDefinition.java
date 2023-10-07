@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.SimpleWireTypeDefinition;
 
-import dan200.computercraft.shared.Registry;
+import dan200.computercraft.shared.ModRegistry;
 
 import blusunrize.immersiveengineering.api.wires.localhandlers.ILocalHandlerConstructor;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
@@ -34,14 +34,14 @@ public class CCWireDefinition extends SimpleWireTypeDefinition<CCConnectorBlockE
 
 	@Override
 	public boolean isCable(BlockGetter level, BlockPos pos) {
-		return level.getBlockState(pos).is(Registry.ModBlocks.CABLE.get());
+		return level.getBlockState(pos).is(ModRegistry.Blocks.CABLE.get());
 	}
 
 	@Override
 	public void init() {
 		super.init();
 
-		CC_MODEM_CONNECTOR = MoreImmersiveWires.blockWithItem("cc_modem", () -> new CCModemConnectorBlock(CC_MODEM_CONNECTOR_ENTITY), b -> new BlockItemIE(b, new Item.Properties().tab(MoreImmersiveWires.MOD_TAB)));
+		CC_MODEM_CONNECTOR = MoreImmersiveWires.blockWithItem("cc_modem", () -> new CCModemConnectorBlock(CC_MODEM_CONNECTOR_ENTITY), b -> new BlockItemIE(b, new Item.Properties()));
 		CC_MODEM_CONNECTOR_ENTITY = MoreImmersiveWires.blockEntity("cc_modem.tile", (p, s) -> new CCModemConnectorBlockEntity(CC_MODEM_CONNECTOR_ENTITY.get(), p, s), CC_MODEM_CONNECTOR);
 	}
 

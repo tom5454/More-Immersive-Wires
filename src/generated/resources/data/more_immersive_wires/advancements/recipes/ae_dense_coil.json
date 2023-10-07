@@ -31,7 +31,8 @@
           "recipes": [
             "more_immersive_wires:ae_dense_coil"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

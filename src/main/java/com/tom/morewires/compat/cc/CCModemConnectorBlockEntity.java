@@ -35,15 +35,14 @@ import com.google.common.collect.ImmutableList;
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.tile.IConnector;
 
-import dan200.computercraft.api.network.wired.IWiredElement;
-import dan200.computercraft.api.network.wired.IWiredNode;
+import dan200.computercraft.api.network.wired.WiredElement;
+import dan200.computercraft.api.network.wired.WiredNode;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.shared.Registry;
 import dan200.computercraft.shared.command.text.ChatHelpers;
 import dan200.computercraft.shared.peripheral.modem.ModemShapes;
 import dan200.computercraft.shared.peripheral.modem.ModemState;
-import dan200.computercraft.shared.peripheral.modem.wired.BlockWiredModemFull;
 import dan200.computercraft.shared.peripheral.modem.wired.WiredModemElement;
+import dan200.computercraft.shared.peripheral.modem.wired.WiredModemFullBlock;
 import dan200.computercraft.shared.peripheral.modem.wired.WiredModemLocalPeripheral;
 import dan200.computercraft.shared.peripheral.modem.wired.WiredModemPeripheral;
 import dan200.computercraft.shared.util.CapabilityUtil;
@@ -189,8 +188,8 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 	private boolean connectionsFormed = false;
 
 	private final WiredModemElement cable = new CableElement();
-	private LazyOptional<IWiredElement> elementCap;
-	private final IWiredNode node = cable.getNode();
+	private LazyOptional<WiredElement> elementCap;
+	private final WiredNode node = cable.getNode();
 	private final TickScheduler.Token tickToken = new TickScheduler.Token(this);
 	private final WiredModemPeripheral modem = new WiredModemPeripheral(
 			new ModemState(() -> TickScheduler.schedule(tickToken)), cable) {
@@ -224,7 +223,7 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 	public void destroy() {
 		if (!destroyed) {
 			destroyed = true;
-			modem.destroy();
+			modem.removed();
 			onRemove();
 		}
 	}
@@ -247,7 +246,7 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 		Direction dir = getFacing();
 		if (neighbour.equals(getBlockPos().relative(dir)) && !getBlockState().canSurvive(getLevel(), getBlockPos())) {
 			// Drop everything and remove block
-			Block.popResource(getLevel(), getBlockPos(), new ItemStack(Registry.ModItems.WIRED_MODEM.get()));
+			Block.popResource(getLevel(), getBlockPos(), new ItemStack(CCWireDefinition.CC_MODEM_CONNECTOR.get()));
 			getLevel().removeBlock(getBlockPos(), false);
 			// This'll call #destroy(), so we don't need to reset the
 			// network here.
@@ -321,12 +320,12 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 	private void updateBlockState() {
 		BlockState state = getBlockState();
 		boolean modemOn = modem.getModemState().isOpen(), peripheralOn = peripheralAccessAllowed;
-		if (state.getValue(BlockWiredModemFull.MODEM_ON) == modemOn
-				&& state.getValue(BlockWiredModemFull.PERIPHERAL_ON) == peripheralOn)
+		if (state.getValue(WiredModemFullBlock.MODEM_ON) == modemOn
+				&& state.getValue(WiredModemFullBlock.PERIPHERAL_ON) == peripheralOn)
 			return;
 
-		getLevel().setBlockAndUpdate(getBlockPos(), state.setValue(BlockWiredModemFull.MODEM_ON, modemOn)
-				.setValue(BlockWiredModemFull.PERIPHERAL_ON, peripheralOn));
+		getLevel().setBlockAndUpdate(getBlockPos(), state.setValue(WiredModemFullBlock.MODEM_ON, modemOn)
+				.setValue(WiredModemFullBlock.PERIPHERAL_ON, peripheralOn));
 	}
 
 	@Override
@@ -443,7 +442,7 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 	}
 
 	@Override
-	public IWiredElement getElement() {
+	public WiredElement getElement() {
 		return cable;
 	}
 

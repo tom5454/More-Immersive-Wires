@@ -10,6 +10,7 @@
       ],
       "recipe": {
         "type": "minecraft:crafting_shaped",
+        "category": "misc",
         "key": {
           "b": {
             "item": "minecraft:deepslate"
@@ -29,7 +30,8 @@
         "result": {
           "count": 4,
           "item": "more_immersive_wires:ae_connector"
-        }
+        },
+        "show_notification": true
       }
     }
   ]

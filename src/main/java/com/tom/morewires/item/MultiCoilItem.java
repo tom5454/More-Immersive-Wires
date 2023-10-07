@@ -18,7 +18,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.WireTypeDefinition.WireInfo;
 import com.tom.morewires.item.MultiCoilItem.MultiWireInfo.ConnectorTypeInfo;
 
@@ -37,7 +36,7 @@ public class MultiCoilItem extends IEBaseItem implements IWireCoil {
 	private final MultiWireInfo def;
 
 	public MultiCoilItem(MultiWireInfo def) {
-		super(new Properties(), MoreImmersiveWires.MOD_TAB);
+		super(new Properties());
 		this.def = def;
 	}
 

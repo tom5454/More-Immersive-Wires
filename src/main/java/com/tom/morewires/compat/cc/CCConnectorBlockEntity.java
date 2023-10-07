@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +16,6 @@ import net.minecraft.world.phys.Vec3;
 
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.util.NonNullConsumer;
 
 import com.google.common.collect.ImmutableList;
 
@@ -23,8 +23,10 @@ import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.tile.IOnCable.IOnCableConnector;
 
 import dan200.computercraft.api.ComputerCraftAPI;
-import dan200.computercraft.api.network.wired.IWiredElement;
-import dan200.computercraft.api.network.wired.IWiredNode;
+import dan200.computercraft.api.network.wired.WiredElement;
+import dan200.computercraft.api.network.wired.WiredNode;
+import dan200.computercraft.shared.platform.ComponentAccess;
+import dan200.computercraft.shared.platform.PlatformHelper;
 import dan200.computercraft.shared.util.CapabilityUtil;
 import dan200.computercraft.shared.util.TickScheduler;
 
@@ -40,13 +42,13 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 	protected GlobalWireNetwork globalNet;
 	private boolean destroyed = false;
 	private boolean connectionsFormed = false;
-	private final IWiredElement cable = new CableElement();
-	private LazyOptional<IWiredElement> elementCap;
-	private final IWiredNode node = cable.getNode();
+	private final WiredElement cable = new CableElement();
+	private LazyOptional<WiredElement> elementCap;
+	private final WiredNode node = cable.getNode();
 	private final TickScheduler.Token tickToken = new TickScheduler.Token(this);
 
-	private class CableElement implements IWiredElement {
-		private final IWiredNode node = ComputerCraftAPI.createWiredNodeForElement(this);
+	private class CableElement implements WiredElement {
+		private final WiredNode node = ComputerCraftAPI.createWiredNodeForElement(this);
 
 		@Override
 		public Level getLevel() {
@@ -59,7 +61,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		}
 
 		@Override
-		public IWiredNode getNode() {
+		public WiredNode getNode() {
 			return node;
 		}
 
@@ -69,7 +71,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		}
 	}
 
-	private final NonNullConsumer<LazyOptional<IWiredElement>> connectedNodeChanged = x -> connectionsChanged();
+	private final ComponentAccess<WiredElement> connectedElements = PlatformHelper.get().createWiredElementAccess(x -> connectionsChanged());
 
 	public CCConnectorBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
 		super(p_155228_, p_155229_, p_155230_);
@@ -189,12 +191,10 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		BlockPos offset = current.relative(facing);
 		if (!world.isLoaded(offset))return;
 
-		LazyOptional<IWiredElement> element = ComputerCraftAPI.getWiredElementAt(world, offset,
-				facing.getOpposite());
-		if (!element.isPresent())return;
+		var element = connectedElements.get((ServerLevel) world, current, facing);
+		if (element == null) return;
 
-		element.addListener(connectedNodeChanged);
-		IWiredNode node = element.orElseThrow(NullPointerException::new).getNode();
+		var node = element.getNode();
 		this.node.connectTo(node);
 	}
 
@@ -210,7 +210,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 	}
 
 	@Override
-	public IWiredElement getElement() {
+	public WiredElement getElement() {
 		return cable;
 	}
 

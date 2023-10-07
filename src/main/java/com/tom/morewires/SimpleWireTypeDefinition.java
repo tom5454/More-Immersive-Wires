@@ -63,8 +63,8 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 
 	@Override
 	public void init() {
-		RELAY = MoreImmersiveWires.blockWithItem(name + "_relay", () -> new RelayBlock<>(RELAY_ENTITY), b -> new ConnectorItemBlock(b, new Item.Properties().tab(MoreImmersiveWires.MOD_TAB), this, null));
-		COIL = MoreImmersiveWires.ITEMS.register(name + "_coil", () -> new WireCoilItem(wireType, this));
+		RELAY = MoreImmersiveWires.blockWithItem(name + "_relay", () -> new RelayBlock<>(RELAY_ENTITY), b -> new ConnectorItemBlock(b, new Item.Properties(), this, null));
+		COIL = MoreImmersiveWires.registerItem(name + "_coil", () -> new WireCoilItem(wireType, this));
 		RELAY_ENTITY = MoreImmersiveWires.blockEntity(name + "_relay.tile", this::createRelayBE, RELAY);
 		CONNECTOR = MoreImmersiveWires.blockWithItem(name + "_connector", () -> this.makeBlock(CONNECTOR_ENTITY), this::makeItemBlock);
 		CONNECTOR_ENTITY = MoreImmersiveWires.blockEntity(name + "_connector.tile", this::createBE, CONNECTOR);
@@ -183,7 +183,7 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 	public abstract boolean isCable(BlockGetter level, BlockPos pos);
 
 	public Item makeItemBlock(Block block) {
-		return new ConnectorItemBlock(block, new Item.Properties().tab(MoreImmersiveWires.MOD_TAB), this, true);
+		return new ConnectorItemBlock(block, new Item.Properties(), this, true);
 	}
 
 	@Override

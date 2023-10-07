@@ -36,7 +36,8 @@
           "recipes": [
             "more_immersive_wires:rs_relay"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

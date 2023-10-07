@@ -2,6 +2,7 @@ package com.tom.morewires.compat.ae;
 
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -22,6 +23,7 @@ import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.tile.IConnector;
 
 import appeng.api.networking.GridFlags;
+import appeng.api.orientation.BlockOrientation;
 import appeng.api.util.AECableType;
 import appeng.blockentity.grid.AENetworkBlockEntity;
 import blusunrize.immersiveengineering.api.wires.Connection;
@@ -55,9 +57,8 @@ public class AEDenseConnectorBlockEntity extends AENetworkBlockEntity implements
 	}
 
 	@Override
-	public void setOrientation(Direction inForward, Direction inUp) {
-		super.setOrientation(inForward, inUp);
-		this.getMainNode().setExposedOnSides(EnumSet.of(getFacing()));
+	public Set<Direction> getGridConnectableSides(BlockOrientation orientation) {
+		return EnumSet.of(getFacing());
 	}
 
 	@Override

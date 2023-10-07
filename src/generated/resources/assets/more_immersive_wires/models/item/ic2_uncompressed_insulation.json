@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "more_immersive_wires:item/ic2_unc_ins"
-  }
-}

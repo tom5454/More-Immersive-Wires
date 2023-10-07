@@ -14,7 +14,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
-import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.WireTypeDefinition;
 
 import blusunrize.immersiveengineering.api.Lib;
@@ -30,7 +29,7 @@ public class WireCoilItem extends IEBaseItem implements IWireCoil {
 	private final WireTypeDefinition<?> def;
 
 	public WireCoilItem(@Nonnull WireType type, WireTypeDefinition<?> def) {
-		super(new Properties(), MoreImmersiveWires.MOD_TAB);
+		super(new Properties());
 		this.type = type;
 		this.def = def;
 	}

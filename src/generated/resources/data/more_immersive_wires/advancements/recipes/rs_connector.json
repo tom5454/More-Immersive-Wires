@@ -41,7 +41,8 @@
           "recipes": [
             "more_immersive_wires:rs_connector"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

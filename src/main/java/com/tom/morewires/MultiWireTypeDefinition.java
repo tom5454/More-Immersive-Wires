@@ -71,13 +71,13 @@ public abstract class MultiWireTypeDefinition<T extends BlockEntity & IImmersive
 			wires.add(w);
 			return w;
 		});
-		RELAY = MoreImmersiveWires.blockWithItem(name + "_relay", () -> new RelayBlock<>(RELAY_ENTITY), b -> new ConnectorItemBlock(b, new Item.Properties().tab(MoreImmersiveWires.MOD_TAB), this, null));
+		RELAY = MoreImmersiveWires.blockWithItem(name + "_relay", () -> new RelayBlock<>(RELAY_ENTITY), b -> new ConnectorItemBlock(b, new Item.Properties(), this, null));
 		RELAY_ENTITY = MoreImmersiveWires.blockEntity(name + "_relay.tile", this::createRelayBE, RELAY);
 		CONNECTOR = MoreImmersiveWires.blockWithItem(name + "_connector", () -> this.makeBlock(CONNECTOR_ENTITY), this::makeItemBlock);
 		CONNECTOR_ENTITY = MoreImmersiveWires.blockEntity(name + "_connector.tile", this::createBE, CONNECTOR);
 		wires.forEach(w -> {
 			if(w.linked == null)
-				w.ITEM = MoreImmersiveWires.ITEMS.register(w.itemName + "_coil", () -> new MultiCoilItem(w));
+				w.ITEM = MoreImmersiveWires.registerItem(w.itemName + "_coil", () -> new MultiCoilItem(w));
 			else
 				w.ITEM = w.linked.ITEM;
 			w.wireType = w.createWire();
@@ -98,7 +98,7 @@ public abstract class MultiWireTypeDefinition<T extends BlockEntity & IImmersive
 	public abstract boolean isCable(BlockGetter level, BlockPos pos);
 
 	public Item makeItemBlock(Block block) {
-		return new ConnectorItemBlock(block, new Item.Properties().tab(MoreImmersiveWires.MOD_TAB), this, true);
+		return new ConnectorItemBlock(block, new Item.Properties(), this, true);
 	}
 
 	protected RelayBlockEntity createRelayBE(BlockPos pos, BlockState state) {

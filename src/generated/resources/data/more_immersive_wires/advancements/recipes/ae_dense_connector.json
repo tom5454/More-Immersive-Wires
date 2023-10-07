@@ -41,7 +41,8 @@
           "recipes": [
             "more_immersive_wires:ae_dense_connector"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

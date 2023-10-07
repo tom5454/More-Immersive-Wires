@@ -38,7 +38,8 @@
           "recipes": [
             "more_immersive_wires:id_relay"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

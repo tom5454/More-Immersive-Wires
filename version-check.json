@@ -1,8 +1,12 @@
 {
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/more-immersive-wires",
 	"promos": {
+		"1.20.1-latest": "1.1.2",
 		"1.19.2-latest": "1.1.2",
 		"1.18.2-latest": "1.1.2"
+	},
+	"1.20.1": {
+		"1.1.2": "1.20 port"
 	},
 	"1.19.2": {
 		"1.1.2": "Fixed CC Modem connector not dropping",
