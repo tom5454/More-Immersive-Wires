@@ -1,14 +1,16 @@
 {
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/more-immersive-wires",
 	"promos": {
-		"1.20.1-latest": "1.1.2",
-		"1.19.2-latest": "1.1.2",
-		"1.18.2-latest": "1.1.2"
+		"1.20.1-latest": "1.1.3",
+		"1.19.2-latest": "1.1.3",
+		"1.18.2-latest": "1.1.3"
 	},
 	"1.20.1": {
+		"1.1.3": "Fixed TPS issues with RS and ID connectors",
 		"1.1.2": "1.20 port"
 	},
 	"1.19.2": {
+		"1.1.3": "Fixed TPS issues with RS and ID connectors",
 		"1.1.2": "Fixed CC Modem connector not dropping",
 		"1.1.1": "Fixed connections getting lost on chunk unload",
 		"1.1.0": "Added FTB Industrial Contraptions support\nAdded IC2 Classic support",
@@ -17,6 +19,7 @@
 		"1.0.0": "First Release"
 	},
 	"1.18.2": {
+		"1.1.3": "Fixed TPS issues with RS and ID connectors",
 		"1.1.2": "Fixed CC Modem connector not dropping",
 		"1.1.1": "Fixed connections getting lost on chunk unload",
 		"1.1.0": "Added FTB Industrial Contraptions support",
