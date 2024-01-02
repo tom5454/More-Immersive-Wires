@@ -66,8 +66,8 @@ public abstract class SimpleNetworkHandler<C, T extends SimpleNetworkHandler<C, 
 					allConnectors.add(c);
 				}
 			}
+			allConnectors.forEach(c -> setNetworkHandler(c, (T) this));
 		}
-		allConnectors.forEach(c -> setNetworkHandler(c, (T) this));
 	}
 
 	protected abstract C connect(IImmersiveConnectable iic);

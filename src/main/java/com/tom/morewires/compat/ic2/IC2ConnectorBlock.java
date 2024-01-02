@@ -1,9 +1,13 @@
 package com.tom.morewires.compat.ic2;
 
+import java.util.List;
 import java.util.function.BiPredicate;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -42,5 +46,10 @@ public class IC2ConnectorBlock extends OnCableConnectorBlock<IC2ConnectorBlockEn
 				connector.getLevel().removeBlock(pos, false);
 			}
 		}
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, BlockGetter world, List<Component> tooltip, TooltipFlag flag) {
+		tooltip.add(Component.translatable("tooltip.more_immersive_wires.ic2.mode_info").withStyle(ChatFormatting.GRAY));
 	}
 }
