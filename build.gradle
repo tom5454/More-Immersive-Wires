@@ -199,7 +199,7 @@ dependencies {
     compileOnly fg.deobf('local:ImmersiveEngineering:1.18.2-8.4.0-161')
     compileOnly fg.deobf('curse.maven:applied-energistics-2-223794:4136407')
     compileOnly fg.deobf('curse.maven:refined-storage-243076:4392829')
-    compileOnly fg.deobf('curse.maven:cc-tweaked-282001:4395618')
+    compileOnly fg.deobf('curse.maven:cc-tweaked-282001:4630521')
     
     compileOnly fg.deobf('local:IntegratedDynamics:1.18.2-1.13.3')
     compileOnly fg.deobf('curse.maven:cyclops-core-232758:4422919')
