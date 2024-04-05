@@ -31,7 +31,7 @@ public class RSConnectorBlockEntity extends NetworkNodeBlockEntity<ConnectorNetw
 	protected GlobalWireNetwork globalNet;
 
 	protected RSConnectorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state, SPEC);
+		super(type, pos, state, SPEC, ConnectorNetworkNode.class);
 	}
 
 	@Override

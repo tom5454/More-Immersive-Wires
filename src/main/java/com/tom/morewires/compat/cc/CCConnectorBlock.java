@@ -16,15 +16,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.block.OnCableConnectorBlock;
 
 public class CCConnectorBlock extends OnCableConnectorBlock<CCConnectorBlockEntity> {
 
-	public CCConnectorBlock(RegistryObject<BlockEntityType<CCConnectorBlockEntity>> type, BiPredicate<BlockGetter, BlockPos> isOnCable) {
+	public CCConnectorBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<CCConnectorBlockEntity>> type, BiPredicate<BlockGetter, BlockPos> isOnCable) {
 		super(type, isOnCable);
 	}
 

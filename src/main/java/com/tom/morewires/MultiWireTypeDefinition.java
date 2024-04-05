@@ -23,10 +23,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import net.minecraftforge.common.ForgeConfigSpec.Builder;
-import net.minecraftforge.common.ForgeConfigSpec.IntValue;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.tom.morewires.MoreImmersiveWires.Wire;
 import com.tom.morewires.WireTypeDefinition.ConnectorInfo;
@@ -48,10 +47,10 @@ import blusunrize.immersiveengineering.api.wires.localhandlers.LocalNetworkHandl
 public abstract class MultiWireTypeDefinition<T extends BlockEntity & IImmersiveConnectable> implements WireTypeDefinition<T>, ConnectorInfo, RelayInfo {
 	public final String name, pf, localized;
 	public final ResourceLocation NET_ID;
-	public RegistryObject<BlockEntityType<RelayBlockEntity>> RELAY_ENTITY;
-	public RegistryObject<Block> RELAY;
-	public RegistryObject<Block> CONNECTOR;
-	public RegistryObject<BlockEntityType<T>> CONNECTOR_ENTITY;
+	public DeferredHolder<BlockEntityType<?>, BlockEntityType<RelayBlockEntity>> RELAY_ENTITY;
+	public DeferredHolder<Block, Block> RELAY;
+	public DeferredHolder<Block, Block> CONNECTOR;
+	public DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> CONNECTOR_ENTITY;
 	private String modid;
 	protected List<WireTypeSettings> wires;
 	protected Set<WireType> wireTypes;
@@ -91,7 +90,7 @@ public abstract class MultiWireTypeDefinition<T extends BlockEntity & IImmersive
 
 	public abstract T createBE(BlockPos pos, BlockState state);
 
-	public Block makeBlock(RegistryObject<BlockEntityType<T>> type) {
+	public Block makeBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> type) {
 		return new OnCableConnectorBlock<>(type, this::isCable);
 	}
 
@@ -113,7 +112,7 @@ public abstract class MultiWireTypeDefinition<T extends BlockEntity & IImmersive
 	}
 
 	@Override
-	public void config(Builder builder) {
+	public void config(ModConfigSpec.Builder builder) {
 		builder.comment(name + " Cable Stettings").translation("config.moreimmersivewires." + name + ".settings").push(name);
 		wires.forEach(w -> {
 			if(w.linked == null)
@@ -205,7 +204,7 @@ public abstract class MultiWireTypeDefinition<T extends BlockEntity & IImmersive
 
 	public static class WireTypeSettings implements WireInfo, MultiWireInfo {
 		private final MultiWireTypeDefinition<?> impl;
-		private RegistryObject<Item> ITEM;
+		private DeferredHolder<Item, Item> ITEM;
 		private boolean thick;
 		private int color;
 		private String localized;
@@ -271,7 +270,7 @@ public abstract class MultiWireTypeDefinition<T extends BlockEntity & IImmersive
 		}
 
 		@Override
-		public RegistryObject<Item> getCoilItem() {
+		public DeferredHolder<Item, Item> getCoilItem() {
 			return ITEM;
 		}
 
@@ -328,12 +327,12 @@ public abstract class MultiWireTypeDefinition<T extends BlockEntity & IImmersive
 	}
 
 	@Override
-	public RegistryObject<Block> getConnectorBlock() {
+	public DeferredHolder<Block, Block> getConnectorBlock() {
 		return CONNECTOR;
 	}
 
 	@Override
-	public RegistryObject<Block> getRelayBlock() {
+	public DeferredHolder<Block, Block> getRelayBlock() {
 		return RELAY;
 	}
 }

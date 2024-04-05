@@ -1,38 +1,30 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "neoforge:conditions": [
     {
-      "conditions": [
-        {
-          "type": "forge:mod_loaded",
-          "modid": "computercraft"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "category": "misc",
-        "key": {
-          "b": {
-            "tag": "forge:stone"
-          },
-          "c": {
-            "item": "minecraft:redstone"
-          },
-          "w": {
-            "item": "computercraft:cable"
-          }
-        },
-        "pattern": [
-          " c ",
-          "bcb",
-          "bwb"
-        ],
-        "result": {
-          "count": 4,
-          "item": "more_immersive_wires:cc_connector"
-        },
-        "show_notification": true
-      }
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
     }
-  ]
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "tag": "forge:stone"
+    },
+    "c": {
+      "item": "minecraft:redstone"
+    },
+    "w": {
+      "item": "computercraft:cable"
+    }
+  },
+  "pattern": [
+    " c ",
+    "bcb",
+    "bwb"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_immersive_wires:cc_connector"
+  }
 }

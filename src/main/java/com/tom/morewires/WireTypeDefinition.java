@@ -10,9 +10,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-
-import net.minecraftforge.common.ForgeConfigSpec.Builder;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.tom.morewires.MoreImmersiveWires.Wire;
 
@@ -22,7 +22,7 @@ import blusunrize.immersiveengineering.api.wires.WireType;
 public interface WireTypeDefinition<T extends BlockEntity & IImmersiveConnectable> {
 	void init();
 	boolean isMatchingWireType(WireType wt);
-	void config(Builder builder);
+	void config(ModConfigSpec.Builder builder);
 	void setup(Wire wire);
 	List<? extends WireInfo> getWireCoils();
 	List<? extends ConnectorInfo> getConnectors();
@@ -37,7 +37,7 @@ public interface WireTypeDefinition<T extends BlockEntity & IImmersiveConnectabl
 		boolean isThickWire();
 		int getColor();
 		String getLocalized();
-		RegistryObject<Item> getCoilItem();
+		DeferredHolder<Item, Item> getCoilItem();
 		String getName();
 
 		default String getItemName() {
@@ -52,7 +52,7 @@ public interface WireTypeDefinition<T extends BlockEntity & IImmersiveConnectabl
 	public static interface ConnectorInfo {
 		boolean isTallConnector();
 		String getLocalized();
-		RegistryObject<Block> getConnectorBlock();
+		DeferredHolder<Block, Block> getConnectorBlock();
 		String getName();
 
 		default boolean datagenConnectorBlock() { return true; }
@@ -62,10 +62,11 @@ public interface WireTypeDefinition<T extends BlockEntity & IImmersiveConnectabl
 		boolean isExTallRelay();
 		boolean isTallRelay();
 		String getLocalized();
-		RegistryObject<Block> getRelayBlock();
+		DeferredHolder<Block, Block> getRelayBlock();
 		String getName();
 		boolean isMatchingWireType(WireType cableType);
 	}
 
 	default void addTranslations(BiConsumer<String, String> addTranslation) {}
+	default void registerCapabilities(RegisterCapabilitiesEvent event) {}
 }

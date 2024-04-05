@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -24,30 +25,24 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplier;
-
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.ForgeConfigSpec.Builder;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.forgespi.language.IModInfo;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforgespi.language.IModInfo;
 
 import com.tom.morewires.WireTypeDefinition.RelayInfo;
-import com.tom.morewires.compat.ae.AEDenseWireDefinition;
-import com.tom.morewires.compat.ae.AEWireDefinition;
 import com.tom.morewires.compat.cc.CCWireDefinition;
-import com.tom.morewires.compat.id.IntegratedDynamicsWireDefinition;
 import com.tom.morewires.compat.rs.RSWireDefinition;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -55,9 +50,9 @@ import com.tom.morewires.compat.rs.RSWireDefinition;
 public class MoreImmersiveWires {
 	public static final String modid = "more_immersive_wires";
 
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, modid);
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, modid);
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, modid);
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, modid);
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, modid);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, modid);
 	public static final DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modid);
 
 	public static final Map<BlockEntityType<?>, RelayInfo> WIRE_TYPES = new HashMap<>();
@@ -70,10 +65,7 @@ public class MoreImmersiveWires {
 	public static final String FTBIC = "ftbic";
 	public static final String IC2 = "ic2";
 
-	public static final Wire AE_WIRE = new Wire(AE, () -> AEWireDefinition::new);
-	public static final Wire AE_DENSE_WIRE = new Wire(AE, () -> AEDenseWireDefinition::new);
 	public static final Wire RS_WIRE = new Wire(RS, () -> RSWireDefinition::new);
-	public static final Wire ID_WIRE = new Wire(ID, () -> IntegratedDynamicsWireDefinition::new);
 	public static final Wire CC_WIRE = new Wire(CC, () -> CCWireDefinition::new);
 
 	public static class Wire {
@@ -96,7 +88,7 @@ public class MoreImmersiveWires {
 			wireTypeDef.setup(this);
 		}
 
-		public void config(Builder builder) {
+		public void config(ModConfigSpec.Builder builder) {
 			wireTypeDef.config(builder);
 		}
 
@@ -110,31 +102,28 @@ public class MoreImmersiveWires {
 
 	public static Map<String, String> MODID_NAME_LOOKUP = Collections.emptyMap();
 
-	public MoreImmersiveWires() {
+	public MoreImmersiveWires(IEventBus bus) {
 		// Register the setup method for modloading
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+		bus.addListener(this::setup);
 		// Register the doClientStuff method for modloading
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+		bus.addListener(this::doClientStuff);
 
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+		bus.addListener(this::enqueueIMC);
 
-		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> MoreImmersiveWiresClient::preInit);
+		if (FMLEnvironment.dist == Dist.CLIENT)MoreImmersiveWiresClient.preInit();
 
 		ALL_WIRES.forEach(Wire::init);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.clientSpec);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.serverSpec);
-		FMLJavaModLoadingContext.get().getModEventBus().register(Config.class);
+		bus.register(Config.class);
+		bus.addListener(this::registerCapabilities);
 
-		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		BLOCKS.register(bus);
 		ITEMS.register(bus);
 		BLOCK_ENTITIES.register(bus);
 		TAB.register(bus);
-
-		// Register ourselves for server and other game events we are interested in
-		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
@@ -151,7 +140,7 @@ public class MoreImmersiveWires {
 	}
 
 	private static List<Item> tabItems = new ArrayList<>();
-	public static final RegistryObject<CreativeModeTab> STORAGE_MOD_TAB = TAB.register("tab", () ->
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> STORAGE_MOD_TAB = TAB.register("tab", () ->
 	CreativeModeTab.builder()
 	.title(Component.translatable("itemGroup.more_immersive_wires.tab"))
 	.icon(() -> {
@@ -168,30 +157,34 @@ public class MoreImmersiveWires {
 		return item;
 	}
 
-	public static <B extends Block> RegistryObject<B> blockWithItem(String name, Supplier<B> create) {
-		RegistryObject<B> re = BLOCKS.register(name, create);
+	public static <B extends Block> DeferredHolder<Block, B> blockWithItem(String name, Supplier<B> create) {
+		DeferredHolder<Block, B> re = BLOCKS.register(name, create);
 		ITEMS.register(name, () -> addItemToTab(new BlockItem(re.get(), new Item.Properties())));
 		return re;
 	}
 
-	public static <B extends Block, I extends Item> RegistryObject<B> blockWithItem(String name, Supplier<B> create, Function<Block, I> createItem) {
-		RegistryObject<B> re = BLOCKS.register(name, create);
+	public static <B extends Block, I extends Item> DeferredHolder<Block, B> blockWithItem(String name, Supplier<B> create, Function<Block, I> createItem) {
+		DeferredHolder<Block, B> re = BLOCKS.register(name, create);
 		ITEMS.register(name, () -> addItemToTab(createItem.apply(re.get())));
 		return re;
 	}
 
-	public static RegistryObject<Item> materialItem(String name) {
+	public static DeferredHolder<Item, Item> materialItem(String name) {
 		return ITEMS.register(name, () -> addItemToTab(new Item(new Item.Properties())));
 	}
 
 	@SafeVarargs
-	public static <BE extends BlockEntity> RegistryObject<BlockEntityType<BE>> blockEntity(String name, BlockEntitySupplier<? extends BE> create, RegistryObject<? extends Block>... blocks) {
+	public static <BE extends BlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<BE>> blockEntity(String name, BlockEntitySupplier<? extends BE> create, DeferredHolder<Block, ? extends Block>... blocks) {
 		return BLOCK_ENTITIES.register(name, () -> {
-			return BlockEntityType.Builder.<BE>of(create, Arrays.stream(blocks).map(RegistryObject::get).toArray(Block[]::new)).build(null);
+			return BlockEntityType.Builder.<BE>of(create, Arrays.stream(blocks).map(DeferredHolder::get).toArray(Block[]::new)).build(null);
 		});
 	}
 
-	public static <I extends Item> RegistryObject<Item> registerItem(String name, Supplier<I> object) {
+	public static <I extends Item> DeferredHolder<Item, Item> registerItem(String name, Supplier<I> object) {
 		return ITEMS.register(name, () -> addItemToTab(object.get()));
+	}
+
+	private void registerCapabilities(RegisterCapabilitiesEvent event) {
+		ALL_WIRES.forEach(w -> w.wireTypeDef.registerCapabilities(event));
 	}
 }

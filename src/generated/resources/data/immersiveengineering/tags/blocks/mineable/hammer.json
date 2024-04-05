@@ -1,35 +1,11 @@
 {
   "values": [
     {
-      "id": "more_immersive_wires:ae_connector",
-      "required": false
-    },
-    {
-      "id": "more_immersive_wires:ae_relay",
-      "required": false
-    },
-    {
-      "id": "more_immersive_wires:ae_dense_connector",
-      "required": false
-    },
-    {
-      "id": "more_immersive_wires:ae_dense_relay",
-      "required": false
-    },
-    {
       "id": "more_immersive_wires:rs_connector",
       "required": false
     },
     {
       "id": "more_immersive_wires:rs_relay",
-      "required": false
-    },
-    {
-      "id": "more_immersive_wires:id_connector",
-      "required": false
-    },
-    {
-      "id": "more_immersive_wires:id_relay",
       "required": false
     },
     {

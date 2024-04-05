@@ -13,9 +13,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.refinedmods.refinedstorage.api.network.node.INetworkNode;
 import com.refinedmods.refinedstorage.apiimpl.API;
@@ -26,7 +25,7 @@ import com.tom.morewires.block.OnCableConnectorBlock;
 
 public class RSConnectorBlock extends OnCableConnectorBlock<RSConnectorBlockEntity> {
 
-	public RSConnectorBlock(RegistryObject<BlockEntityType<RSConnectorBlockEntity>> type,
+	public RSConnectorBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<RSConnectorBlockEntity>> type,
 			BiPredicate<BlockGetter, BlockPos> isOnCable) {
 		super(type, isOnCable);
 	}

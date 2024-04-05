@@ -15,8 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.tom.morewires.tile.IConnector;
 
@@ -28,7 +27,7 @@ public class OnCableConnectorBlock<T extends BlockEntity & IImmersiveConnectable
 	public static final BooleanProperty ON_CABLE = BooleanProperty.create("on_cable");
 	private BiPredicate<BlockGetter, BlockPos> isOnCable;
 
-	public OnCableConnectorBlock(RegistryObject<BlockEntityType<T>> type, BiPredicate<BlockGetter, BlockPos> isOnCable) {
+	public OnCableConnectorBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> type, BiPredicate<BlockGetter, BlockPos> isOnCable) {
 		super(ConnectorBlock.PROPERTIES.get(), type);
 		this.isOnCable = isOnCable;
 	}

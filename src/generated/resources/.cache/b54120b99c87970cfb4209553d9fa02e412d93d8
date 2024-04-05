@@ -1,10 +1,5 @@
-// 1.20.1	2023-10-07T19:50:25.8972049	Item Models 2
-36fbaef29b9887045ec1352e1e23d79d771afa78 assets/more_immersive_wires/models/item/ae_connector.json
-8d0f29625852d00eb77e81130dcd2a18a7f70b22 assets/more_immersive_wires/models/item/ae_dense_relay.json
-77ea5d2c96f1b5f5b5707afaa6a4d99c57e7c625 assets/more_immersive_wires/models/item/ae_relay.json
-fb22ea0268ca028290b92325e8df59cbd3623b29 assets/more_immersive_wires/models/item/cc_connector.json
-0fc8e38a9b556201cd4eca1126ce1cb0b55cf915 assets/more_immersive_wires/models/item/cc_relay.json
-3087d8a74f3f157337807dd58bf329c4735e959a assets/more_immersive_wires/models/item/id_connector.json
-d6baa6ce3f1ac5b762decd1e4536742246ef4b77 assets/more_immersive_wires/models/item/id_relay.json
-e4a609236129889143b9ddaafc932c09a7c02aa4 assets/more_immersive_wires/models/item/rs_connector.json
-8fb6b88bacf3e84b8b6d11a770fa96e56f899d67 assets/more_immersive_wires/models/item/rs_relay.json
+// 1.20.4	2024-04-04T21:29:55.4082496	Item Models 2
+d4dffec056a22ccf3ab7d103dadee78ff3c3953e assets/more_immersive_wires/models/item/cc_connector.json
+3e0e6214dacc4161b2c43cd4d11e128998fca81e assets/more_immersive_wires/models/item/cc_relay.json
+0a783a0e44b9c0fd461e8895b18d598a6785628e assets/more_immersive_wires/models/item/rs_connector.json
+914f6e8f181cfd330a1800fff1c57e48b39a1c17 assets/more_immersive_wires/models/item/rs_relay.json

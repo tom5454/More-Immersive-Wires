@@ -2,16 +2,15 @@ package com.tom.morewires;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.config.ModConfig.Type;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class Config {
 	public static class Server {
 
-		private Server(ForgeConfigSpec.Builder builder) {
+		private Server(ModConfigSpec.Builder builder) {
 			builder.comment("Wire Settings").translation("config.moreimmersivewires.wires").push("wires");
 			MoreImmersiveWires.ALL_WIRES.forEach(w -> w.config(builder));
 			builder.pop();
@@ -21,7 +20,7 @@ public class Config {
 
 	public static class Common {
 
-		public Common(ForgeConfigSpec.Builder builder) {
+		public Common(ModConfigSpec.Builder builder) {
 			builder.comment("IMPORTANT NOTICE:",
 					"THIS IS ONLY THE COMMON CONFIG. It does not contain all the values adjustable for More Immersive Wires",
 					"The settings have been moved to more_immersive_wires-server.toml",
@@ -36,37 +35,37 @@ public class Config {
 
 	public static class Client {
 
-		public Client(ForgeConfigSpec.Builder builder) {
+		public Client(ModConfigSpec.Builder builder) {
 			CompatConfig.build(ModConfig.Type.CLIENT, builder);
 		}
 	}
 
-	static final ForgeConfigSpec commonSpec;
+	static final ModConfigSpec commonSpec;
 	public static final Common COMMON;
 	static {
-		final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		final Pair<Common, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Common::new);
 		commonSpec = specPair.getRight();
 		COMMON = specPair.getLeft();
 	}
 
-	static final ForgeConfigSpec serverSpec;
+	static final ModConfigSpec serverSpec;
 	public static final Server SERVER;
 	static {
-		final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Server::new);
+		final Pair<Server, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Server::new);
 		serverSpec = specPair.getRight();
 		SERVER = specPair.getLeft();
 	}
 
-	static final ForgeConfigSpec clientSpec;
+	static final ModConfigSpec clientSpec;
 	public static final Client CLIENT;
 	static {
-		final Pair<Client, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Client::new);
+		final Pair<Client, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Client::new);
 		clientSpec = specPair.getRight();
 		CLIENT = specPair.getLeft();
 	}
 
 	private static void load(ModConfig config) {
-		if(config.getType() == Type.SERVER)
+		if(config.getType() == ModConfig.Type.SERVER)
 			MoreImmersiveWires.ALL_WIRES.forEach(w -> w.wireTypeDef.configReload());
 		CompatConfig.reload(config.getType());
 	}

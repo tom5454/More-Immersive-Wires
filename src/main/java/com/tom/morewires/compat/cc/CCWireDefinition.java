@@ -7,12 +7,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.SimpleWireTypeDefinition;
 
+import dan200.computercraft.api.network.wired.WiredElementCapability;
+import dan200.computercraft.api.peripheral.PeripheralCapability;
 import dan200.computercraft.shared.ModRegistry;
 
 import blusunrize.immersiveengineering.api.wires.localhandlers.ILocalHandlerConstructor;
@@ -24,8 +26,8 @@ public class CCWireDefinition extends SimpleWireTypeDefinition<CCConnectorBlockE
 		super("cc", "Networking Cable", 0x888888);
 	}
 
-	public static RegistryObject<Block> CC_MODEM_CONNECTOR;
-	public static RegistryObject<BlockEntityType<BlockEntity>> CC_MODEM_CONNECTOR_ENTITY;
+	public static DeferredHolder<Block, Block> CC_MODEM_CONNECTOR;
+	public static DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntity>> CC_MODEM_CONNECTOR_ENTITY;
 
 	@Override
 	public CCConnectorBlockEntity createBE(BlockPos pos, BlockState state) {
@@ -46,12 +48,18 @@ public class CCWireDefinition extends SimpleWireTypeDefinition<CCConnectorBlockE
 	}
 
 	@Override
-	public Block makeBlock(RegistryObject<BlockEntityType<CCConnectorBlockEntity>> type) {
+	public Block makeBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<CCConnectorBlockEntity>> type) {
 		return new CCConnectorBlock(type, this::isCable);
 	}
 
 	@Override
 	protected ILocalHandlerConstructor createLocalHandler() {
 		return CCNetworkHandler::new;
+	}
+
+	@Override
+	public void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(PeripheralCapability.get(), CC_MODEM_CONNECTOR_ENTITY.get(), (be, side) -> ((CCModemConnectorBlockEntity) be).getPeripheralCap(side));
+		event.registerBlockEntity(WiredElementCapability.get(), MoreImmersiveWires.CC_WIRE.simple().CONNECTOR_ENTITY.get(), (be, side) -> ((CCConnectorBlockEntity) be).getCap(side));
 	}
 }

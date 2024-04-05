@@ -1,21 +1,15 @@
 package com.tom.morewires.compat.cc;
 
-import static dan200.computercraft.shared.Capabilities.CAPABILITY_WIRED_ELEMENT;
-
 import java.util.Collection;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
 
 import com.google.common.collect.ImmutableList;
 
@@ -27,7 +21,6 @@ import dan200.computercraft.api.network.wired.WiredElement;
 import dan200.computercraft.api.network.wired.WiredNode;
 import dan200.computercraft.shared.platform.ComponentAccess;
 import dan200.computercraft.shared.platform.PlatformHelper;
-import dan200.computercraft.shared.util.CapabilityUtil;
 import dan200.computercraft.shared.util.TickScheduler;
 
 import blusunrize.immersiveengineering.api.wires.Connection;
@@ -43,7 +36,6 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 	private boolean destroyed = false;
 	private boolean connectionsFormed = false;
 	private final WiredElement cable = new CableElement();
-	private LazyOptional<WiredElement> elementCap;
 	private final WiredNode node = cable.getNode();
 	private final TickScheduler.Token tickToken = new TickScheduler.Token(this);
 
@@ -71,7 +63,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		}
 	}
 
-	private final ComponentAccess<WiredElement> connectedElements = PlatformHelper.get().createWiredElementAccess(x -> connectionsChanged());
+	private final ComponentAccess<WiredElement> connectedElements = PlatformHelper.get().createWiredElementAccess(this, x -> connectionsChanged());
 
 	public CCConnectorBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
 		super(p_155228_, p_155229_, p_155230_);
@@ -151,16 +143,6 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		onRemove();
 	}
 
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-		if (cap == CAPABILITY_WIRED_ELEMENT) {
-			if(destroyed || side != getFacing()) return LazyOptional.empty();
-			if (elementCap == null) elementCap = LazyOptional.of(() -> cable);
-			return elementCap.cast();
-		}
-		return super.getCapability(cap, side);
-	}
-
 	private void onRemove() {
 		if (level == null || !level.isClientSide) {
 			node.remove();
@@ -176,12 +158,6 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		}
 	}
 
-	@Override
-	public void invalidateCaps() {
-		super.invalidateCaps();
-		elementCap = CapabilityUtil.invalidate(elementCap);
-	}
-
 	void connectionsChanged() {
 		if (getLevel().isClientSide) return;
 
@@ -191,7 +167,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		BlockPos offset = current.relative(facing);
 		if (!world.isLoaded(offset))return;
 
-		var element = connectedElements.get((ServerLevel) world, current, facing);
+		var element = connectedElements.get(facing);
 		if (element == null) return;
 
 		var node = element.getNode();
@@ -231,5 +207,9 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 	@Override
 	public Collection<ResourceLocation> getRequestedHandlers() {
 		return ImmutableList.of(MoreImmersiveWires.CC_WIRE.simple().NET_ID);
+	}
+
+	public WiredElement getCap(Direction side) {
+		return side == getFacing() ? cable : null;
 	}
 }

@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ModConfig.Type;
+import net.neoforged.fml.config.ModConfig.Type;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class CompatConfig {
 
 	public static interface ConfigHandler {
-		void build(ForgeConfigSpec.Builder builder);
+		void build(ModConfigSpec.Builder builder);
 		void reload();
 	}
 
@@ -23,7 +23,7 @@ public class CompatConfig {
 		CONFIGS.get(cfg).add(b);
 	}
 
-	public static void build(Type cfg, ForgeConfigSpec.Builder builder) {
+	public static void build(Type cfg, ModConfigSpec.Builder builder) {
 		CONFIGS.get(cfg).forEach(c -> c.build(builder));
 	}
 

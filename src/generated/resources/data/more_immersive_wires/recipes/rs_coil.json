@@ -1,38 +1,30 @@
 {
-  "type": "forge:conditional",
-  "recipes": [
+  "neoforge:conditions": [
     {
-      "conditions": [
-        {
-          "type": "forge:mod_loaded",
-          "modid": "refinedstorage"
-        }
-      ],
-      "recipe": {
-        "type": "minecraft:crafting_shaped",
-        "category": "misc",
-        "key": {
-          "c": {
-            "item": "refinedstorage:cable"
-          },
-          "s": {
-            "tag": "forge:rods/wooden"
-          },
-          "w": {
-            "tag": "forge:wires/aluminum"
-          }
-        },
-        "pattern": [
-          "wcw",
-          "csc",
-          "wcw"
-        ],
-        "result": {
-          "count": 4,
-          "item": "more_immersive_wires:rs_coil"
-        },
-        "show_notification": true
-      }
+      "type": "neoforge:mod_loaded",
+      "modid": "refinedstorage"
     }
-  ]
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "refinedstorage:cable"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    },
+    "w": {
+      "tag": "forge:wires/aluminum"
+    }
+  },
+  "pattern": [
+    "wcw",
+    "csc",
+    "wcw"
+  ],
+  "result": {
+    "count": 4,
+    "item": "more_immersive_wires:rs_coil"
+  }
 }

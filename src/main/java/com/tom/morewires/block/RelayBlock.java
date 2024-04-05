@@ -7,8 +7,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.tom.morewires.tile.IConnector;
 
@@ -18,7 +17,7 @@ import blusunrize.immersiveengineering.common.blocks.metal.BasicConnectorBlock;
 
 public class RelayBlock<T extends BlockEntity & IImmersiveConnectable> extends BasicConnectorBlock<T> {
 
-	public RelayBlock(RegistryObject<BlockEntityType<T>> type) {
+	public RelayBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> type) {
 		super(ConnectorBlock.PROPERTIES.get(), type);
 	}
 

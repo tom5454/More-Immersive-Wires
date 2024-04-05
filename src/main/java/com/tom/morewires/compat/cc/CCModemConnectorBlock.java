@@ -15,8 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
-
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.tom.morewires.MoreImmersiveWires;
 
@@ -27,8 +26,8 @@ import blusunrize.immersiveengineering.common.blocks.generic.ConnectorBlock;
 
 public class CCModemConnectorBlock extends ConnectorBlock<CCModemConnectorBlockEntity> {
 
-	public CCModemConnectorBlock(RegistryObject<BlockEntityType<BlockEntity>> entityType) {
-		super(ConnectorBlock.PROPERTIES.get(), (RegistryObject) entityType);
+	public CCModemConnectorBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockEntity>> entityType) {
+		super(ConnectorBlock.PROPERTIES.get(), (DeferredHolder) entityType);
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public class CCModemConnectorBlock extends ConnectorBlock<CCModemConnectorBlockE
 			BlockHitResult hit) {
 		if(player.getItemInHand(hand).is(MoreImmersiveWires.CC_WIRE.simple().COIL.get()))return InteractionResult.PASS;
 		BlockEntity tile = world.getBlockEntity(pos);
-		return tile instanceof CCBlockEntity generic ? generic.onActivate(player, hand, hit) : InteractionResult.PASS;
+		return tile instanceof CCModemConnectorBlockEntity generic ? generic.use(player) : InteractionResult.PASS;
 	}
 
 	@Override

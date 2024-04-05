@@ -5,8 +5,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.refinedmods.refinedstorage.block.CableBlock;
 
@@ -32,7 +31,7 @@ public class RSWireDefinition extends SimpleWireTypeDefinition<RSConnectorBlockE
 	}
 
 	@Override
-	public Block makeBlock(RegistryObject<BlockEntityType<RSConnectorBlockEntity>> type) {
+	public Block makeBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<RSConnectorBlockEntity>> type) {
 		return new RSConnectorBlock(type, this::isCable);
 	}
 

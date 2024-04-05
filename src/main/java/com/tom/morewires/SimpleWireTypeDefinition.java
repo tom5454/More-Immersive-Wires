@@ -17,10 +17,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import net.minecraftforge.common.ForgeConfigSpec.Builder;
-import net.minecraftforge.common.ForgeConfigSpec.IntValue;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import com.google.common.collect.ImmutableList;
 
@@ -46,11 +45,11 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 	public final ResourceLocation NET_ID;
 	public final int color;
 	public WireType wireType;
-	public RegistryObject<BlockEntityType<RelayBlockEntity>> RELAY_ENTITY;
-	public RegistryObject<Block> RELAY;
-	public RegistryObject<Item> COIL;
-	public RegistryObject<Block> CONNECTOR;
-	public RegistryObject<BlockEntityType<T>> CONNECTOR_ENTITY;
+	public DeferredHolder<BlockEntityType<?>, BlockEntityType<RelayBlockEntity>> RELAY_ENTITY;
+	public DeferredHolder<Block, Block> RELAY;
+	public DeferredHolder<Item, Item> COIL;
+	public DeferredHolder<Block, Block> CONNECTOR;
+	public DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> CONNECTOR_ENTITY;
 	private IntValue lengthCfg;
 	private String modid;
 
@@ -131,7 +130,7 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 	}
 
 	@Override
-	public void config(Builder builder) {
+	public void config(ModConfigSpec.Builder builder) {
 		builder.comment(localized + " Cable Stettings").translation("config.moreimmersivewires." + name + ".settings").push(name);
 		lengthCfg = builder.comment(localized + " Cable Max Length").
 				translation("config.moreimmersivewires." + name + ".maxlen").defineInRange(name + "MaxLen", 16, 4, 256);
@@ -176,7 +175,7 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 
 	public abstract T createBE(BlockPos pos, BlockState state);
 
-	public Block makeBlock(RegistryObject<BlockEntityType<T>> type) {
+	public Block makeBlock(DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> type) {
 		return new OnCableConnectorBlock<>(type, this::isCable);
 	}
 
@@ -218,7 +217,7 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 	}
 
 	@Override
-	public RegistryObject<Item> getCoilItem() {
+	public DeferredHolder<Item, Item> getCoilItem() {
 		return COIL;
 	}
 
@@ -233,12 +232,12 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 	}
 
 	@Override
-	public RegistryObject<Block> getRelayBlock() {
+	public DeferredHolder<Block, Block> getRelayBlock() {
 		return RELAY;
 	}
 
 	@Override
-	public RegistryObject<Block> getConnectorBlock() {
+	public DeferredHolder<Block, Block> getConnectorBlock() {
 		return CONNECTOR;
 	}
 
