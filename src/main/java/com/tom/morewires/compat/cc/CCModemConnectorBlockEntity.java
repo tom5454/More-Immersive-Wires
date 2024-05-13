@@ -45,6 +45,7 @@ import dan200.computercraft.shared.peripheral.modem.wired.WiredModemElement;
 import dan200.computercraft.shared.peripheral.modem.wired.WiredModemFullBlock;
 import dan200.computercraft.shared.peripheral.modem.wired.WiredModemLocalPeripheral;
 import dan200.computercraft.shared.peripheral.modem.wired.WiredModemPeripheral;
+import dan200.computercraft.shared.platform.PlatformHelper;
 import dan200.computercraft.shared.util.CapabilityUtil;
 import dan200.computercraft.shared.util.TickScheduler;
 
@@ -181,7 +182,7 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 
 	private boolean invalidPeripheral;
 	private boolean peripheralAccessAllowed;
-	private final WiredModemLocalPeripheral peripheral = new WiredModemLocalPeripheral(this::queueRefreshPeripheral);
+	private final WiredModemLocalPeripheral peripheral = new WiredModemLocalPeripheral(PlatformHelper.get().createPeripheralAccess(this, x -> queueRefreshPeripheral()));
 
 	private boolean destroyed = false;
 
@@ -192,20 +193,12 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 	private final WiredNode node = cable.getNode();
 	private final TickScheduler.Token tickToken = new TickScheduler.Token(this);
 	private final WiredModemPeripheral modem = new WiredModemPeripheral(
-			new ModemState(() -> TickScheduler.schedule(tickToken)), cable) {
-		@Override
-		protected WiredModemLocalPeripheral getLocalPeripheral() {
-			return peripheral;
-		}
-
+			new ModemState(() -> TickScheduler.schedule(tickToken)), cable, peripheral, this
+			) {
 		@Override
 		public Vec3 getPosition() {
-			return Vec3.atCenterOf(getBlockPos().relative(getFacing()));
-		}
-
-		@Override
-		public Object getTarget() {
-			return CCModemConnectorBlockEntity.this;
+			var dir = getFacing();
+			return Vec3.atCenterOf(dir == null ? getBlockPos() : getBlockPos().relative(dir));
 		}
 	};
 	private LazyOptional<IPeripheral> modemCap;

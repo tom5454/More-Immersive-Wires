@@ -195,7 +195,7 @@ dependencies {
   	compileOnly fg.deobf('curse.maven:immersive-engineering-231951:4782978')
     compileOnly fg.deobf('curse.maven:applied-energistics-2-223794:4777696')
     compileOnly fg.deobf('curse.maven:refined-storage-243076:4630564')
-    compileOnly fg.deobf('curse.maven:cc-tweaked-282001:4740605')
+    compileOnly fg.deobf('curse.maven:cc-tweaked-282001:5293514')
     
     //compileOnly fg.deobf('curse.maven:ic2-classic-242942:4558911')
     
@@ -237,6 +237,10 @@ tasks.named('jar', Jar).configure {
 jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 // publish.dependsOn('reobfJar')
+
+java {
+    withSourcesJar()
+}
 
 publishing {
     publications {

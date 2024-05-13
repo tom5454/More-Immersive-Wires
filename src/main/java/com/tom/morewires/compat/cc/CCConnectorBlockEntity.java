@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -71,7 +70,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		}
 	}
 
-	private final ComponentAccess<WiredElement> connectedElements = PlatformHelper.get().createWiredElementAccess(x -> connectionsChanged());
+	private final ComponentAccess<WiredElement> connectedElements = PlatformHelper.get().createWiredElementAccess(this, x -> connectionsChanged());
 
 	public CCConnectorBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
 		super(p_155228_, p_155229_, p_155230_);
@@ -191,7 +190,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		BlockPos offset = current.relative(facing);
 		if (!world.isLoaded(offset))return;
 
-		var element = connectedElements.get((ServerLevel) world, current, facing);
+		var element = connectedElements.get(facing);
 		if (element == null) return;
 
 		var node = element.getNode();
