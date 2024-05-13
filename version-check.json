@@ -2,7 +2,7 @@
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/more-immersive-wires",
 	"promos": {
 		"1.20.4-latest": "1.1.4",
-		"1.20.1-latest": "1.1.3",
+		"1.20.1-latest": "1.1.4",
 		"1.19.2-latest": "1.1.3",
 		"1.18.2-latest": "1.1.3"
 	},
@@ -10,6 +10,7 @@
 		"1.1.4": "1.20.4 port"
 	},
 	"1.20.1": {
+		"1.1.4": "Fixed crash with latest CC Tweaked version",
 		"1.1.3": "Fixed TPS issues with RS and ID connectors",
 		"1.1.2": "1.20 port"
 	},
