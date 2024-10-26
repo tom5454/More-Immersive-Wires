@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -257,15 +258,15 @@ public class CCModemConnectorBlockEntity extends CCBlockEntity implements IConne
 	}
 
 	@Override
-	public void load(CompoundTag nbt) {
-		super.load(nbt);
+	public void loadAdditional(CompoundTag nbt, Provider pr) {
+		super.loadAdditional(nbt, pr);
 		peripheral.read(nbt, "");
 	}
 
 	@Override
-	public void saveAdditional(CompoundTag nbt) {
+	public void saveAdditional(CompoundTag nbt, Provider pr) {
 		peripheral.write(nbt, "");
-		super.saveAdditional(nbt);
+		super.saveAdditional(nbt, pr);
 	}
 
 	private void updateBlockState() {

@@ -5,7 +5,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -47,10 +49,17 @@ public class CCModemConnectorBlock extends ConnectorBlock<CCModemConnectorBlockE
 	}
 
 	@Override
-	public final InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-			BlockHitResult hit) {
-		if(player.getItemInHand(hand).is(MoreImmersiveWires.CC_WIRE.simple().COIL.get()))return InteractionResult.PASS;
-		BlockEntity tile = world.getBlockEntity(pos);
+	public ItemInteractionResult useItemOn(ItemStack arg0, BlockState arg1, Level arg2, BlockPos arg3, Player player,
+			InteractionHand hand, BlockHitResult arg6) {
+		if(player.getItemInHand(hand).is(MoreImmersiveWires.CC_WIRE.simple().COIL.get()))
+			return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+		return super.useItemOn(arg0, arg1, arg2, arg3, player, hand, arg6);
+	}
+
+	@Override
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
+			BlockHitResult hitResult) {
+		BlockEntity tile = level.getBlockEntity(pos);
 		return tile instanceof CCModemConnectorBlockEntity generic ? generic.use(player) : InteractionResult.PASS;
 	}
 

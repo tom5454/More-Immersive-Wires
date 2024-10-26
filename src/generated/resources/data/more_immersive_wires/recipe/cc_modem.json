@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "more_immersive_wires:cc_connector"
+    },
+    {
+      "item": "computercraft:wired_modem"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "more_immersive_wires:cc_modem"
+  }
+}

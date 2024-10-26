@@ -27,8 +27,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -42,8 +42,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforgespi.language.IModInfo;
 
 import com.tom.morewires.WireTypeDefinition.RelayInfo;
+import com.tom.morewires.compat.ae.AEDenseWireDefinition;
+import com.tom.morewires.compat.ae.AEWireDefinition;
 import com.tom.morewires.compat.cc.CCWireDefinition;
-import com.tom.morewires.compat.rs.RSWireDefinition;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MoreImmersiveWires.modid)
@@ -65,7 +66,8 @@ public class MoreImmersiveWires {
 	public static final String FTBIC = "ftbic";
 	public static final String IC2 = "ic2";
 
-	public static final Wire RS_WIRE = new Wire(RS, () -> RSWireDefinition::new);
+	public static final Wire AE_WIRE = new Wire(AE, () -> AEWireDefinition::new);
+	public static final Wire AE_DENSE_WIRE = new Wire(AE, () -> AEDenseWireDefinition::new);
 	public static final Wire CC_WIRE = new Wire(CC, () -> CCWireDefinition::new);
 
 	public static class Wire {
@@ -102,7 +104,7 @@ public class MoreImmersiveWires {
 
 	public static Map<String, String> MODID_NAME_LOOKUP = Collections.emptyMap();
 
-	public MoreImmersiveWires(IEventBus bus) {
+	public MoreImmersiveWires(ModContainer mc, IEventBus bus) {
 		// Register the setup method for modloading
 		bus.addListener(this::setup);
 		// Register the doClientStuff method for modloading
@@ -114,9 +116,9 @@ public class MoreImmersiveWires {
 
 		ALL_WIRES.forEach(Wire::init);
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.clientSpec);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.serverSpec);
+		mc.registerConfig(ModConfig.Type.CLIENT, Config.clientSpec);
+		mc.registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
+		mc.registerConfig(ModConfig.Type.SERVER, Config.serverSpec);
 		bus.register(Config.class);
 		bus.addListener(this::registerCapabilities);
 

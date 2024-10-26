@@ -5,9 +5,9 @@ import java.util.function.BiConsumer;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -27,8 +27,8 @@ public interface WireTypeDefinition<T extends BlockEntity & IImmersiveConnectabl
 	List<? extends WireInfo> getWireCoils();
 	List<? extends ConnectorInfo> getConnectors();
 	List<? extends RelayInfo> getRelays();
-	void appendHoverTextCoil(WireType type, ItemStack stack, Level world, List<Component> list, TooltipFlag flag);
-	void appendHoverTextConnector(Object id, ItemStack stack, Level world, List<Component> tooltip, TooltipFlag advanced);
+	void appendHoverTextCoil(WireType type, ItemStack stack, TooltipContext ctx, List<Component> list, TooltipFlag flag);
+	void appendHoverTextConnector(Object id, ItemStack stack, TooltipContext ctx, List<Component> tooltip, TooltipFlag advanced);
 	void configReload();
 	String getName();
 	String getLocalized();

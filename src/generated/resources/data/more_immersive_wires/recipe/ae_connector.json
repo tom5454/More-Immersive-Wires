@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:deepslate"
+    },
+    "c": {
+      "tag": "c:gems/fluix"
+    },
+    "w": {
+      "tag": "ae2:glass_cable"
+    }
+  },
+  "pattern": [
+    " c ",
+    "bcb",
+    "bwb"
+  ],
+  "result": {
+    "count": 4,
+    "id": "more_immersive_wires:ae_connector"
+  }
+}

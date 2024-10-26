@@ -1,13 +1,11 @@
 package com.tom.morewires.compat.cc;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 
 public class CCBlockEntity extends BlockEntity {
 
@@ -21,7 +19,7 @@ public class CCBlockEntity extends BlockEntity {
 	public void destroy() {
 	}
 
-	public InteractionResult onActivate(Player player, InteractionHand hand, BlockHitResult hit) {
+	public InteractionResult onActivate(Player player) {
 		return InteractionResult.PASS;
 	}
 

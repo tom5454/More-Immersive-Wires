@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,on_cable=false": {
+      "model": "more_immersive_wires:block/connector_ae"
+    },
+    "facing=down,on_cable=true": {
+      "model": "more_immersive_wires:block/connector_ae_c"
+    },
+    "facing=east,on_cable=false": {
+      "model": "more_immersive_wires:block/connector_ae",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east,on_cable=true": {
+      "model": "more_immersive_wires:block/connector_ae_c",
+      "x": 90,
+      "y": 270
+    },
+    "facing=north,on_cable=false": {
+      "model": "more_immersive_wires:block/connector_ae",
+      "x": 90,
+      "y": 180
+    },
+    "facing=north,on_cable=true": {
+      "model": "more_immersive_wires:block/connector_ae_c",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,on_cable=false": {
+      "model": "more_immersive_wires:block/connector_ae",
+      "x": 90
+    },
+    "facing=south,on_cable=true": {
+      "model": "more_immersive_wires:block/connector_ae_c",
+      "x": 90
+    },
+    "facing=up,on_cable=false": {
+      "model": "more_immersive_wires:block/connector_ae",
+      "x": 180
+    },
+    "facing=up,on_cable=true": {
+      "model": "more_immersive_wires:block/connector_ae_c",
+      "x": 180
+    },
+    "facing=west,on_cable=false": {
+      "model": "more_immersive_wires:block/connector_ae",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,on_cable=true": {
+      "model": "more_immersive_wires:block/connector_ae_c",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

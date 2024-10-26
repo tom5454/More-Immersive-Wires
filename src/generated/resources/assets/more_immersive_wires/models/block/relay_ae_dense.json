@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "flip_v": true,
+  "loader": "neoforge:obj",
+  "model": "more_immersive_wires:models/block/connector_hv.obj",
+  "textures": {
+    "particle": "more_immersive_wires:block/relay_ae_dense",
+    "texture": "more_immersive_wires:block/relay_ae_dense"
+  }
+}

@@ -3,8 +3,8 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.94'
-    id 'net.neoforged.gradle.mixin' version '7.0.94'
+    id 'net.neoforged.gradle.userdev' version '7.0.165'
+    id 'net.neoforged.gradle.mixin' version '7.0.165'
 }
 
 version = mod_version
@@ -12,7 +12,7 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
-    maven { url 'https://jitpack.io' }
+    //maven { url 'https://jitpack.io' }
     maven {
         url 'https://www.cursemaven.com'
         content {
@@ -32,11 +32,11 @@ repositories {
 }
 
 base {
-    archivesName = 'more-immersive-wires-1.20.4'
+    archivesName = 'more-immersive-wires-1.21.1'
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 //minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
@@ -68,7 +68,7 @@ runs {
 
     server {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
+        arguments '--nogui'
     }
 
     // This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -83,7 +83,7 @@ runs {
         // workingDirectory project.file('run-data')
 
         // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing-mod', 'immersiveengineering', '--existing-mod', 'computercraft'
+        arguments '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing-mod', 'immersiveengineering', '--existing-mod', 'computercraft'
     }
 }
 
@@ -130,17 +130,23 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    compileOnly "mezz.jei:jei-1.20.4-neoforge-api:17.0.0.30"
-    compileOnly "mezz.jei:jei-1.20.4-common-api:17.0.0.30"
+    compileOnly "mezz.jei:jei-1.21.1-neoforge-api:19.19.0.219"
+    compileOnly "mezz.jei:jei-1.21.1-common-api:19.19.0.219"
     // at runtime, use the full JEI jar
-  	runtimeOnly "mezz.jei:jei-1.20.4-neoforge:17.0.0.30"
+  	runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.19.0.219"
   	
-    implementation "curse.maven:the-one-probe-245211:5084077"
+    implementation "curse.maven:the-one-probe-245211:5502323"
+    implementation "curse.maven:jade-324717:5529595"
     
-    compileOnly 'curse.maven:immersive-engineering-231951:5227809'
+    compileOnly 'curse.maven:immersive-engineering-231951:5828000'
     
-    compileOnly 'curse.maven:refined-storage-243076:5159837'
-    compileOnly 'curse.maven:cc-tweaked-282001:5203692'
+    //compileOnly 'curse.maven:refined-storage-243076:5159837'
+    implementation 'curse.maven:cc-tweaked-282001:5583001'
+    
+    implementation 'curse.maven:applied-energistics-2-223794:5729094'
+
+    implementation("malte0811:BlockModelSplitter:2.0.1")
+    implementation("malte0811:DualCodecs:0.1.1")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -158,7 +164,7 @@ tasks.withType(ProcessResources).configureEach {
     ]
     inputs.properties replaceProperties
 
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
 }
@@ -175,9 +181,12 @@ publishing {
         }
     }
     repositories {
-        maven {
-            url "file://${project.projectDir}/repo"
-        }
+        def mavenURL = System.getProperty("mavenDir")
+		if ("${mavenURL}" != "null") {
+			maven {
+				url = file(mavenURL)
+			}
+		}
     }
 }
 

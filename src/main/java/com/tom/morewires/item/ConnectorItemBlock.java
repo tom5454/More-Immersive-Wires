@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
 import com.tom.morewires.WireTypeDefinition;
@@ -23,8 +22,8 @@ public class ConnectorItemBlock extends BlockItemIE {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag advanced) {
-		super.appendHoverText(stack, world, tooltip, advanced);
-		def.appendHoverTextConnector(id, stack, world, tooltip, advanced);
+	public void appendHoverText(ItemStack stack, TooltipContext ctx, List<Component> tooltip, TooltipFlag advanced) {
+		super.appendHoverText(stack, ctx, tooltip, advanced);
+		def.appendHoverTextConnector(id, stack, ctx, tooltip, advanced);
 	}
 }

@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "more_immersive_wires:block/relay_ae"
+    },
+    "facing=east": {
+      "model": "more_immersive_wires:block/relay_ae",
+      "x": 90,
+      "y": 270
+    },
+    "facing=north": {
+      "model": "more_immersive_wires:block/relay_ae",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south": {
+      "model": "more_immersive_wires:block/relay_ae",
+      "x": 90
+    },
+    "facing=up": {
+      "model": "more_immersive_wires:block/relay_ae",
+      "x": 180
+    },
+    "facing=west": {
+      "model": "more_immersive_wires:block/relay_ae",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "display": {
+    "firstperson_lefthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "translation": [
+        0.0,
+        4.0,
+        2.0
+      ]
+    },
+    "firstperson_righthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "translation": [
+        0.0,
+        4.0,
+        2.0
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "scale": [
+        0.99999994,
+        1.0,
+        0.99999994
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "gui": {
+      "rotation": [
+        -149.99998,
+        45.000004,
+        180.0
+      ],
+      "scale": [
+        0.75,
+        0.74999994,
+        0.74999994
+      ],
+      "translation": [
+        0.0,
+        2.0,
+        0.0
+      ]
+    },
+    "head": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "none": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        69.999954,
+        69.999954,
+        0.0
+      ],
+      "scale": [
+        0.50000006,
+        0.49999997,
+        0.5
+      ],
+      "translation": [
+        -1.0,
+        2.0,
+        3.0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        69.999954,
+        69.999954,
+        0.0
+      ],
+      "scale": [
+        0.50000006,
+        0.49999997,
+        0.5
+      ],
+      "translation": [
+        -1.0,
+        2.0,
+        3.0
+      ]
+    }
+  },
+  "flip_v": true,
+  "loader": "neoforge:obj",
+  "model": "immersiveengineering:models/block/connector/connector_mv.obj",
+  "textures": {
+    "texture": "more_immersive_wires:block/relay_ae"
+  }
+}

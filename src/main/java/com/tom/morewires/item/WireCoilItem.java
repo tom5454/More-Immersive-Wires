@@ -1,21 +1,18 @@
 package com.tom.morewires.item;
 
-import static blusunrize.immersiveengineering.api.wires.utils.WirecoilUtils.hasWireLink;
-
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
 
 import com.tom.morewires.WireTypeDefinition;
 
+import blusunrize.immersiveengineering.api.IEApiDataComponents;
 import blusunrize.immersiveengineering.api.Lib;
 import blusunrize.immersiveengineering.api.wires.IWireCoil;
 import blusunrize.immersiveengineering.api.wires.WireType;
@@ -40,11 +37,11 @@ public class WireCoilItem extends IEBaseItem implements IWireCoil {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
-		if(hasWireLink(stack)) {
-			WireLink link = WireLink.readFromItem(stack);
-			list.add(Component.translatable(Lib.DESC_INFO+"attachedToDim", link.cp.getX(),
-					link.cp.getY(), link.cp.getZ(), link.dimension));
+	public void appendHoverText(ItemStack stack, TooltipContext world, List<Component> list, TooltipFlag flag) {
+		WireLink link = stack.get(IEApiDataComponents.WIRE_LINK.get());
+		if (link != null) {
+			list.add(Component.translatable(Lib.DESC_INFO+"attachedToDim", link.cp().getX(),
+					link.cp().getY(), link.cp().getZ(), link.dimension()));
 		}
 		def.appendHoverTextCoil(type, stack, world, list, flag);
 	}

@@ -9,10 +9,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -57,7 +57,7 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 		this.name = name;
 		this.localized = localized;
 		this.color = color;
-		NET_ID = new ResourceLocation(MoreImmersiveWires.modid, name + "_network");
+		NET_ID = ResourceLocation.tryBuild(MoreImmersiveWires.modid, name + "_network");
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 	@Override
 	public void setup(Wire w) {
 		WireApi.registerFeedthroughForWiretype(wireType,
-				new ResourceLocation(MoreImmersiveWires.modid, "block/connector/connector_" + name),
+				ResourceLocation.tryBuild(MoreImmersiveWires.modid, "block/connector/connector_" + name),
 				new double[]{0, 4, 8, 12}, isTallConnector() ? 0.875F : 0.75f,
 						RELAY.get().defaultBlockState());
 		MoreImmersiveWires.WIRE_TYPES.put(RELAY_ENTITY.get(), this);
@@ -186,14 +186,14 @@ public abstract class SimpleWireTypeDefinition<T extends BlockEntity & IImmersiv
 	}
 
 	@Override
-	public void appendHoverTextCoil(WireType type, ItemStack stack, Level world, List<Component> list,
+	public void appendHoverTextCoil(WireType type, ItemStack stack, TooltipContext world, List<Component> list,
 			TooltipFlag flag) {
 		appendHoverText(list);
 		list.add(Component.translatable("tooltip.more_immersive_wires.mod_id", MoreImmersiveWires.MODID_NAME_LOOKUP.getOrDefault(modid, modid)).withStyle(ChatFormatting.BLUE));
 	}
 
 	@Override
-	public void appendHoverTextConnector(Object id, ItemStack stack, Level world, List<Component> tooltip,
+	public void appendHoverTextConnector(Object id, ItemStack stack, TooltipContext world, List<Component> tooltip,
 			TooltipFlag advanced) {
 		appendHoverText(tooltip);
 		tooltip.add(Component.translatable("tooltip.more_immersive_wires.mod_id", MoreImmersiveWires.MODID_NAME_LOOKUP.getOrDefault(modid, modid)).withStyle(ChatFormatting.BLUE));

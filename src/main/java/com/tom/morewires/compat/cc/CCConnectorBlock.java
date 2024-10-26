@@ -5,7 +5,6 @@ import java.util.function.BiPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.block.OnCableConnectorBlock;
 
 public class CCConnectorBlock extends OnCableConnectorBlock<CCConnectorBlockEntity> {
@@ -38,11 +36,10 @@ public class CCConnectorBlock extends OnCableConnectorBlock<CCConnectorBlockEnti
 	}
 
 	@Override
-	public final InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand,
-			BlockHitResult hit) {
-		if(player.getItemInHand(hand).is(MoreImmersiveWires.CC_WIRE.simple().COIL.get()))return InteractionResult.PASS;
-		BlockEntity tile = world.getBlockEntity(pos);
-		return tile instanceof CCBlockEntity generic ? generic.onActivate(player, hand, hit) : InteractionResult.PASS;
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
+			BlockHitResult hitResult) {
+		BlockEntity tile = level.getBlockEntity(pos);
+		return tile instanceof CCBlockEntity generic ? generic.onActivate(player) : InteractionResult.PASS;
 	}
 
 	@Override

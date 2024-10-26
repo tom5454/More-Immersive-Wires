@@ -6,10 +6,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 
 import com.google.common.collect.ImmutableList;
 
@@ -18,6 +20,7 @@ import com.tom.morewires.tile.IOnCable.IOnCableConnector;
 
 import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.network.wired.WiredElement;
+import dan200.computercraft.api.network.wired.WiredElementCapability;
 import dan200.computercraft.api.network.wired.WiredNode;
 import dan200.computercraft.shared.platform.ComponentAccess;
 import dan200.computercraft.shared.platform.PlatformHelper;
@@ -64,6 +67,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 	}
 
 	private final ComponentAccess<WiredElement> connectedElements = PlatformHelper.get().createWiredElementAccess(this, x -> connectionsChanged());
+	private BlockCapabilityCache<WiredElement, Direction> connectedWire;
 
 	public CCConnectorBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
 		super(p_155228_, p_155229_, p_155230_);
@@ -129,6 +133,12 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		super.onLoad();
 		ConnectorBlockEntityHelper.onChunkLoad(this, level);
 		isUnloaded = false;
+		if (!level.isClientSide) {
+			BlockPos current = getBlockPos();
+			Direction facing = getFacing();
+			BlockPos offset = current.relative(facing);
+			connectedWire = BlockCapabilityCache.create(WiredElementCapability.get(), (ServerLevel) level, offset, facing.getOpposite(), () -> !isRemoved(), () -> connectionsChanged());
+		}
 	}
 
 	public void setRemovedIE() {
@@ -159,15 +169,9 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 	}
 
 	void connectionsChanged() {
-		if (getLevel().isClientSide) return;
+		if (getLevel().isClientSide || connectedWire == null) return;
 
-		Level world = getLevel();
-		BlockPos current = getBlockPos();
-		Direction facing = getFacing();
-		BlockPos offset = current.relative(facing);
-		if (!world.isLoaded(offset))return;
-
-		var element = connectedElements.get(facing);
+		var element = connectedWire.getCapability();
 		if (element == null) return;
 
 		var node = element.getNode();
