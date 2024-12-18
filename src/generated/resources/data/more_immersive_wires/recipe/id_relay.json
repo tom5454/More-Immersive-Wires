@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "integrateddynamics"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "integrateddynamics:menril_wood"
+    },
+    "c": {
+      "item": "integrateddynamics:crystalized_menril_chunk"
+    }
+  },
+  "pattern": [
+    " c ",
+    "bcb"
+  ],
+  "result": {
+    "count": 8,
+    "id": "more_immersive_wires:id_relay"
+  }
+}

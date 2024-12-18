@@ -1,0 +1,3 @@
+blusunrize/immersiveengineering/data/*
+!blusunrize/immersiveengineering/data/blockstates/ExtendedBlockstateProvider
+!blusunrize/immersiveengineering/data/models/TRSRItemModelProvider

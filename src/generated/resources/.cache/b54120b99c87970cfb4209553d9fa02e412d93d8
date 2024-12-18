@@ -1,6 +1,8 @@
-// 1.21.1	2024-10-24T01:04:06.1582044	Item Models 2
+// 1.21.1	2024-12-18T18:28:59.7865569	Item Models 2
 55b22639e197a34b13c32fa21be48c43761bcb42 assets/more_immersive_wires/models/item/ae_connector.json
 a1653ede68f8ab4b5ce7cf0ba86c951123ff33c2 assets/more_immersive_wires/models/item/ae_dense_relay.json
 b29c968c74ef016369da9a34e7ad313d445cb0c0 assets/more_immersive_wires/models/item/ae_relay.json
 d4dffec056a22ccf3ab7d103dadee78ff3c3953e assets/more_immersive_wires/models/item/cc_connector.json
 3e0e6214dacc4161b2c43cd4d11e128998fca81e assets/more_immersive_wires/models/item/cc_relay.json
+b3bdf460f2b682738e1d730528adbaa11e7c0fb6 assets/more_immersive_wires/models/item/id_connector.json
+f6f0fb2b9dde3d852667ad4092aa2227d6409086 assets/more_immersive_wires/models/item/id_relay.json

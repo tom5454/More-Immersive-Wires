@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import net.minecraft.data.recipes.FinishedRecipe;
+import org.jetbrains.annotations.Nullable;
 
-import net.minecraftforge.common.crafting.ConditionalRecipe;
-import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraft.advancements.Advancement.Builder;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Recipe;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 public class ConditionalRecipeUtil {
 	private List<ICondition> conditions = new ArrayList<>();
-	private List<Consumer<Consumer<FinishedRecipe>>> recipes = new ArrayList<>();
+	private List<Consumer<RecipeOutput>> recipes = new ArrayList<>();
 
 	public static ConditionalRecipeUtil builder() {
 		return new ConditionalRecipeUtil();
@@ -22,19 +26,24 @@ public class ConditionalRecipeUtil {
 		return this;
 	}
 
-	public ConditionalRecipeUtil addRecipe(Consumer<Consumer<FinishedRecipe>> callable) {
+	public ConditionalRecipeUtil addRecipe(Consumer<RecipeOutput> callable) {
 		recipes.add(callable);
 		return this;
 	}
 
-	public void build(Consumer<FinishedRecipe> consumer) {
-		recipes.forEach(c -> c.accept(r -> {
-			ConditionalRecipe.Builder b = ConditionalRecipe.builder();
-			conditions.forEach(b::addCondition);
-			b.addRecipe(r);
-			b.generateAdvancement();
-			b.build(consumer, r.getId());
-		}));
+	public void build(RecipeOutput consumer) {
+		recipes.forEach(c -> c.accept(new RecipeOutput() {
 
+			@Override
+			public void accept(ResourceLocation id, Recipe<?> recipe, @Nullable AdvancementHolder advancement,
+					ICondition... conditions) {
+				consumer.accept(id, recipe, advancement, ConditionalRecipeUtil.this.conditions.toArray(ICondition[]::new));
+			}
+
+			@Override
+			public Builder advancement() {
+				return consumer.advancement();
+			}
+		}));
 	}
 }

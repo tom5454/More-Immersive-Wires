@@ -137,8 +137,13 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 			BlockPos current = getBlockPos();
 			Direction facing = getFacing();
 			BlockPos offset = current.relative(facing);
-			connectedWire = BlockCapabilityCache.create(WiredElementCapability.get(), (ServerLevel) level, offset, facing.getOpposite(), () -> !isRemoved(), () -> connectionsChanged());
+			connectedWire = BlockCapabilityCache.create(WiredElementCapability.get(), (ServerLevel) level, offset, facing.getOpposite(), () -> !isRemoved(), () -> scheduleConnectionsChanged());
 		}
+	}
+
+	void scheduleConnectionsChanged() {
+		this.connectionsFormed = false;
+		TickScheduler.schedule(this.tickToken);
 	}
 
 	public void setRemovedIE() {
@@ -157,6 +162,7 @@ public class CCConnectorBlockEntity extends CCBlockEntity implements IOnCableCon
 		if (level == null || !level.isClientSide) {
 			node.remove();
 			connectionsFormed = false;
+			connectedWire = null;
 		}
 	}
 

@@ -1,6 +1,7 @@
-// 1.21.1	2024-10-24T01:04:06.1612048	Item Models: more_immersive_wires
+// 1.21.1	2024-12-18T18:28:59.7885575	Item Models: more_immersive_wires
 29f0e39100f9843aa8bd2358eef781cae8c9a4ac assets/more_immersive_wires/models/item/ae_coil.json
 5751a87e1647ba493c2d237a08b7036d4d830df7 assets/more_immersive_wires/models/item/ae_dense_coil.json
 da4b5e2284fba633c05691dc555476b6203e87d8 assets/more_immersive_wires/models/item/ae_dense_connector.json
 7467d551ded6a28814cebf637e74246ec0877d31 assets/more_immersive_wires/models/item/cc_coil.json
 888750f95185b00da8590b78e6bcf5c471d6faa5 assets/more_immersive_wires/models/item/cc_modem.json
+d50b93ca94d57ce90f2a2f848786aeb7f71d5895 assets/more_immersive_wires/models/item/id_coil.json

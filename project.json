@@ -1,0 +1,30 @@
+{
+  "type": "neoforge",
+  "name": "more-immersive-wires-1.21.1",
+  "mcVer": "1.21",
+  "verId": "1.21.1",
+  "display": "More Immersive Wires 1.21.1",
+  "git": "More-Immersive-Wires",
+  "subver": [
+    "1.21.1"
+  ],
+  "j17": true,
+  "depProjects": [
+    {
+      "slug": "cc-tweaked",
+      "type": "optionalDependency"
+    },
+    {
+      "slug": "immersive-engineering",
+      "type": "requiredDependency"
+    },
+    {
+      "slug": "integrated-dynamics",
+      "type": "optionalDependency"
+    },
+    {
+      "slug": "refined-storage",
+      "type": "optionalDependency"
+    }
+  ]
+}

@@ -25,6 +25,14 @@
       "required": false
     },
     {
+      "id": "more_immersive_wires:id_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:id_relay",
+      "required": false
+    },
+    {
       "id": "more_immersive_wires:cc_modem",
       "required": false
     }

@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "integrateddynamics"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "more_immersive_wires:id_connector"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "id_connector_unlock": {
+      "conditions": {
+        "items": [
+          {
+            "items": "integrateddynamics:menril_wood"
+          },
+          {
+            "items": "integrateddynamics:crystalized_menril_chunk"
+          },
+          {
+            "items": "integrateddynamics:cable"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "id_connector_unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:id_connector"
+    ]
+  }
+}

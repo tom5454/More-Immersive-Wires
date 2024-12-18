@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "flip_v": true,
+  "loader": "neoforge:obj",
+  "model": "immersiveengineering:models/block/connector/connector_mv.obj",
+  "textures": {
+    "particle": "more_immersive_wires:block/relay_id",
+    "texture": "more_immersive_wires:block/relay_id"
+  }
+}

@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-24T01:04:06.1592046	Recipes
+// 1.21.1	2024-12-18T18:28:59.7875573	Recipes
 60da9f11a00acba2ce08eced610b997262842a63 data/more_immersive_wires/advancement/recipes/misc/ae_coil.json
 19b522bc2f4567aa7e3fe28d1476cfaa88633f47 data/more_immersive_wires/advancement/recipes/misc/ae_connector.json
 0c5f915fdbe1eb5e320cb1d1eeba91b2d10741dc data/more_immersive_wires/advancement/recipes/misc/ae_dense_coil.json
@@ -8,6 +8,9 @@ bb927341dadbc6c921df70bd6ea34e0010b27cb7 data/more_immersive_wires/advancement/r
 2fb7ea41da32397f76836431dc0cf033d06175cc data/more_immersive_wires/advancement/recipes/misc/cc_coil.json
 70560113f6bf0edd71ad5e0eace176ebf3b56b27 data/more_immersive_wires/advancement/recipes/misc/cc_connector.json
 512ca4834a3b19bba7aacd32eab8700ce5cf154a data/more_immersive_wires/advancement/recipes/misc/cc_relay.json
+41d2d74557fb10a10ad760ea09ef0ec5863060c7 data/more_immersive_wires/advancement/recipes/misc/id_coil.json
+14f0305d3b520d5b9e1b1308d48ee09898712f05 data/more_immersive_wires/advancement/recipes/misc/id_connector.json
+101c11bcccfbb7b9e2bab60bdeaa9aaa787b8fe7 data/more_immersive_wires/advancement/recipes/misc/id_relay.json
 e400d8d4a23561f2706bea1e4b7b4d27209ebd69 data/more_immersive_wires/advancement/recipes/redstone/cc_modem.json
 68ba128a65f1a63510e15de76854780d07f8e472 data/more_immersive_wires/recipe/ae_coil.json
 87586d899e97f91078bfa9b649e688e20301a9d9 data/more_immersive_wires/recipe/ae_connector.json
@@ -19,3 +22,6 @@ c78d21f3e4e1cacb9b7ed6b8e686fdc321642cdc data/more_immersive_wires/recipe/ae_den
 b009c86cdbf69ddaa495fb2a40be13fef3230e45 data/more_immersive_wires/recipe/cc_connector.json
 1ac7d245fd0e527037d44508061b5796fbb830a6 data/more_immersive_wires/recipe/cc_modem.json
 2976a773a21585885820e0002f9d1c4a30a9ca5e data/more_immersive_wires/recipe/cc_relay.json
+b328c5a53425f9073604adfdae94ed91d2eea53b data/more_immersive_wires/recipe/id_coil.json
+6458f848f7f43f94d27d77aac038678429ef689f data/more_immersive_wires/recipe/id_connector.json
+c5302144b6f988257903b180b110260a2040138c data/more_immersive_wires/recipe/id_relay.json

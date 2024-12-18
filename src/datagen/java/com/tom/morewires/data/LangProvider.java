@@ -1,17 +1,14 @@
 package com.tom.morewires.data;
 
-import net.minecraft.data.DataGenerator;
-
-import net.minecraftforge.common.data.LanguageProvider;
+import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.compat.cc.CCWireDefinition;
-import com.tom.morewires.compat.ftbic.FTBICWireDefinition;
-import com.tom.morewires.compat.ic2.IC2WireDefinition;
 
 public class LangProvider extends LanguageProvider {
 
-	public LangProvider(DataGenerator gen, String locale) {
+	public LangProvider(PackOutput gen, String locale) {
 		super(gen, MoreImmersiveWires.modid, locale);
 	}
 
@@ -38,11 +35,7 @@ public class LangProvider extends LanguageProvider {
 			wt.wireTypeDef.addTranslations(this::add);
 		});
 		add(CCWireDefinition.CC_MODEM_CONNECTOR.get(), "CC Modem with Connector");
-		add(FTBICWireDefinition.ENERGY_ALLOY.get(), "Energy Alloy");
 		add("tooltip.more_immersive_wires.network_type", "Linking cable type: %s");
-		add(IC2WireDefinition.ENERGY_ALLOY.get(), "Energy Alloy");
-		add(IC2WireDefinition.UNCOMPRESSED_INSULATION.get(), "Uncompressed Insulation");
-		add(IC2WireDefinition.COMPRESSED_INSULATION.get(), "Compressed Insulation");
 	}
 
 }

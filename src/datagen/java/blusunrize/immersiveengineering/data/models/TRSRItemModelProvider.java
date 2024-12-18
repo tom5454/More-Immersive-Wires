@@ -1,16 +1,21 @@
+/*
+ * BluSunrize
+ * Copyright (c) 2023
+ *
+ * This code is licensed under "Blu's License of Common Sense"
+ * Details can be found in the license file in the root folder of this project
+ */
+
 package blusunrize.immersiveengineering.data.models;
 
-import net.minecraft.data.DataGenerator;
-
-import net.minecraftforge.client.model.generators.ModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-
-import com.tom.morewires.MoreImmersiveWires;
+import net.minecraft.data.PackOutput;
+import net.neoforged.neoforge.client.model.generators.ModelProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public abstract class TRSRItemModelProvider extends ModelProvider<TRSRModelBuilder>
 {
-	public TRSRItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper)
+	public TRSRItemModelProvider(PackOutput output, String modid, ExistingFileHelper existingFileHelper)
 	{
-		super(generator, MoreImmersiveWires.modid, ITEM_FOLDER, TRSRModelBuilder::new, existingFileHelper);
+		super(output, modid, ITEM_FOLDER, TRSRModelBuilder::new, existingFileHelper);
 	}
 }

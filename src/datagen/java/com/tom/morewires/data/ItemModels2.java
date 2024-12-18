@@ -2,27 +2,25 @@ package com.tom.morewires.data;
 
 import static blusunrize.immersiveengineering.ImmersiveEngineering.rl;
 
-import net.minecraft.core.Registry;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.ItemLike;
-
-import net.minecraftforge.client.model.generators.loaders.ObjModelBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.loaders.ObjModelBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import com.google.common.base.Preconditions;
 
 import com.tom.morewires.MoreImmersiveWires;
-import com.tom.morewires.MoreImmersiveWires.Wire;
 
 import blusunrize.immersiveengineering.data.models.TRSRItemModelProvider;
 import blusunrize.immersiveengineering.data.models.TRSRModelBuilder;
 
 public class ItemModels2 extends TRSRItemModelProvider {
 
-	public ItemModels2(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, existingFileHelper);
+	public ItemModels2(PackOutput generator, ExistingFileHelper existingFileHelper) {
+		super(generator, MoreImmersiveWires.modid, existingFileHelper);
 	}
 
 	@Override
@@ -46,14 +44,6 @@ public class ItemModels2 extends TRSRItemModelProvider {
 				}
 			});
 		});
-		for (Wire w : MoreImmersiveWires.IC2_WIRES) {
-			w.wireTypeDef.getConnectors().forEach(c -> {
-				obj(c.getConnectorBlock().get(), c.isTallConnector() ? modLoc("block/connector_hv_io.obj") : modLoc("block/connector_mv_io.obj"))
-				.texture("texture", modLoc("block/connector_" + c.getName()))
-				.texture("io", modLoc("block/input"))
-				.transforms(modLoc("item/connector"));
-			});
-		}
 	}
 
 	private TRSRModelBuilder obj(ItemLike item, ResourceLocation model) {
@@ -61,7 +51,7 @@ public class ItemModels2 extends TRSRItemModelProvider {
 		return getBuilder(item)
 				.customLoader(ObjModelBuilder::begin)
 				.flipV(true)
-				.modelLocation(new ResourceLocation(model.getNamespace(), "models/"+model.getPath()))
+				.modelLocation(ResourceLocation.tryBuild(model.getNamespace(), "models/"+model.getPath()))
 				.end();
 	}
 
@@ -70,6 +60,6 @@ public class ItemModels2 extends TRSRItemModelProvider {
 	}
 
 	private String name(ItemLike item) {
-		return Registry.ITEM.getKey(item.asItem()).getPath();
+		return BuiltInRegistries.ITEM.getKey(item.asItem()).getPath();
 	}
 }
