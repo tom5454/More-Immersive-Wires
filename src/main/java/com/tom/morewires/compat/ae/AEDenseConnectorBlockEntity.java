@@ -23,6 +23,7 @@ import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.tile.IConnector;
 
 import appeng.api.networking.GridFlags;
+import appeng.api.networking.IGridNodeListener.State;
 import appeng.api.orientation.BlockOrientation;
 import appeng.api.util.AECableType;
 import appeng.blockentity.grid.AENetworkedBlockEntity;
@@ -157,5 +158,13 @@ public class AEDenseConnectorBlockEntity extends AENetworkedBlockEntity implemen
 	@Override
 	public Collection<ResourceLocation> getRequestedHandlers() {
 		return ImmutableList.of(MoreImmersiveWires.AE_DENSE_WIRE.simple().NET_ID);
+	}
+
+	@Override
+	public void onMainNodeStateChanged(State reason) {
+		boolean p = getMainNode().isPowered();
+		if (getState().getValue(AEDenseConnectorBlock.POWERED) != p) {
+			level.setBlock(worldPosition, getState().setValue(AEDenseConnectorBlock.POWERED, p), 3);
+		}
 	}
 }

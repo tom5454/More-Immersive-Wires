@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "refinedstorage"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "more_immersive_wires:rs_relay"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "rs_relay_unlock": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:stones"
+          },
+          {
+            "items": "refinedstorage:quartz_enriched_copper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "rs_relay_unlock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "more_immersive_wires:rs_relay"
+    ]
+  }
+}

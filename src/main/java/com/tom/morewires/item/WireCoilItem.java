@@ -41,7 +41,7 @@ public class WireCoilItem extends IEBaseItem implements IWireCoil {
 		WireLink link = stack.get(IEApiDataComponents.WIRE_LINK.get());
 		if (link != null) {
 			list.add(Component.translatable(Lib.DESC_INFO+"attachedToDim", link.cp().getX(),
-					link.cp().getY(), link.cp().getZ(), link.dimension()));
+					link.cp().getY(), link.cp().getZ(), link.dimension().location().toString()));
 		}
 		def.appendHoverTextCoil(type, stack, world, list, flag);
 	}

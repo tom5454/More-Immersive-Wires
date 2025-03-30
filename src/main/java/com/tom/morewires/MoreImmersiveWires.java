@@ -46,6 +46,7 @@ import com.tom.morewires.compat.ae.AEDenseWireDefinition;
 import com.tom.morewires.compat.ae.AEWireDefinition;
 import com.tom.morewires.compat.cc.CCWireDefinition;
 import com.tom.morewires.compat.id.IntegratedDynamicsWireDefinition;
+import com.tom.morewires.compat.rs.RSWireDefinition;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MoreImmersiveWires.modid)
@@ -69,6 +70,7 @@ public class MoreImmersiveWires {
 
 	public static final Wire AE_WIRE = new Wire(AE, () -> AEWireDefinition::new);
 	public static final Wire AE_DENSE_WIRE = new Wire(AE, () -> AEDenseWireDefinition::new);
+	public static final Wire RS_WIRE = new Wire(RS, () -> RSWireDefinition::new);
 	public static final Wire CC_WIRE = new Wire(CC, () -> CCWireDefinition::new);
 	public static final Wire ID_WIRE = new Wire(ID, () -> IntegratedDynamicsWireDefinition::new);
 

@@ -48,7 +48,7 @@ public class Recipes extends RecipeProvider {
 	public static enum WireRecipe {
 		AE(MoreImmersiveWires.AE_WIRE, CraftingIngredient.of(Blocks.DEEPSLATE), CraftingIngredient.of(ConventionTags.FLUIX_CRYSTAL), CraftingIngredient.of(ConventionTags.GLASS_CABLE)),
 		AE_DENSE(MoreImmersiveWires.AE_DENSE_WIRE, CraftingIngredient.of(AEBlocks.SKY_STONE_BLOCK), CraftingIngredient.of(AEBlocks.FLUIX_BLOCK), CraftingIngredient.of(ConventionTags.COVERED_DENSE_CABLE)),
-		//RS(MoreImmersiveWires.RS_WIRE, CraftingIngredient.of(Tags.Items.STONE), CraftingIngredient.of(RSItems.QUARTZ_ENRICHED_IRON.get()), CraftingIngredient.of(RSBlocks.CABLE.get())),
+		RS(MoreImmersiveWires.RS_WIRE, CraftingIngredient.of(Tags.Items.STONES), CraftingIngredient.of(com.refinedmods.refinedstorage.common.content.Items.INSTANCE.getQuartzEnrichedCopper()), new TagIngredient(com.refinedmods.refinedstorage.common.content.Tags.CABLES)),
 		ID(MoreImmersiveWires.ID_WIRE, CraftingIngredient.of(RegistryEntries.BLOCK_MENRIL_WOOD.get()), CraftingIngredient.of("integrateddynamics:crystalized_menril_chunk"), CraftingIngredient.of(RegistryEntries.BLOCK_CABLE.get())),
 		CC(MoreImmersiveWires.CC_WIRE, CraftingIngredient.of(Tags.Items.STONES), CraftingIngredient.of(Items.REDSTONE), CraftingIngredient.of(ModRegistry.Items.CABLE.get())),
 		;

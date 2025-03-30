@@ -27,7 +27,8 @@ public class ItemModels extends ItemModelProvider {
 			});
 		});
 
-		withExistingParent(BuiltInRegistries.BLOCK.getKey(MoreImmersiveWires.AE_DENSE_WIRE.simple().CONNECTOR.get()).getPath(), modLoc("block/ae_dense_connector"));
+		withExistingParent(BuiltInRegistries.BLOCK.getKey(MoreImmersiveWires.AE_DENSE_WIRE.simple().CONNECTOR.get()).getPath(), modLoc("block/ae_dense_connector_base"))
+		.texture("base", modLoc("block/ae_dense_connector_base"));
 		withExistingParent(BuiltInRegistries.BLOCK.getKey(CCWireDefinition.CC_MODEM_CONNECTOR.get()).getPath(), modLoc("block/modem_connector"))
 		.texture("texture", modLoc("block/relay_cc"))
 		.texture("back", ResourceLocation.parse("computercraft:block/modem_back"))

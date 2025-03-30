@@ -4,7 +4,7 @@
   "mcVer": "1.21",
   "verId": "1.21.1",
   "display": "More Immersive Wires 1.21.1",
-  "git": "More-Immersive-Wires",
+  "onGit": true,
   "subver": [
     "1.21.1"
   ],
@@ -17,6 +17,10 @@
     {
       "slug": "immersive-engineering",
       "type": "requiredDependency"
+    },
+    {
+      "slug": "applied-energistics-2",
+      "type": "optionalDependency"
     },
     {
       "slug": "integrated-dynamics",

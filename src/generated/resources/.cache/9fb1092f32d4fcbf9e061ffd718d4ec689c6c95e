@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-18T18:28:59.7875573	Recipes
+// 1.21.1	2025-03-29T21:52:50.9490425	Recipes
 60da9f11a00acba2ce08eced610b997262842a63 data/more_immersive_wires/advancement/recipes/misc/ae_coil.json
 19b522bc2f4567aa7e3fe28d1476cfaa88633f47 data/more_immersive_wires/advancement/recipes/misc/ae_connector.json
 0c5f915fdbe1eb5e320cb1d1eeba91b2d10741dc data/more_immersive_wires/advancement/recipes/misc/ae_dense_coil.json
@@ -11,6 +11,9 @@ bb927341dadbc6c921df70bd6ea34e0010b27cb7 data/more_immersive_wires/advancement/r
 41d2d74557fb10a10ad760ea09ef0ec5863060c7 data/more_immersive_wires/advancement/recipes/misc/id_coil.json
 14f0305d3b520d5b9e1b1308d48ee09898712f05 data/more_immersive_wires/advancement/recipes/misc/id_connector.json
 101c11bcccfbb7b9e2bab60bdeaa9aaa787b8fe7 data/more_immersive_wires/advancement/recipes/misc/id_relay.json
+5e43d545baa8bc0c347f66e78d3ac2d6fe6d2c09 data/more_immersive_wires/advancement/recipes/misc/rs_coil.json
+70fda221512fd459624127dff98ff297dfe9dd47 data/more_immersive_wires/advancement/recipes/misc/rs_connector.json
+e26c9bf3ecf41ad9edc60f7fd36c3a67ddd2efc5 data/more_immersive_wires/advancement/recipes/misc/rs_relay.json
 e400d8d4a23561f2706bea1e4b7b4d27209ebd69 data/more_immersive_wires/advancement/recipes/redstone/cc_modem.json
 68ba128a65f1a63510e15de76854780d07f8e472 data/more_immersive_wires/recipe/ae_coil.json
 87586d899e97f91078bfa9b649e688e20301a9d9 data/more_immersive_wires/recipe/ae_connector.json
@@ -25,3 +28,6 @@ b009c86cdbf69ddaa495fb2a40be13fef3230e45 data/more_immersive_wires/recipe/cc_con
 b328c5a53425f9073604adfdae94ed91d2eea53b data/more_immersive_wires/recipe/id_coil.json
 6458f848f7f43f94d27d77aac038678429ef689f data/more_immersive_wires/recipe/id_connector.json
 c5302144b6f988257903b180b110260a2040138c data/more_immersive_wires/recipe/id_relay.json
+31021f1cb3696487a86173ca9d649c3930919f94 data/more_immersive_wires/recipe/rs_coil.json
+f8f85ad2082ff407b846afc6620e86dd72522f94 data/more_immersive_wires/recipe/rs_connector.json
+ab21e74d0c143ca6157e5e4ac53a3a04ffc74b89 data/more_immersive_wires/recipe/rs_relay.json

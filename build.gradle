@@ -149,20 +149,22 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    compileOnly "mezz.jei:jei-1.21.1-neoforge-api:19.19.0.219"
-    compileOnly "mezz.jei:jei-1.21.1-common-api:19.19.0.219"
+    // compile against the JEI API but do not include it at runtime
+    compileOnly "mezz.jei:jei-1.21.1-neoforge-api:19.21.0.247"
+    compileOnly "mezz.jei:jei-1.21.1-common-api:19.21.0.247"
     // at runtime, use the full JEI jar
-  	runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.19.0.219"
+  	runtimeOnly "mezz.jei:jei-1.21.1-neoforge:19.21.0.247"
   	
     implementation "curse.maven:the-one-probe-245211:5502323"
     implementation "curse.maven:jade-324717:5529595"
     
-    implementation 'curse.maven:immersive-engineering-231951:5828000'
+    implementation 'curse.maven:immersive-engineering-231951:6235316'
     
-    //compileOnly 'curse.maven:refined-storage-243076:5159837'
-    implementation 'maven.modrinth:cc-tweaked:uoGrgCjc'
+    implementation 'curse.maven:refined-storage-243076:6358597'
+    implementation 'maven.modrinth:cc-tweaked:h6qYZ1UT'
     
-    implementation 'curse.maven:applied-energistics-2-223794:5729094'
+    implementation 'curse.maven:applied-energistics-2-223794:6225422'
+    implementation 'curse.maven:guideme-1173950:6331224'
 
     implementation("malte0811:BlockModelSplitter:2.0.1")
     implementation("malte0811:DualCodecs:0.1.1")

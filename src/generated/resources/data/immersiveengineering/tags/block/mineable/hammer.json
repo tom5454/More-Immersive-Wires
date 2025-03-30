@@ -17,6 +17,14 @@
       "required": false
     },
     {
+      "id": "more_immersive_wires:rs_connector",
+      "required": false
+    },
+    {
+      "id": "more_immersive_wires:rs_relay",
+      "required": false
+    },
+    {
       "id": "more_immersive_wires:cc_connector",
       "required": false
     },

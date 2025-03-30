@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableMap;
 
 import com.tom.morewires.MoreImmersiveWires;
 import com.tom.morewires.block.OnCableConnectorBlock;
+import com.tom.morewires.compat.ae.AEDenseConnectorBlock;
 import com.tom.morewires.compat.cc.CCWireDefinition;
 
 import dan200.computercraft.shared.peripheral.modem.wired.WiredModemFullBlock;
@@ -65,7 +66,11 @@ public class BlockStates extends ExtendedBlockstateProvider {
 			});
 		});
 
-		createAllRotatedBlock(MoreImmersiveWires.AE_DENSE_WIRE.simple().CONNECTOR, models().getExistingFile(modLoc("block/ae_dense_connector")));
+		createAllRotatedBlock(MoreImmersiveWires.AE_DENSE_WIRE.simple().CONNECTOR, d -> {
+			boolean p = (boolean) d.getSetStates().get(AEDenseConnectorBlock.POWERED);
+			return models().withExistingParent("ae_dense_connector" + (p ? "_p" : ""), modLoc("block/ae_dense_connector_base")).
+					texture("base", modLoc("block/ae_dense_connector_base" + (p ? "_powered" : "")));
+		}, List.of(AEDenseConnectorBlock.POWERED));
 
 		createAllRotatedBlock(CCWireDefinition.CC_MODEM_CONNECTOR, d -> {
 			boolean p = d.getSetStates().get(WiredModemFullBlock.PERIPHERAL_ON) == Boolean.TRUE;

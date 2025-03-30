@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "refinedstorage"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "tag": "refinedstorage:cables"
+    },
+    "s": {
+      "tag": "c:rods/wooden"
+    },
+    "w": {
+      "tag": "c:wires/aluminum"
+    }
+  },
+  "pattern": [
+    "wcw",
+    "csc",
+    "wcw"
+  ],
+  "result": {
+    "count": 4,
+    "id": "more_immersive_wires:rs_coil"
+  }
+}

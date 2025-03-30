@@ -1,6 +1,6 @@
 {
   "parent": "more_immersive_wires:block/ae_dense_connector_base",
   "textures": {
-    "base": "more_immersive_wires:block/ae_dense_connector_base"
+    "base": "more_immersive_wires:block/ae_dense_connector_base_powered"
   }
 }
