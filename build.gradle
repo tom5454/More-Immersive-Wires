@@ -158,16 +158,16 @@ dependencies {
     implementation "curse.maven:the-one-probe-245211:5502323"
     implementation "curse.maven:jade-324717:5529595"
     
-    implementation 'curse.maven:immersive-engineering-231951:6235316'
+    implementation 'curse.maven:immersive-engineering-231951:6733669'
     
-    implementation 'curse.maven:refined-storage-243076:6358597'
+    implementation 'curse.maven:refined-storage-243076:7039043'
     implementation 'maven.modrinth:cc-tweaked:h6qYZ1UT'
     
     implementation 'curse.maven:applied-energistics-2-223794:6225422'
     implementation 'curse.maven:guideme-1173950:6331224'
 
     implementation("malte0811:BlockModelSplitter:2.0.1")
-    implementation("malte0811:DualCodecs:0.1.1")
+    implementation("malte0811:DualCodecs:0.1.2")
     
     implementation 'curse.maven:integrated-dynamics-236307:6001774'
     implementation 'curse.maven:cyclops-core-232758:5979361'

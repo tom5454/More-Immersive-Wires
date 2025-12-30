@@ -1,1 +1,1 @@
-Copy 'https://github.com/BluSunrize/ImmersiveEngineering/tree/1.19.2/src/datagen/java' before running datagen
+Copy 'https://github.com/BluSunrize/ImmersiveEngineering/tree/583a182549d284a35c813b55ac2a0d1fddcf945a/src/datagen/java' before running datagen

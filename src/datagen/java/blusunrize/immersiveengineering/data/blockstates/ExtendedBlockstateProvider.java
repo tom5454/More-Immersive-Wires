@@ -8,18 +8,18 @@
 
 package blusunrize.immersiveengineering.data.blockstates;
 
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
-
+import blusunrize.immersiveengineering.ImmersiveEngineering;
+import blusunrize.immersiveengineering.api.IEProperties;
+import blusunrize.immersiveengineering.api.Lib;
+import blusunrize.immersiveengineering.common.blocks.IEStairsBlock;
+import blusunrize.immersiveengineering.common.blocks.IEWallBlock;
+import blusunrize.immersiveengineering.common.register.IEBlocks;
+import blusunrize.immersiveengineering.data.DataGenUtils;
+import blusunrize.immersiveengineering.data.models.*;
+import blusunrize.immersiveengineering.data.models.NongeneratedModels.NongeneratedModel;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
@@ -33,39 +33,26 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
-import net.minecraft.world.level.block.state.properties.Half;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.block.state.properties.StairsShape;
-import net.minecraft.world.level.block.state.properties.WallSide;
-import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.ModelProvider;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.*;
+import net.neoforged.neoforge.client.model.generators.*;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel.Builder;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder.PartBuilder;
 import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder.PartialBlockstate;
 import net.neoforged.neoforge.client.model.generators.loaders.ObjModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-import blusunrize.immersiveengineering.api.IEProperties;
-import blusunrize.immersiveengineering.common.blocks.IEStairsBlock;
-import blusunrize.immersiveengineering.common.blocks.IEWallBlock;
-import blusunrize.immersiveengineering.common.register.IEBlocks;
-import blusunrize.immersiveengineering.data.DataGenUtils;
-import blusunrize.immersiveengineering.data.models.IEOBJBuilder;
-import blusunrize.immersiveengineering.data.models.MirroredModelBuilder;
-import blusunrize.immersiveengineering.data.models.ModelProviderUtils;
-import blusunrize.immersiveengineering.data.models.NongeneratedModels;
-import blusunrize.immersiveengineering.data.models.NongeneratedModels.NongeneratedModel;
-import blusunrize.immersiveengineering.data.models.SplitModelBuilder;
+import javax.annotation.Nullable;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 {
@@ -134,9 +121,9 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	protected void multiCubeAll(Supplier<? extends Block> b, @Nullable RenderType layer, ResourceLocation... textures)
 	{
 		final BlockModelBuilder[] models = new BlockModelBuilder[textures.length];
-		for (int i=0;i<textures.length;i++)
+		for(int i = 0; i < textures.length; i++)
 		{
-			models[i]=models().cubeAll(name(b)+i, textures[i]);
+			models[i] = models().cubeAll(name(b)+i, textures[i]);
 			setRenderType(layer, models[i]);
 		}
 		multiBlockAndItem(b, models);
@@ -145,7 +132,7 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	protected void multiEightCubeAll(Supplier<? extends Block> b, ResourceLocation texture)
 	{
 		ResourceLocation[] textures = new ResourceLocation[8];
-		for (int i=0;i<8;i++)
+		for(int i = 0; i < 8; i++)
 			textures[i] = texture.withSuffix(Integer.toString(i));
 		multiCubeAll(b, textures);
 	}
@@ -155,11 +142,11 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 		simpleBlockAndItem(
 				b,
 				models().withExistingParent(name(b), modLoc("block/ie_scaffolding"))
-				.texture("side", others)
-				.texture("bottom", others)
-				.texture("top", top)
-				.renderType(ModelProviderUtils.getName(RenderType.cutout()))
-				);
+						.texture("side", others)
+						.texture("bottom", others)
+						.texture("top", top)
+						.renderType(ModelProviderUtils.getName(RenderType.cutout()))
+		);
 	}
 
 	protected void slabFor(Supplier<? extends Block> b, ResourceLocation texture)
@@ -181,7 +168,7 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 			Supplier<? extends Block> full,
 			ResourceLocation side, ResourceLocation top, ResourceLocation bottom,
 			@Nullable RenderType layer
-			)
+	)
 	{
 		SlabBlock b = IEBlocks.TO_SLAB.get(BuiltInRegistries.BLOCK.getKey(full.get())).get();
 		ModelBuilder<?> mainModel = models().slab(name(b)+"_bottom", side, bottom, top);
@@ -195,7 +182,7 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	protected void slabForMultiEightAll(Supplier<? extends Block> b, ResourceLocation texture)
 	{
 		ResourceLocation[] textures = new ResourceLocation[8];
-		for (int i=0;i<8;i++)
+		for(int i = 0; i < 8; i++)
 			textures[i] = texture.withSuffix(Integer.toString(i));
 		slabForMultiAll(b, textures);
 	}
@@ -212,11 +199,11 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 		final ModelBuilder<?>[] mainModels = new ModelBuilder<?>[textures.length];
 		final ModelBuilder<?>[] topModels = new ModelBuilder<?>[textures.length];
 		final ModelBuilder<?>[] doubleModels = new ModelBuilder<?>[textures.length];
-		for (int i=0;i<textures.length;i++)
+		for(int i = 0; i < textures.length; i++)
 		{
-			mainModels[i]=models().slab(name(b)+i+"_bottom", textures[i], textures[i], textures[i]);
-			topModels[i]=models().slabTop(name(b)+i+"_top", textures[i], textures[i], textures[i]);
-			doubleModels[i]=models().cubeAll(name(b)+i+"_double", textures[i]);
+			mainModels[i] = models().slab(name(b)+i+"_bottom", textures[i], textures[i], textures[i]);
+			topModels[i] = models().slabTop(name(b)+i+"_top", textures[i], textures[i], textures[i]);
+			doubleModels[i] = models().cubeAll(name(b)+i+"_double", textures[i]);
 			setRenderType(layer, mainModels[i], topModels[i], doubleModels[i]);
 		}
 
@@ -225,11 +212,12 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	}
 
 	//Forge method does not allow random textures for slabs, instead creating a ConfiguredModel directly from an input file
-	public void slabBlock(SlabBlock block, ModelFile[] bottom, ModelFile[] top, ModelFile[] doubleslab) {
+	public void slabBlock(SlabBlock block, ModelFile[] bottom, ModelFile[] top, ModelFile[] doubleslab)
+	{
 		getVariantBuilder(block)
-		.partialState().with(SlabBlock.TYPE, SlabType.BOTTOM).addModels(Stream.of(bottom).map(ConfiguredModel::new).toArray(ConfiguredModel[]::new))
-		.partialState().with(SlabBlock.TYPE, SlabType.TOP).addModels(Stream.of(top).map(ConfiguredModel::new).toArray(ConfiguredModel[]::new))
-		.partialState().with(SlabBlock.TYPE, SlabType.DOUBLE).addModels(Stream.of(doubleslab).map(ConfiguredModel::new).toArray(ConfiguredModel[]::new));
+				.partialState().with(SlabBlock.TYPE, SlabType.BOTTOM).addModels(Stream.of(bottom).map(ConfiguredModel::new).toArray(ConfiguredModel[]::new))
+				.partialState().with(SlabBlock.TYPE, SlabType.TOP).addModels(Stream.of(top).map(ConfiguredModel::new).toArray(ConfiguredModel[]::new))
+				.partialState().with(SlabBlock.TYPE, SlabType.DOUBLE).addModels(Stream.of(doubleslab).map(ConfiguredModel::new).toArray(ConfiguredModel[]::new));
 	}
 
 	protected void stairsFor(Supplier<? extends Block> b, ResourceLocation texture)
@@ -241,7 +229,7 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 			Supplier<? extends Block> full,
 			ResourceLocation side, ResourceLocation top, ResourceLocation bottom,
 			@Nullable RenderType layer
-			)
+	)
 	{
 		final IEStairsBlock b = IEBlocks.TO_STAIRS.get(BuiltInRegistries.BLOCK.getKey(full.get())).get();
 		String baseName = name(b);
@@ -256,7 +244,7 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	protected void stairsForMultiEightAll(Supplier<? extends Block> b, ResourceLocation texture)
 	{
 		ResourceLocation[] textures = new ResourceLocation[8];
-		for (int i=0;i<8;i++)
+		for(int i = 0; i < 8; i++)
 			textures[i] = texture.withSuffix(Integer.toString(i));
 		stairsForMultiAll(b, textures);
 	}
@@ -273,11 +261,11 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 		final ModelBuilder<?>[] stairs = new ModelBuilder<?>[textures.length];
 		final ModelBuilder<?>[] stairsInner = new ModelBuilder<?>[textures.length];
 		final ModelBuilder<?>[] stairsOuter = new ModelBuilder<?>[textures.length];
-		for (int i=0;i<textures.length;i++)
+		for(int i = 0; i < textures.length; i++)
 		{
-			stairs[i]=models().stairs(name(b)+i, textures[i], textures[i], textures[i]);
-			stairsInner[i]=models().stairsInner(name(b)+i+"_inner", textures[i], textures[i], textures[i]);
-			stairsOuter[i]=models().stairsOuter(name(b)+i+"_outer", textures[i], textures[i], textures[i]);
+			stairs[i] = models().stairs(name(b)+i, textures[i], textures[i], textures[i]);
+			stairsInner[i] = models().stairsInner(name(b)+i+"_inner", textures[i], textures[i], textures[i]);
+			stairsOuter[i] = models().stairsOuter(name(b)+i+"_outer", textures[i], textures[i], textures[i]);
 			setRenderType(layer, stairs[i], stairsInner[i], stairsOuter[i]);
 		}
 
@@ -286,28 +274,42 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	}
 
 	//Forge method does not allow random textures for slabs, instead creating a ConfiguredModel directly from an input file
-	public void stairsBlock(StairBlock block, ModelFile[] stairs, ModelFile[] stairsInner, ModelFile[] stairsOuter) {
+	public void stairsBlock(StairBlock block, ModelFile[] stairs, ModelFile[] stairsInner, ModelFile[] stairsOuter)
+	{
 		getVariantBuilder(block)
-		.forAllStatesExcept(state -> {
-			Direction facing = state.getValue(StairBlock.FACING);
-			Half half = state.getValue(StairBlock.HALF);
-			StairsShape shape = state.getValue(StairBlock.SHAPE);
-			int yRot = (int) facing.getClockWise().toYRot(); // Stairs model is rotated 90 degrees clockwise for some reason
-			if (shape == StairsShape.INNER_LEFT || shape == StairsShape.OUTER_LEFT) {
-				yRot += 270; // Left facing stairs are rotated 90 degrees clockwise
-			}
-			if (shape != StairsShape.STRAIGHT && half == Half.TOP) {
-				yRot += 90; // Top stairs are rotated 90 degrees clockwise
-			}
-			yRot %= 360;
-			boolean uvlock = yRot != 0 || half == Half.TOP; // Don't set uvlock for states that have no rotation
-			//We need multiple textures, so no builder
-			ModelFile[] files = (shape == StairsShape.STRAIGHT ? stairs : shape == StairsShape.INNER_LEFT || shape == StairsShape.INNER_RIGHT ? stairsInner : stairsOuter);
-			ConfiguredModel[] models = new ConfiguredModel[stairs.length];
-			for (int i=0;i<stairs.length;i++)
-				models[i] = new ConfiguredModel(files[i], half == Half.BOTTOM ? 0 : 180, yRot, uvlock);
-			return models;
-		}, StairBlock.WATERLOGGED);
+				.forAllStatesExcept(state -> {
+					Direction facing = state.getValue(StairBlock.FACING);
+					Half half = state.getValue(StairBlock.HALF);
+					StairsShape shape = state.getValue(StairBlock.SHAPE);
+					int yRot = (int)facing.getClockWise().toYRot(); // Stairs model is rotated 90 degrees clockwise for some reason
+					if(shape==StairsShape.INNER_LEFT||shape==StairsShape.OUTER_LEFT)
+					{
+						yRot += 270; // Left facing stairs are rotated 90 degrees clockwise
+					}
+					if(shape!=StairsShape.STRAIGHT&&half==Half.TOP)
+					{
+						yRot += 90; // Top stairs are rotated 90 degrees clockwise
+					}
+					yRot %= 360;
+					boolean uvlock = yRot!=0||half==Half.TOP; // Don't set uvlock for states that have no rotation
+					//We need multiple textures, so no builder
+					ModelFile[] files = (shape==StairsShape.STRAIGHT?stairs: shape==StairsShape.INNER_LEFT||shape==StairsShape.INNER_RIGHT?stairsInner: stairsOuter);
+					ConfiguredModel[] models = new ConfiguredModel[stairs.length];
+					for(int i = 0; i < stairs.length; i++)
+						models[i] = new ConfiguredModel(files[i], half==Half.BOTTOM?0: 180, yRot, uvlock);
+					return models;
+				}, StairBlock.WATERLOGGED);
+	}
+
+	protected void wallForSingle(Supplier<? extends Block> full, ResourceLocation bottomTexture, ResourceLocation sideTexture, ResourceLocation topTexture)
+	{
+		final IEWallBlock b = IEBlocks.TO_WALL.get(BuiltInRegistries.BLOCK.getKey(full.get())).get();
+		wallBlock(b,
+				wallModelTopped(name(b)+"_post", "wall_post_topped", bottomTexture, sideTexture, topTexture),
+				wallModelTopped(name(b)+"_side", "wall_side_topped", bottomTexture, sideTexture, topTexture),
+				wallModelTopped(name(b)+"_side_tall", "wall_side_tall_topped", bottomTexture, sideTexture, topTexture)
+		);
+		itemModel(() -> b, wallModelToppedInventory(name(b), bottomTexture, sideTexture, topTexture));
 	}
 
 	protected void wallForMultiEight(Supplier<? extends Block> b, ResourceLocation bottomTexture, ResourceLocation sideTexture, ResourceLocation topTexture)
@@ -315,7 +317,7 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 		ResourceLocation[] bottomTextures = new ResourceLocation[8];
 		ResourceLocation[] sideTextures = new ResourceLocation[8];
 		ResourceLocation[] topTextures = new ResourceLocation[8];
-		for (int i=0;i<8;i++)
+		for(int i = 0; i < 8; i++)
 		{
 			bottomTextures[i] = bottomTexture.withSuffix(Integer.toString(i));
 			sideTextures[i] = sideTexture.withSuffix(Integer.toString(i));
@@ -336,11 +338,11 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 		final ModelBuilder<?>[] wallPost = new ModelBuilder<?>[bottomTextures.length];
 		final ModelBuilder<?>[] wallSide = new ModelBuilder<?>[bottomTextures.length];
 		final ModelBuilder<?>[] wallSideTall = new ModelBuilder<?>[bottomTextures.length];
-		for (int i=0;i<bottomTextures.length;i++)
+		for(int i = 0; i < bottomTextures.length; i++)
 		{
-			wallPost[i]=wallModelTopped(name(b)+i+"_post", "wall_post_topped", bottomTextures[i], sideTextures[i], topTextures[i]);
-			wallSide[i]=wallModelTopped(name(b)+i+"_side", "wall_side_topped", bottomTextures[i], sideTextures[i], topTextures[i]);
-			wallSideTall[i]=wallModelTopped(name(b)+i+"_side_tall", "wall_side_tall_topped", bottomTextures[i], sideTextures[i], topTextures[i]);
+			wallPost[i] = wallModelTopped(name(b)+i+"_post", "wall_post_topped", bottomTextures[i], sideTextures[i], topTextures[i]);
+			wallSide[i] = wallModelTopped(name(b)+i+"_side", "wall_side_topped", bottomTextures[i], sideTextures[i], topTextures[i]);
+			wallSideTall[i] = wallModelTopped(name(b)+i+"_side_tall", "wall_side_tall_topped", bottomTextures[i], sideTextures[i], topTextures[i]);
 			setRenderType(layer, wallPost[i], wallSide[i], wallSideTall[i]);
 		}
 
@@ -349,31 +351,38 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	}
 
 	//Forge method does not allow random textures for walls, instead creating ConfiguredModel directly from input file
-	public void wallBlock(WallBlock block, ModelFile[] posts, ModelFile[] sides, ModelFile[] sidesTall) {
-		for (int i=0;i<posts.length;i++)
+	private void wallBlock(WallBlock block, ModelFile[] posts, ModelFile[] sides, ModelFile[] sidesTall)
+	{
+		MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
+		Builder<PartBuilder> part = builder.part();
+		for(int i = 0; i < posts.length; i++)
 		{
-			ModelFile side = sides[i];
-			ModelFile sideTall = sidesTall[i];
-			MultiPartBlockStateBuilder builder = getMultipartBuilder(block)
-					.part().modelFile(posts[i]).addModel()
-					.condition(WallBlock.UP, true).end();
-			WALL_PROPS.entrySet().stream()
-			.filter(e -> e.getKey().getAxis().isHorizontal())
-			.forEach(e -> {
-				wallSidePart(builder, side, e, WallSide.LOW);
-				wallSidePart(builder, sideTall, e, WallSide.TALL);
-			});
+			part = part.modelFile(posts[i]);
+			if((i+1) < posts.length)
+				part = part.nextModel();
 		}
+		part.addModel().condition(WallBlock.UP, true);
+		WALL_PROPS.entrySet().stream()
+				.filter(e -> e.getKey().getAxis().isHorizontal())
+				.forEach(e -> {
+					wallSidePart(builder, sides, e, WallSide.LOW);
+					wallSidePart(builder, sidesTall, e, WallSide.TALL);
+				});
 	}
 
-	//This method is private in BlockStateProvider & we need access to it
-	private void wallSidePart(MultiPartBlockStateBuilder builder, ModelFile model, Map.Entry<Direction, Property<WallSide>> entry, WallSide height) {
-		builder.part()
-		.modelFile(model)
-		.rotationY((((int) entry.getKey().toYRot()) + 180) % 360)
-		.uvLock(true)
-		.addModel()
-		.condition(entry.getValue(), height);
+	//The equivalent method is private in BlockStateProvider & we need access to it
+	private void wallSidePart(MultiPartBlockStateBuilder builder, ModelFile[] models, Entry<Direction, Property<WallSide>> entry, WallSide height)
+	{
+		Builder<MultiPartBlockStateBuilder.PartBuilder> part = builder.part();
+		for(int i = 0; i < models.length; i++)
+		{
+			part = part.modelFile(models[i])
+					.rotationY((((int)entry.getKey().toYRot())+180)%360)
+					.uvLock(true);
+			if((i+1) < models.length)
+				part = part.nextModel();
+		}
+		part.addModel().condition(entry.getValue(), height);
 	}
 
 	protected void setRenderType(@Nullable RenderType type, ModelBuilder<?>... builders)
@@ -580,7 +589,8 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 		createHorizontalRotatedBlock(block, $ -> model, List.of());
 	}
 
-	protected void createHorizontalRotatedBlock(Supplier<? extends Block> block, ModelFile model, int offsetRotY) {
+	protected void createHorizontalRotatedBlock(Supplier<? extends Block> block, ModelFile model, int offsetRotY)
+	{
 		createRotatedBlock(block, $ -> model, IEProperties.FACING_HORIZONTAL, List.of(), 0, offsetRotY);
 	}
 
@@ -600,13 +610,13 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	}
 
 	protected void createRotatedBlock(Supplier<? extends Block> block, ModelFile model, Property<Direction> facing,
-			List<Property<?>> additionalProps, int offsetRotX, int offsetRotY)
+									  List<Property<?>> additionalProps, int offsetRotX, int offsetRotY)
 	{
 		createRotatedBlock(block, $ -> model, facing, additionalProps, offsetRotX, offsetRotY);
 	}
 
 	protected void createRotatedBlock(Supplier<? extends Block> block, Function<PartialBlockstate, ModelFile> model, Property<Direction> facing,
-			List<Property<?>> additionalProps, int offsetRotX, int offsetRotY)
+									  List<Property<?>> additionalProps, int offsetRotX, int offsetRotY)
 	{
 		VariantBlockStateBuilder stateBuilder = getVariantBuilder(block.get());
 		forEachState(stateBuilder.partialState(), additionalProps, state -> {
@@ -617,21 +627,35 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 				int y;
 				switch(d)
 				{
-				case UP -> {
-					x = 90;
-					y = 0;
-				}
-				case DOWN -> {
-					x = -90;
-					y = 0;
-				}
-				default -> {
-					y = getAngle(d, offsetRotY);
-					x = 0;
-				}
+					case UP ->
+					{
+						x = 90;
+						y = 0;
+					}
+					case DOWN ->
+					{
+						x = -90;
+						y = 0;
+					}
+					default ->
+					{
+						y = getAngle(d, offsetRotY);
+						x = 0;
+					}
 				}
 				state.with(facing, d).setModels(new ConfiguredModel(modelLoc, x+offsetRotX, y, false));
 			}
+		});
+	}
+
+	protected <T extends Comparable<T>> void createForAllStates(Supplier<? extends Block> b, Function<BlockState, ModelFile> modelFunction)
+	{
+		AtomicBoolean hasItemModel = new AtomicBoolean();
+		getVariantBuilder(b.get()).forAllStates(state -> {
+			ModelFile variant = modelFunction.apply(state);
+			if(hasItemModel.compareAndSet(false, true))
+				itemModel(b, variant);
+			return new ConfiguredModel[]{new ConfiguredModel(variant)};
 		});
 	}
 
@@ -652,7 +676,7 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 	}
 
 	public static <T extends Comparable<T>> void forEach(PartialBlockstate base, Property<T> prop,
-			List<Property<?>> remaining, Consumer<PartialBlockstate> out)
+														 List<Property<?>> remaining, Consumer<PartialBlockstate> out)
 	{
 		for(T value : prop.getPossibleValues())
 			forEachState(base, remaining, map -> {

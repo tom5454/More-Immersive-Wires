@@ -1,3 +1,4 @@
 blusunrize/immersiveengineering/data/*
-!blusunrize/immersiveengineering/data/blockstates/ExtendedBlockstateProvider
+!blusunrize/immersiveengineering/data/ItemModels.java
+!blusunrize/immersiveengineering/data/blockstates
 !blusunrize/immersiveengineering/data/models/TRSRItemModelProvider

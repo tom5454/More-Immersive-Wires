@@ -26,6 +26,6 @@ public class RSNetworkHandler extends SimpleNetworkHandler<RSConnectorBlockEntit
 	}
 
 	public void addConnections(ConnectionSink sink) {
-		visitAll(s -> sink.tryConnect(s.getGlobalPos()));
+		visitAll(s -> sink.tryConnect(s.getGlobalPos(), null));
 	}
 }
