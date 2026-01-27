@@ -169,9 +169,9 @@ dependencies {
     implementation("malte0811:BlockModelSplitter:2.0.1")
     implementation("malte0811:DualCodecs:0.1.2")
     
-    implementation 'curse.maven:integrated-dynamics-236307:6001774'
-    implementation 'curse.maven:cyclops-core-232758:5979361'
-    implementation 'curse.maven:common-capabilities-247007:5992581'
+    implementation 'curse.maven:integrated-dynamics-236307:7518214'
+    implementation 'curse.maven:cyclops-core-232758:7365285'
+    implementation 'curse.maven:common-capabilities-247007:7361876'
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
