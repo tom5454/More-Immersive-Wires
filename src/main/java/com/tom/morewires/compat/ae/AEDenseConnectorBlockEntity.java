@@ -163,7 +163,7 @@ public class AEDenseConnectorBlockEntity extends AENetworkedBlockEntity implemen
 	@Override
 	public void onMainNodeStateChanged(State reason) {
 		boolean p = getMainNode().isPowered();
-		if (getState().getValue(AEDenseConnectorBlock.POWERED) != p) {
+		if (!isUnloaded && getState().getValue(AEDenseConnectorBlock.POWERED) != p && level.getBlockState(worldPosition).getBlock() == getState().getBlock()) {
 			level.setBlock(worldPosition, getState().setValue(AEDenseConnectorBlock.POWERED, p), 3);
 		}
 	}

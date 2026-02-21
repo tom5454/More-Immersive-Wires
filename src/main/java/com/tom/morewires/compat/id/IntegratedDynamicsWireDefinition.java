@@ -47,5 +47,6 @@ public class IntegratedDynamicsWireDefinition extends SimpleWireTypeDefinition<I
 		event.registerBlockEntity(Capabilities.Cable.BLOCK, CONNECTOR_ENTITY.get(), (blockEntity, context) -> blockEntity.getCable());
 		event.registerBlockEntity(Capabilities.NetworkCarrier.BLOCK, CONNECTOR_ENTITY.get(), (blockEntity, context) -> blockEntity.getNetworkCarrier());
 		event.registerBlockEntity(Capabilities.PathElement.BLOCK, CONNECTOR_ENTITY.get(), (blockEntity, context) -> blockEntity.getPathElement());
+		event.registerBlockEntity(Capabilities.NetworkElementProvider.BLOCK, CONNECTOR_ENTITY.get(), (blockEntity, context) -> blockEntity.getNetworkElementProvider());
 	}
 }

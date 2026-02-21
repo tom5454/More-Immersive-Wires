@@ -59,3 +59,9 @@ Add modded wire support for Immersive Engineering
     versionRange="*"
     ordering="NONE"
     side="BOTH"
+[[dependencies.more_immersive_wires]]
+    modId="integrateddynamics"
+    type="optional"
+    versionRange="[1.31.0,)"
+    ordering="NONE"
+    side="BOTH"

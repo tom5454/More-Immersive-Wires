@@ -160,18 +160,18 @@ dependencies {
     
     implementation 'curse.maven:immersive-engineering-231951:6733669'
     
-    implementation 'curse.maven:refined-storage-243076:7039043'
+    implementation 'curse.maven:refined-storage-243076:7610477'
     implementation 'maven.modrinth:cc-tweaked:h6qYZ1UT'
     
-    implementation 'curse.maven:applied-energistics-2-223794:6225422'
-    implementation 'curse.maven:guideme-1173950:6331224'
+    implementation 'curse.maven:applied-energistics-2-223794:7027323'
+    implementation 'curse.maven:guideme-1173950:7127444'
 
     implementation("malte0811:BlockModelSplitter:2.0.1")
     implementation("malte0811:DualCodecs:0.1.2")
     
-    implementation 'curse.maven:integrated-dynamics-236307:6001774'
-    implementation 'curse.maven:cyclops-core-232758:5979361'
-    implementation 'curse.maven:common-capabilities-247007:5992581'
+    implementation 'curse.maven:integrated-dynamics-236307:7648811'
+    implementation 'curse.maven:cyclops-core-232758:7637998'
+    implementation 'curse.maven:common-capabilities-247007:7361876'
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

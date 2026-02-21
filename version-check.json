@@ -1,13 +1,15 @@
 {
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/more-immersive-wires",
 	"promos": {
-		"1.21.1-latest": "1.1.7",
+		"1.21.1-latest": "1.1.9",
 		"1.20.4-latest": "1.1.4",
 		"1.20.1-latest": "1.1.4",
 		"1.19.2-latest": "1.1.3",
 		"1.18.2-latest": "1.1.3"
 	},
 	"1.21.1": {
+		"1.1.9": "Fixed AE Dense Connectors Duplicating (Closes #24)\nFixed crash with Integrated Dynamics (Closes #25, Closes #26)\nFixed locking up issue with Integrated Dynamic Cables (Closes #21)",
+		"1.1.8": "Fixed crash with new RS version (Closes #23)\nUpdated IE and NeoForge",
 		"1.1.7": "Added Refined Storage Support\nFixed AE connectors breaking on world reload\nFixed crash with wire coil tooltips",
 		"1.1.6": "Added Integrated Dynamics support\nFixed log spam from CC connectors when exiting a world",
 		"1.1.5": "1.21.1 port"

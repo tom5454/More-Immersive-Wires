@@ -7,6 +7,7 @@ import org.cyclops.cyclopscore.blockentity.BlockEntityTickerDelayed;
 import org.cyclops.cyclopscore.blockentity.CyclopsBlockEntity;
 import org.cyclops.cyclopscore.datastructure.DimPos;
 import org.cyclops.cyclopscore.datastructure.EnumFacingMap;
+import org.cyclops.cyclopscore.persist.nbt.NBTPersist;
 import org.cyclops.integrateddynamics.api.block.cable.ICable;
 import org.cyclops.integrateddynamics.api.network.INetwork;
 import org.cyclops.integrateddynamics.api.network.INetworkCarrier;
@@ -18,13 +19,13 @@ import org.cyclops.integrateddynamics.capability.network.NetworkCarrierDefault;
 import org.cyclops.integrateddynamics.capability.networkelementprovider.NetworkElementProviderSingleton;
 import org.cyclops.integrateddynamics.capability.path.PathElementCable;
 import org.cyclops.integrateddynamics.capability.path.PathElementDefault;
-import org.cyclops.integrateddynamics.core.helper.CableHelpers;
 import org.cyclops.integrateddynamics.core.helper.NetworkHelpers;
-import org.cyclops.integrateddynamics.network.VariablestoreNetworkElement;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -50,46 +51,46 @@ public class IDConnectorBlockEntity extends CyclopsBlockEntity implements IOnCab
 	protected GlobalWireNetwork globalNet;
 	private final INetworkCarrier networkCarrier;
 
+	@NBTPersist
+	private EnumFacingMap<Boolean> connected = EnumFacingMap.newMap();
+
 	public IDConnectorBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
 		super(p_155228_, p_155229_, p_155230_);
 
-		cable = new CableTile<>(this) {
-
-			@Override
-			protected boolean isForceDisconnectable() {
-				return false;
-			}
-
-			@Override
-			protected boolean isForceDisconnected(Direction side) {
-				return getFacing() != side;
-			}
-
-			@Override
-			protected EnumFacingMap<Boolean> getForceDisconnected() {
-				return null;
-			}
-
-			@Override
-			protected EnumFacingMap<Boolean> getConnected() {
-				return EnumFacingMap.newMap();
-			}
-
-			@Override
-			public boolean isConnected(Direction side) {
-				return getFacing() == side && CableHelpers.canCableConnectTo(level, getPos(), side, this);
-			}
-
-			@Override
-			public void updateConnections() {
-			}
-
-			@Override
-			public ItemStack getItemStack() {
-				return new ItemStack(MoreImmersiveWires.ID_WIRE.simple().CONNECTOR.get());
-			}
-		};
+		cable = new MIWCable(this);
 		this.networkCarrier = new NetworkCarrierDefault();
+	}
+
+	public static class MIWCable extends CableTile<IDConnectorBlockEntity> {
+
+		public MIWCable(IDConnectorBlockEntity tile) {
+			super(tile);
+		}
+
+		@Override
+		public boolean canConnect(ICable connector, Direction side) {
+			return tile.getFacing() == side;
+		}
+
+		@Override
+		protected boolean isForceDisconnectable() {
+			return false;
+		}
+
+		@Override
+		protected EnumFacingMap<Boolean> getForceDisconnected() {
+			return null;
+		}
+
+		@Override
+		protected EnumFacingMap<Boolean> getConnected() {
+			return tile.connected;
+		}
+
+		@Override
+		public ItemStack getItemStack() {
+			return new ItemStack(MoreImmersiveWires.ID_WIRE.simple().CONNECTOR.get());
+		}
 	}
 
 	@Override
@@ -158,7 +159,7 @@ public class IDConnectorBlockEntity extends CyclopsBlockEntity implements IOnCab
 		return new NetworkElementProviderSingleton() {
 			@Override
 			public INetworkElement createNetworkElement(final Level world, final BlockPos blockPos) {
-				return new VariablestoreNetworkElement(DimPos.of(world, blockPos));
+				return new IDConnectorNetworkElement(DimPos.of(world, blockPos));
 			}
 		};
 	}
@@ -168,13 +169,16 @@ public class IDConnectorBlockEntity extends CyclopsBlockEntity implements IOnCab
 		protected void update(Level level, BlockPos pos, BlockState blockState, IDConnectorBlockEntity blockEntity) {
 			super.update(level, pos, blockState, blockEntity);
 
+			if (blockEntity.getConnected().isEmpty()) {
+				blockEntity.getCable().updateConnections();
+			}
 			NetworkHelpers.revalidateNetworkElements(level, pos);
 		}
 	}
 
 	public void setNetworkHandler(IDNetworkHandler handler) {
 		this.handler = handler;
-		if(!remove)NetworkHelpers.initNetwork(level, worldPosition, null);
+		if(!remove && handler != null)NetworkHelpers.initNetwork(level, worldPosition, null);
 	}
 
 	@Override
@@ -233,5 +237,15 @@ public class IDConnectorBlockEntity extends CyclopsBlockEntity implements IOnCab
 
 	public PathElementDefault getPathElement() {
 		return path;
+	}
+
+	@Override
+	public void read(CompoundTag tag, Provider provider) {
+		super.read(tag, provider);
+		connected.clear();
+	}
+
+	public EnumFacingMap<Boolean> getConnected() {
+		return connected;
 	}
 }
